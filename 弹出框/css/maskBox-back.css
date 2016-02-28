@@ -1,0 +1,71 @@
+@charset "UTF-8";
+/* 页面初始化 */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.mask-box {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  display: table;
+  visibility: hidden;
+}
+.mask-box.active {
+	visibility: visible;
+}
+.mask-box .mask {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 5;
+}
+.mask-box .table {
+  display: table-cell;
+  vertical-align: middle;
+}
+.mask-box .msg {
+  position: relative;
+  z-index: 7;
+  border: 1px solid #808080;
+  border-radius: 5px;
+  background: #151a1f;
+  color: #f2f2f2;
+  font-size: 20px;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.mask-box .msg div {
+  width: 100%;
+}
+.mask-box .msg span {
+  display: block;
+  word-wrap: break-word;
+  word-break: break-all;
+  font-weight: bold;
+  margin: 10px 0 20px 0;
+  text-align: center;
+}
+.mask-box .msg input {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 5px 10px;
+  font-size: 20px;
+  background: #0099ff;
+  color: #fefeff;
+  border: 0;
+  outline: none;
+}
+
+/*# sourceMappingURL=maskBox.css.map */

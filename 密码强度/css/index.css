@@ -1,0 +1,37 @@
+*,
+*:before,
+*:after{
+	box-sizing: border-box;
+}
+#password{
+	width: 200px;
+}
+.strength{
+	width: 200px;
+	height: 2em;
+}
+.bg{
+	width: 0;
+	height: 100%;
+	padding: 0.5em;
+	color: white;
+}
+.bg.s0,
+.bg.s1{
+	width: 33%;
+	background: red;
+	text-indent: 1em;
+}
+.bg.s2,
+.bg.s3{
+	width: 66%;
+	background: yellow;
+	text-indent: 3em;
+	color: blue;
+}
+.bg.s4,
+.bg.s5{
+	width: 100%;
+	background: green;
+	text-indent: 5em;
+}

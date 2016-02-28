@@ -1,0 +1,78 @@
+#wrapper {
+	text-align: center;
+}
+
+#table {
+	margin: 0 auto;
+	display: inline-block;
+	width: 95%;
+}
+
+#table .blue {
+	background-color: blue;
+	color: white;
+}
+
+#table .red {
+	background-color: red;
+	color: white;
+}
+
+#table .class1 {
+  background-color: #48b646;
+  color: white;
+}
+#table .class0 {
+  background-color: #e6271f;
+  color: white;
+}
+#table .class2 {
+  background-color: #f1bf00;
+  color: white;
+}
+
+.thv {
+	width: 30px;
+	height: 30px;
+	border: 1px solid #000;
+	position: relative;
+	overflow: hidden;
+}
+
+.thv .top{
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 3;
+}
+
+.thv .bottom{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 3;
+}
+
+.bg {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0;
+	height: 0;
+	border-top: 40px solid #000;
+	border-left: 60px solid transparent;
+	z-index: 1;
+}
+
+.bg:after{
+	content: '';
+  display: block;
+  position: absolute;
+  left: -59px;
+  top: -40px;
+  width: 0;
+  height: 0;
+  border-top: 40px solid #fff;
+  border-left: 60px solid transparent;
+	z-index: 2;
+}

@@ -1,0 +1,198 @@
+@charset "UTF-8";
+.log-calendar .serach-box {
+  float: left;
+}
+
+.log-calendar .date-box {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.log-calendar .header-caption:before, .log-calendar .header-caption:after {
+  content: "";
+  display: table;
+}
+.log-calendar .header-caption:after {
+  clear: both;
+  overflow: hidden;
+}
+
+/* 页面初始化 */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body,
+h1,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+.log-calendar {
+  font-size: 12px;
+  /*.thv {
+  	width: 70px;
+  	height: 30px;
+  	border: 1px solid $border-color;
+  	position: relative;
+  	overflow: hidden;
+  	.top{
+  		position: absolute;
+  		top: 0;
+  		right: 0;
+  		z-index: 3;
+  	}
+  	.bottom{
+  		position: absolute;
+  		bottom: 0;
+  		left: 0;
+  		z-index: 3;
+  	}
+  }
+  .bg {
+  	position: absolute;
+  	left: 0;
+  	top: 0;
+  	width: 0;
+  	height: 0;
+  	border-top: 30px solid $border-color;
+  	border-left: 70px solid transparent;
+  	z-index: 1;
+  	&:after{
+  		content: '';
+  		display: block;
+  		position: absolute;
+  		left: -69px;
+  		top: -30px;
+  		width: 0;
+  		height: 0;
+  		border-top: 30px solid #fff;
+  		border-left: 70px solid transparent;
+  		z-index: 2;
+  	}
+  }*/
+}
+.log-calendar label {
+  margin: 0;
+}
+.log-calendar .header-caption {
+  background-color: #059fe9;
+  color: #fff;
+  position: relative;
+}
+.log-calendar .header-caption h1 {
+  text-align: center;
+  margin: 14px 0;
+  font-size: 20px;
+}
+.log-calendar .header-caption h1 a {
+  display: inline-block;
+  padding: 5px;
+  min-width: 30px;
+  cursor: pointer;
+}
+.log-calendar .header-caption a {
+  color: #fff;
+  cursor: pointer;
+}
+.log-calendar .header-caption a:hover {
+  text-decoration: none;
+}
+.log-calendar .header-caption .title {
+  width: 130px;
+}
+.log-calendar input.search {
+  padding-right: 24px;
+}
+.log-calendar .search-btn {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: url("../images/glyphicons-halflings.png") -44px 4px no-repeat;
+  vertical-align: middle;
+  position: relative;
+  left: -24px;
+}
+.log-calendar .date-box {
+  margin-right: 10px;
+}
+.log-calendar .date-box,
+.log-calendar .serach-box {
+  padding: 5px;
+  line-height: 50px;
+}
+.log-calendar .date-box label,
+.log-calendar .serach-box label {
+  display: inline-block;
+  padding: 0 10px;
+}
+.log-calendar .date-box input,
+.log-calendar .serach-box input {
+  line-height: 1;
+}
+.log-calendar .date-box input[type="text"],
+.log-calendar .serach-box input[type="text"] {
+  width: 10em;
+  padding: 3px 5px;
+  line-height: 1;
+  font-size: 12px;
+  display: inline-block;
+  height: auto;
+  vertical-align: middle;
+}
+.log-calendar table {
+  border: 1px solid #ccc;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: center;
+}
+.log-calendar table td {
+  border: 1px solid #ccc;
+  padding: 5px;
+  min-width: 30px;
+  min-height: 30px;
+}
+.log-calendar table tbody td {
+  text-indent: -9999px;
+}
+.log-calendar table tbody td.name {
+  text-indent: 0;
+}
+.log-calendar #t1 {
+  background: #fff url("../images/icon-calendar2.png") 97px 2px no-repeat;
+  padding-right: 24px;
+}
+.log-calendar .legend {
+  margin-top: 20px;
+}
+.log-calendar .legend ul {
+  text-align: center;
+}
+.log-calendar .legend li {
+  display: inline-block;
+  vertical-align: middle;
+}
+.log-calendar .legend span {
+  display: inline-block;
+  vertical-align: middle;
+}
+.log-calendar .legend span[class^="class"] {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px 0 20px;
+}
+.log-calendar .info {
+  text-align: center;
+  font-size: 22px;
+  margin: 20px 0;
+}

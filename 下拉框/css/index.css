@@ -1,0 +1,69 @@
+/* 页面初始化 */
+* {
+	box-sizing: border-box;
+}
+
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+
+body,
+h1,
+ul,
+li {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style-type: none;
+}
+
+.wrap {
+	font-size: 14px;
+	width: 100%;
+	font-family: "Microsoft Yahei";
+	padding: 20px;
+}
+
+.wrap ul {
+	padding: 0 2em;
+	margin: 0 auto;
+}
+
+.wrap li {
+	padding-bottom: 15px;
+	position: relative;
+}
+
+.wrap label {
+	display: block;
+	width: 100%;
+	padding-left: 5em;
+	font-size: 1em;
+}
+
+.wrap label:before,
+.wrap label:after {
+	content: "";
+	display: table;
+}
+
+.wrap label:after {
+	clear: both;
+	overflow: hidden;
+}
+
+.wrap .title {
+	position: absolute;
+	left: 0;
+	display: inline-block;
+	vertical-align: middle;
+	height: 2em;
+	line-height: 2em;
+	letter-spacing: 0;
+	width: 4.5em;
+	overflow: hidden;
+	white-space: nowrap;
+}
