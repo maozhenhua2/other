@@ -1789,7 +1789,7 @@ function rgb2hex(rgb) {
  * This class implements the Storage API that localStorage and sessionStorage
  * do, but implements it on top of HTTP Cookies.
  */
-function CookieStorage(maxage, path) { // Arguments specify lifetime and scope
+function CookieStorage() { // Arguments specify lifetime and scope
 
   // Get an object that holds all cookies
   var cookies = (function() { // The getCookies() function shown earlier
@@ -1830,7 +1830,7 @@ function CookieStorage(maxage, path) { // Arguments specify lifetime and scope
   };
 
   // Store a value
-  this.setItem = function(key, value) {
+  this.setItem = function(key, value, maxage, path) {
     if (!(key in cookies)) { // If no existing cookie with this name
       keys.push(key); // Add key to the array of keys
       this.length++; // And increment the length
