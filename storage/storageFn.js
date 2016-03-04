@@ -28,6 +28,9 @@ function localStorageFn(toggle) {
     clear: function () {
       store.clear();
     },
+    has: function(key){
+      return store.getItem(key) !== undefined;
+    },
     support: function () {
       try {
         var x = '__storage_test__';
