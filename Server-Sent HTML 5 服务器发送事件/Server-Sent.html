@@ -8,9 +8,15 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <title>localStorage</title>
+  <title>Title</title>
 </head>
 <body>
-<script src="storageFn.js"></script>
+<div id="result"></div>
+<script>
+var source = new EventSource('demo_sse.php');
+source.addEventListener('message', function(e){
+  document.getElementById('result').innerHTML += e.data + '<br>';
+});
+</script>
 </body>
 </html>
