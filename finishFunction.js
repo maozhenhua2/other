@@ -1291,7 +1291,7 @@ function type(o){
   }
 
   if ((c = classof(o)) !== 'Object') {
-    reutrn tc
+    return c;
   }
 
   if (o.constructor && typeof o.constructor === 'function' && (n = o.constructor.getName())) {
