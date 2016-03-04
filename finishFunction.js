@@ -1959,3 +1959,13 @@ function formatCurrencyTenThou(num) {
     num.substring(num.length - (4 * i + 3));
   return (((sign) ? '' : '-') + num + '.' + cents);
 }
+
+// 编码字符串
+function escapeString(s){
+  return encodeURIComponent(s);
+}
+
+// 解码字符串
+function unescapeString(s){
+  return decodeURIComponent(s);
+}
