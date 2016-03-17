@@ -1,0 +1,1 @@
+"*/.sass-cache" "*/.git" "*/node_modules" "*/bower_components" "*/toolkit-2.0.2" "*/.idea" "web.config"
