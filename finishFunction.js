@@ -1276,7 +1276,7 @@ function deepCopy(p, c) {
 }
 
 // 判断值的类型
-function type(o){
+function type(o) {
   var t, c, n;
   if (o === null) {
     return 'null';
@@ -1966,6 +1966,32 @@ function escapeString(s){
 }
 
 // 解码字符串
-function unescapeString(s){
+function unescapeString(s) {
   return decodeURIComponent(s);
 }
+
+// 洗牌算法：给数组随机排序
+Array.prototype.shuffle = function() {
+  var input = this;
+
+  for (var i = input.length - 1; i >= 0; i--) {
+
+    var randomIndex = Math.floor(Math.random() * (i + 1));
+    var itemAtIndex = input[randomIndex];
+
+    input[randomIndex] = input[i];
+    input[i] = itemAtIndex;
+  }
+  return input;
+}
+
+/*
+// 使用例子
+var tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+tempArray.shuffle();
+
+// and the result is...
+alert(tempArray);
+
+ */
+
