@@ -298,6 +298,99 @@ function inArray(arr, value) {
   return false;
 }
 
+// 洗牌算法：给数组随机排序
+Array.prototype.shuffle = function() {
+  var input = this;
+
+  for (var i = input.length - 1; i >= 0; i--) {
+
+    var randomIndex = Math.floor(Math.random() * (i + 1));
+    var itemAtIndex = input[randomIndex];
+
+    input[randomIndex] = input[i];
+    input[i] = itemAtIndex;
+  }
+  return input;
+};
+
+// 使用数组sort方法对数组元素随机排序
+Array.prototype.shuffle2 = function(n) {
+  var len = this.length,
+    num = n ? Math.min(n, len) : len,
+    arr = this.slice(0)
+  arr.sort(function(a, b) {
+    return Math.random() - 0.5
+  })
+  return arr.slice(0, num - 1)
+};
+
+// 随机交换数组内的元素 原理from underscore.js
+Array.prototype.shuffle3 = function(n) {
+  var len = this.length,
+    num = n ? Math.min(n, len) : len,
+    arr = this.slice(0),
+    temp, index
+
+  for (var i = 0; i < len; i++) {
+    index = lib.range(i, len - 1)
+    temp = arr[i]
+    arr[i] = arr[index]
+    arr[index] = temp
+
+  }
+  return arr.slice(0, num)
+};
+
+/*
+// 使用例子
+var tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+tempArray.shuffle();
+
+// and the result is...
+alert(tempArray);
+
+ */
+
+// 数组去重
+function unique3(array) {
+  // 构建一个新数组存放结果
+  var newArray = [];
+  // 创建一个空对象
+  var object = {};
+  // for循环时，每次取出一个元素与对象进行对比
+  // 如果这个元素不重复，则将它存放到结果数中
+  // 同时把这个元素的内容作为对象的一个属性，并赋值为1,
+  // 存入到第2步建立的对象中
+  for (var i = 0; i < array.length; i++) {
+    // 检测在object对象中是否包含遍历到的元素的值
+    if (!object[typeof(array[i]) + array[i]]) {
+      // 如果不包含，将存入对象的元素的值推入到结果数组中
+      newArray.push(array[i]);
+      // 如果不包含，存入object对象中该属性名的值设置为1
+      object[typeof(array[i]) + array[i]] = 1;
+    }
+  }
+  return newArray;
+}
+
+Array.prototype.max = function() {
+  return Math.max.apply({}, this)
+}
+Array.prototype.min = function() {
+  return Math.min.apply({}, this)
+}
+
+// 思路：获取没重复的最右一值放入新数组
+function unique5(array) {
+  var r = [];
+  for (var i = 0, l = array.length; i < l; i++) {
+    for (var j = i + 1; j < l; j++)
+      if (array[i] === array[j]) j = ++i;
+    r.push(array[i]);
+  }
+  return r;
+}
+
 // 将节点插入到某节点后
 function insertAfter(node, referenceNode) {
   if (!(node = getId(node))) return false;
@@ -1961,7 +2054,7 @@ function formatCurrencyTenThou(num) {
 }
 
 // 编码字符串
-function escapeString(s){
+function escapeString(s) {
   return encodeURIComponent(s);
 }
 
@@ -1969,29 +2062,3 @@ function escapeString(s){
 function unescapeString(s) {
   return decodeURIComponent(s);
 }
-
-// 洗牌算法：给数组随机排序
-Array.prototype.shuffle = function() {
-  var input = this;
-
-  for (var i = input.length - 1; i >= 0; i--) {
-
-    var randomIndex = Math.floor(Math.random() * (i + 1));
-    var itemAtIndex = input[randomIndex];
-
-    input[randomIndex] = input[i];
-    input[i] = itemAtIndex;
-  }
-  return input;
-}
-
-/*
-// 使用例子
-var tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-tempArray.shuffle();
-
-// and the result is...
-alert(tempArray);
-
- */
-
