@@ -1,0 +1,33 @@
+$header-height: 80px;
+$footer-height: 80px;
+
+.warpper {
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  left: 0;
+  top: 0;
+  padding: $header-height 0 $footer-height;
+  z-index: 4;
+}
+.header{
+  height: $header-height;
+  background-color: $green-dark;
+  color: #fff;
+  position: absolute;
+  width: 100%;
+  z-index: 5;
+  top: 0;
+  left: 0;
+}
+.footer{
+  height: $footer-height;
+  line-height: $footer-height;
+  text-align: center;
+  color: #fff;
+  position: absolute;
+  width: 100%;
+  z-index: 5;
+  bottom: 0;
+  left: 0;
+}
