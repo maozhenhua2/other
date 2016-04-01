@@ -1,0 +1,52 @@
+.checkbox,
+.radiobox {
+  width: 15px;
+  height: 15px;
+  background-color: $green-light;
+  border: 1px solid #ccc;
+  margin: 0 5px 0 0;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: inherit;
+}
+
+.radiobox {
+  border-radius: 100%;
+}
+
+.c-checkbox,
+.c-radiobox {
+  & ~ label{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  &:checked {
+    & + label {
+      background: {
+        image: url("../images/checked.png");
+        position: center center;
+        repeat: no-repeat;
+        size: 90% 90%;
+      }
+    }
+  }
+}
+
+.c-radiobox {
+  &:checked {
+    & + label {
+      background: {
+        image: none;
+      }
+      &:after {
+        content: ' ';
+        display: block;
+        width: 9px;
+        height: 9px;
+        border-radius: 100%;
+        background-color: $green;
+        margin: 2px;
+      }
+    }
+  }
+}

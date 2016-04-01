@@ -1,0 +1,78 @@
+// 自定义
+.c-search,
+.c-select {
+  width: 220px;
+  position: relative;
+  .input-text {
+    width: 100%;
+    height: 33px;
+    padding: 5px;
+    padding-right: 41px;
+  }
+  &.small {
+    width: 160px;
+  }
+}
+
+.c-search-btn,
+.c-select-btn {
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 33px;
+  height: 33px;
+  border: 1px solid #ccc;
+  background: {
+    color: #ccc;
+    image: url("../images/c-select.png");
+    position: center center;
+    repeat: no-repeat;
+    size: 50%;
+  }
+  z-index: 7;
+}
+
+.c-search-btn {
+  background: {
+    image: url("../images/search.png");
+  }
+}
+
+.c-select-list {
+  margin-top: -1px;
+  display: none;
+  border: 1px solid #ccc;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 33px;
+  li {
+    height: 33px;
+    background-color: #fff;
+    padding: 8px 10px;
+    position: relative;
+    &:before {
+      content: '';
+      display: inline-block;
+      width: 100%;
+      height: 0;
+      border-top: 1px solid #ccc;
+      margin: 0 10px;
+      position: relative;
+      top: -8px;
+      left: -10px;
+      float: left;
+    }
+    &:first-child {
+      &:before {
+        border-top: none;
+      }
+    }
+    &.cselected,
+    &:hover {
+      background-color: #f6f6f6;
+    }
+  }
+}
