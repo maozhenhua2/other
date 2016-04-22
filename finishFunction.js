@@ -706,12 +706,15 @@ function documentVisibleSize() {
 
 // 网页实际面积
 function documentSize() {
-  if (document.compatMode === "BackCompat") {
+  // if (document.compatMode === "BackCompat") {
+  if (document.body) {
+    // console.log(1)
     return {
       width: Math.max(document.body.scrollWidth, document.body.clientWidth),
       height: Math.max(document.body.scrollHeight, document.body.clientHeight)
     };
   } else {
+    // console.log(2)
     return {
       width: Math.max(document.documentElement.scrollWidth, document.documentElement.clientWidth),
       height: Math.max(document.documentElement.scrollHeight, document.documentElement.clientHeight)
@@ -732,11 +735,24 @@ function getBrowserWindowSize() {
 }
 
 // 判断是否滚动到底部
-function isScrollBottom() {
+function isScrollBottom(obj) {
   var scrollTop = getScrollOffsets().y;
-  var scrollHeight = documentSize().height;
+  // 如果body的高度为0，则获取指定元素的高度
+  var scrollHeight = documentSize().height || getObjSize(obj).h;
   var windowHeight = documentVisibleSize().height;
   return (scrollTop + windowHeight) === scrollHeight;
+}
+
+// 滚动到顶部
+function scrollTop(step) {
+  // step = step || document.body.scrollTop / 100;
+  step = 100;
+  var top = getScrollOffsets().y;
+  document.body.scrollTop =  top - step;
+  // console.log(step)
+  if ( document.body.scrollTop > 0) {
+    window.requestAnimationFrame(scrollTop);
+  }
 }
 
 // 获取网页元素的绝对位置
