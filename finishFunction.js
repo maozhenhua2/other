@@ -1,6 +1,6 @@
 /*
-dom操作
-*/
+ dom操作
+ */
 // 根据id
 function getId() {
   var elements = [];
@@ -15,23 +15,23 @@ function getId() {
 
 // 根据class
 /*
-function getElementsByClassName(obj, className) {
-  var classNames, classArr = [],
-    objArr = [];
-  for (var i = 0, l = obj.length; i < l; i++) {
-    classNames = obj[i].className;
-    if (!classNames) continue;
-    classArr = classNames.split(' ');
+ function getElementsByClassName(obj, className) {
+ var classNames, classArr = [],
+ objArr = [];
+ for (var i = 0, l = obj.length; i < l; i++) {
+ classNames = obj[i].className;
+ if (!classNames) continue;
+ classArr = classNames.split(' ');
 
-    for (var j = 0, k = classArr.length; j < k; j++) {
-      if (classArr[j] === className) {
-        objArr.push(obj[i]);
-      }
-    }
-  }
-  return objArr;
-}
-*/
+ for (var j = 0, k = classArr.length; j < k; j++) {
+ if (classArr[j] === className) {
+ objArr.push(obj[i]);
+ }
+ }
+ }
+ return objArr;
+ }
+ */
 function getElementsByClass(searchClass, node, tag) {
   var classElements = new Array();
   if (node == null) node = document;
@@ -184,7 +184,7 @@ function parentsUntil(o, select) {
 }
 
 if (typeof Array.prototype.indexOf !== 'function') {
-  Array.prototype.indexOf = function(e) {
+  Array.prototype.indexOf = function (e) {
     var i = 0;
     var l = this.length;
     for (; i < l; i++) {
@@ -197,36 +197,36 @@ if (typeof Array.prototype.indexOf !== 'function') {
 }
 
 /*// 判断浏览器是否支持indexOf ，indexOf 为ecmaScript5新方法 IE8以下（包括IE8， IE8只支持部分ecma5）不支持
-if (!Array.prototype.indexOf){
-  // 新增indexOf方法
-  Array.prototype.indexOf = function(item) {
-    var result = -1,
-      a_item = null;
-    if (this.length == 0) {
-      return result;
-    }
-    for (var i = 0, len = this.length; i < len; i++) {
-      a_item = this[i];
-      if (a_item === item) {
-        result = i;
-        break;
-      }
-    }
-    return result;
-  }
-}*/
+ if (!Array.prototype.indexOf){
+ // 新增indexOf方法
+ Array.prototype.indexOf = function(item) {
+ var result = -1,
+ a_item = null;
+ if (this.length == 0) {
+ return result;
+ }
+ for (var i = 0, len = this.length; i < len; i++) {
+ a_item = this[i];
+ if (a_item === item) {
+ result = i;
+ break;
+ }
+ }
+ return result;
+ }
+ }*/
 
-Array.join = Array.join || function(a, sep) {
-  return Array.prototype.join.call(a, sep);
-};
+Array.join = Array.join || function (a, sep) {
+    return Array.prototype.join.call(a, sep);
+  };
 
-Array.slice = Array.slice || function(a, from, to) {
-  return Array.prototype.slice.call(a, from, to);
-};
+Array.slice = Array.slice || function (a, from, to) {
+    return Array.prototype.slice.call(a, from, to);
+  };
 
-Array.map = Array.map || function(a, f, thisArg) {
-  return Array.prototype.map.call(a, f, thisArg);
-};
+Array.map = Array.map || function (a, f, thisArg) {
+    return Array.prototype.map.call(a, f, thisArg);
+  };
 // 在数组中查找所有出现的x，并返回一个包含匹配索引的数组
 function findAll(a, x) {
   var results = [],
@@ -244,7 +244,7 @@ function findAll(a, x) {
 }
 
 /*
-判断o是否是一个类数组对象
+ 判断o是否是一个类数组对象
  */
 function isArrayLike(o) {
   if (
@@ -277,13 +277,13 @@ function fillZero(a, b) {
 
 // 判断是否是数组
 /*if (typeof Array.isArray === 'undefined') {
-  Array.isArray = function(arg) {
-    return Object.prototype.toString.call(arg) = '[object Array]';
-  };
-}*/
+ Array.isArray = function(arg) {
+ return Object.prototype.toString.call(arg) = '[object Array]';
+ };
+ }*/
 // 判断是否是数组
 if (!Array.isArray) {
-  Array.isArray = function(arg) {
+  Array.isArray = function (arg) {
     return Object.prototype.toString.call(arg) === '[object Array]';
   };
 }
@@ -299,7 +299,7 @@ function inArray(arr, value) {
 }
 
 // 洗牌算法：给数组随机排序
-Array.prototype.shuffle = function() {
+Array.prototype.shuffle = function () {
   var input = this;
 
   for (var i = input.length - 1; i >= 0; i--) {
@@ -314,18 +314,18 @@ Array.prototype.shuffle = function() {
 };
 
 // 使用数组sort方法对数组元素随机排序
-Array.prototype.shuffle2 = function(n) {
+Array.prototype.shuffle2 = function (n) {
   var len = this.length,
     num = n ? Math.min(n, len) : len,
     arr = this.slice(0)
-  arr.sort(function(a, b) {
+  arr.sort(function (a, b) {
     return Math.random() - 0.5
   })
   return arr.slice(0, num - 1)
 };
 
 // 随机交换数组内的元素 原理from underscore.js
-Array.prototype.shuffle3 = function(n) {
+Array.prototype.shuffle3 = function (n) {
   var len = this.length,
     num = n ? Math.min(n, len) : len,
     arr = this.slice(0),
@@ -342,12 +342,12 @@ Array.prototype.shuffle3 = function(n) {
 };
 
 /*
-// 使用例子
-var tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-tempArray.shuffle();
+ // 使用例子
+ var tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+ tempArray.shuffle();
 
-// and the result is...
-alert(tempArray);
+ // and the result is...
+ alert(tempArray);
 
  */
 
@@ -373,10 +373,10 @@ function unique3(array) {
   return newArray;
 }
 
-Array.prototype.max = function() {
+Array.prototype.max = function () {
   return Math.max.apply({}, this)
 }
-Array.prototype.min = function() {
+Array.prototype.min = function () {
   return Math.min.apply({}, this)
 }
 
@@ -424,9 +424,9 @@ function removeChildren(parent) {
 }
 
 /*
-事件
-document.ready
-*/
+ 事件
+ document.ready
+ */
 (function whenReady() {
   var funcs = [];
   var ready = false;
@@ -438,6 +438,7 @@ document.ready
     ready = true;
     funcs = null;
   }
+
   if (document.addEventListener) {
     document.addEventListener("DOMContentLoaded", handler, false);
     document.addEventListener("readystatechange", handler, false);
@@ -511,11 +512,11 @@ function fixEvent(event) {
   return event;
 }
 
-fixEvent.preventDefault = function() {
+fixEvent.preventDefault = function () {
   this.returnValue = false;
 };
 
-fixEvent.stopPropagation = function() {
+fixEvent.stopPropagation = function () {
   this.cancelBubble = true;
 };
 
@@ -525,7 +526,7 @@ function getStyle(oElm, strCssRule) {
   if (document.defaultView && document.defaultView.getComputedStyle) {
     strValue = document.defaultView.getComputedStyle(oElm, "").getPropertyValue(strCssRule);
   } else if (oElm.currentStyle) {
-    strCssRule = strCssRule.replace(/\-(\w)/g, function(strMatch, p1) {
+    strCssRule = strCssRule.replace(/\-(\w)/g, function (strMatch, p1) {
       return p1.toUpperCase();
     });
     strValue = oElm.currentStyle[strCssRule];
@@ -582,6 +583,7 @@ function getCompleteStyle() {
       return false;
     }
   }
+
   switch (arguments.length) {
     case 0:
       return;
@@ -729,6 +731,14 @@ function getBrowserWindowSize() {
   };
 }
 
+// 判断是否滚动到底部
+function isScrollBottom() {
+  var scrollTop = getScrollOffsets().y;
+  var scrollHeight = documentSize().height;
+  var windowHeight = documentVisibleSize().height;
+  return (scrollTop + windowHeight) === scrollHeight;
+}
+
 // 获取网页元素的绝对位置
 function getElementPosition(element) {
   var position = {
@@ -776,7 +786,7 @@ function getOffset(el) {
     docElem = doc.documentElement, // for ie
     clientTop = docElem.clientTop || body.clientTop || 0,
     clientLeft = docElem.clientLeft || body.clientLeft || 0, // In Internet Explorer 7 getBoundingClientRect property is treated as physical,
-    // while others are logical. Make all logical, like in IE8.
+  // while others are logical. Make all logical, like in IE8.
     zoom = 1;
   if (body.getBoundingClientRect) {
     var bound = body.getBoundingClientRect();
@@ -856,7 +866,7 @@ function getPointerPositionInDocument(eventObject) {
 }
 
 if (!Function.prototype.bind) {
-  Function.prototype.bind = function(oThis) {
+  Function.prototype.bind = function (oThis) {
     if (typeof this !== "function") {
       // closest thing possible to the ECMAScript 5 internal IsCallable function
       throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
@@ -864,8 +874,9 @@ if (!Function.prototype.bind) {
 
     var aArgs = Array.prototype.slice.call(arguments, 1),
       fToBind = this,
-      fNOP = function() {},
-      fBound = function() {
+      fNOP = function () {
+      },
+      fBound = function () {
         return fToBind.apply(this instanceof fNOP && oThis ? this : oThis || window,
           aArgs.concat(Array.prototype.slice.call(arguments)));
       };
@@ -878,9 +889,9 @@ if (!Function.prototype.bind) {
 }
 
 /*
-parseJSON(string, filter)
-解析JSON文本生成对象或数组，可能抛出SyntaxError异常
-*/
+ parseJSON(string, filter)
+ 解析JSON文本生成对象或数组，可能抛出SyntaxError异常
+ */
 function parseJSON(s, filter) {
   var j;
 
@@ -930,13 +941,14 @@ function parseJSON(s, filter) {
   return j;
 }
 /*
-ajax
-*/
+ ajax
+ */
 function ajax(arr) {
   var url = arr["url"],
     method = arr["methods"] || "POST",
     async = arr["async"] || true,
-    fn = arr["suc"] || function(message) {},
+    fn = arr["suc"] || function (message) {
+      },
     data = arr["datas"] || "",
     name = arr["name"] || "Content-type",
     value = arr["value"] || "application/x-www-form-urlencoded",
@@ -948,14 +960,14 @@ function ajax(arr) {
     // code for IE6, IE5
     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
   }
-  xmlhttp.onreadystatechange = function() {
+  xmlhttp.onreadystatechange = function () {
     /*
-    0 Uninitialized 初始化状态。XMLHttpRequest 对象已创建或已被 abort() 方法重置。
-    1 Open  open() 方法已调用，但是 send() 方法未调用。请求还没有被发送。
-    2 Sent  Send() 方法已调用，HTTP 请求已发送到 Web 服务器。未接收到响应。
-    3 Receiving 所有响应头部都已经接收到。响应体开始接收但未完成。
-    4 Loaded  HTTP 响应已经完全接收。
-    */
+     0 Uninitialized 初始化状态。XMLHttpRequest 对象已创建或已被 abort() 方法重置。
+     1 Open  open() 方法已调用，但是 send() 方法未调用。请求还没有被发送。
+     2 Sent  Send() 方法已调用，HTTP 请求已发送到 Web 服务器。未接收到响应。
+     3 Receiving 所有响应头部都已经接收到。响应体开始接收但未完成。
+     4 Loaded  HTTP 响应已经完全接收。
+     */
     switch (xmlhttp.readyState) {
       case 0:
         // 尚未初始化
@@ -978,7 +990,8 @@ function ajax(arr) {
         if (xmlhttp.status == 200) {
           var message = xmlhttp;
           fn(message);
-        } else {}
+        } else {
+        }
         break;
     }
   };
@@ -1004,17 +1017,17 @@ function ajax(arr) {
 //     datas:"user=aaaa"
 // });
 /*
-其他
-*/
+ 其他
+ */
 // 用于sort的比较函数
 /*
-var testArray = ["郑", "州", "信", "源", "信", "息", "技", "术", "股", "份", "有", "限", "公", "司"];
-console.log(testArray.sort(
-  function compareFunction(param1, param2) {
-    return param1.localeCompare(param2); //output:份,公,股,技,术,司,息,限,信,信,有,源,郑,州
-  }
-));
-*/
+ var testArray = ["郑", "州", "信", "源", "信", "息", "技", "术", "股", "份", "有", "限", "公", "司"];
+ console.log(testArray.sort(
+ function compareFunction(param1, param2) {
+ return param1.localeCompare(param2); //output:份,公,股,技,术,司,息,限,信,信,有,源,郑,州
+ }
+ ));
+ */
 function compareFunc(param1, param2) {
   //如果两个参数均为字符串类型
   if (typeof param1 == "string" && typeof param2 == "string") {
@@ -1050,7 +1063,7 @@ function noRepeatRandom(start, end) {
   for (; i < l; i++) {
     arr[i] = start + i;
   }
-  arr.sort(function() {
+  arr.sort(function () {
     return 0.5 - Math.random();
   });
 
@@ -1114,18 +1127,18 @@ function addScript(url) {
 }
 
 /*
-var myURL = parseURL('http://abc.com:8080/dir/index.html?id=255&m=hello#top');
-myURL.file; // = 'index.html'
-myURL.hash; // = 'top'
-myURL.host; // = 'abc.com'
-myURL.query; // = '?id=255&m=hello'
-myURL.params; // = Object = { id: 255, m: hello }
-myURL.path; // = '/dir/index.html'
-myURL.segments; // = Array = ['dir', 'index.html']
-myURL.port; // = '8080'
-myURL.protocol; // = 'http'
-myURL.source; // = 'http://abc.com:8080/dir/index.html?id=255&m=hello#top'
-*/
+ var myURL = parseURL('http://abc.com:8080/dir/index.html?id=255&m=hello#top');
+ myURL.file; // = 'index.html'
+ myURL.hash; // = 'top'
+ myURL.host; // = 'abc.com'
+ myURL.query; // = '?id=255&m=hello'
+ myURL.params; // = Object = { id: 255, m: hello }
+ myURL.path; // = '/dir/index.html'
+ myURL.segments; // = Array = ['dir', 'index.html']
+ myURL.port; // = '8080'
+ myURL.protocol; // = 'http'
+ myURL.source; // = 'http://abc.com:8080/dir/index.html?id=255&m=hello#top'
+ */
 function parseURL(url) {
   var a = document.createElement("a");
   //创建一个链接
@@ -1136,7 +1149,7 @@ function parseURL(url) {
     host: a.hostname,
     port: a.port,
     query: a.search,
-    params: function() {
+    params: function () {
       var ret = {},
         seg = a.search.replace(/^\?/, "").split("&"),
         len = seg.length,
@@ -1259,13 +1272,13 @@ function getMouseButton(eventObject) {
 }
 
 /***********************
-* 函数：判断滚轮滚动方向
-* 作者：walkingp
-* 参数：event
-* 返回：滚轮方向 ：
-向上 ：火狐为-3，其他为120
-向下 ：火狐为3，其他为-120
-*************************/
+ * 函数：判断滚轮滚动方向
+ * 作者：walkingp
+ * 参数：event
+ * 返回：滚轮方向 ：
+ 向上 ：火狐为-3，其他为120
+ 向下 ：火狐为3，其他为-120
+ *************************/
 function scrollFunc(e) {
   var direct = 0,
     step = 50;
@@ -1327,8 +1340,8 @@ function walkTheDOM(node, func) {
 }
 
 /*
-面向对象
-*/
+ 面向对象
+ */
 // 判断要检查的对象是否存在于原型对象的原型链
 function inPrototype(objPrototype, objExample) {
   return objPrototype.prototype.isPrototypeOf(objExample);
@@ -1395,7 +1408,7 @@ function type(o) {
 }
 
 /*
-类属性
+ 类属性
  */
 function classof(o) {
   if (o === null) {
@@ -1409,20 +1422,22 @@ function classof(o) {
 
 // 利用空对象作为中介来继承
 function extend(Child, Parent) {
-  var F = function() {};
+  var F = function () {
+  };
   F.prototype = Parent.prototype;
   Child.prototype = new F();
   Child.prototype.constructor = Child;
   Child.uber = Parent.prototype;
 }
 function extend(subClass, superClass) {
-  var F = function() {};
+  var F = function () {
+  };
   F.prototype = superClass.prototype;
   subClass.prototype = new F();
   subClass.prototype.constructor = subClass;
 
   subClass.superClass = superClass.prototype;
-  if(superClass.prototype.constructor == Object.prototype.constructor){
+  if (superClass.prototype.constructor == Object.prototype.constructor) {
     superClass.prototype.constructor = superClass;
   }
 }
@@ -1438,16 +1453,16 @@ function extend2(Child, Parent) {
 }
 
 /*
-给Object.prototype添加一个不可枚举的extend()方法
-这个方法继承自调用它的对象，将作为参数传入的对象的属性一一复制
-除了值之外，也复制属性的所有特性，除非在目标对象中存在同名的属性
-参数对象的所有自有对象（包括不可枚举的属性）也会一一复制
+ 给Object.prototype添加一个不可枚举的extend()方法
+ 这个方法继承自调用它的对象，将作为参数传入的对象的属性一一复制
+ 除了值之外，也复制属性的所有特性，除非在目标对象中存在同名的属性
+ 参数对象的所有自有对象（包括不可枚举的属性）也会一一复制
  */
 Object.defineProperty(Object.prototype, 'extend', {
   writable: true,
   enumerable: false,
   configurable: true,
-  value: function(o) {
+  value: function (o) {
     var names = Object.getOwnPropertyNames(o);
     for (var i = 0; i < names.length; i++) {
       if (names[i] in this) {
@@ -1472,13 +1487,14 @@ function inherit(p) {
     throw TypeError();
   }
 
-  function f() {};
+  function f() {
+  };
   f.prototype = p;
   return new f();
 }
 
 /*
-将p中的可枚举属性复制到o中， 并返回o
+ 将p中的可枚举属性复制到o中， 并返回o
  */
 function merge(o, p) {
   for (prop in p) {
@@ -1489,7 +1505,7 @@ function merge(o, p) {
 }
 
 /*
-如果o中的属性在p中没有同名属性，则从o中删除这个属性
+ 如果o中的属性在p中没有同名属性，则从o中删除这个属性
  */
 function restrict(o, p) {
   for (prop in o) {
@@ -1501,7 +1517,7 @@ function restrict(o, p) {
 }
 
 /*
-如果o中的属性在p中有同名属性，则从o中删除这个属性
+ 如果o中的属性在p中有同名属性，则从o中删除这个属性
  */
 function substr(o, p) {
   for (prop in o) {
@@ -1511,7 +1527,7 @@ function substr(o, p) {
 }
 
 /*
-返回一个新对象，这个对象同时拥有o的属性和p的属性，如果o和p中有重名属性，使用p中的属性
+ 返回一个新对象，这个对象同时拥有o的属性和p的属性，如果o和p中有重名属性，使用p中的属性
  */
 function union(o, p) {
   function extend(o, p) {
@@ -1525,17 +1541,17 @@ function union(o, p) {
 }
 
 /*
-返回一个新对象，这个对象拥有同时在o和p中出现的属性，
-很像求o和p的交集，但p中属性的值被忽略
+ 返回一个新对象，这个对象拥有同时在o和p中出现的属性，
+ 很像求o和p的交集，但p中属性的值被忽略
  */
 function instersection(o, p) {
   return restrict(extend({}, o), p);
 }
 
 /*
-功能
-拖动，只能用于绝对定位元素，需要 getScrollOffsets()
-*/
+ 功能
+ 拖动，只能用于绝对定位元素，需要 getScrollOffsets()
+ */
 function drag(elementToDrag, event) {
   event = event || window.event;
   // 最初的鼠标位置，转换为坐标文件
@@ -1613,18 +1629,20 @@ function touchMove(obj, steper, inx, fn, o) {
     var lis = obj.childNodes;
     for (var i = 0, l = lis.length; i < l; i++) {
       function remove_select(i) {
-        addEvent(lis[i], "selectstart", function() {
+        addEvent(lis[i], "selectstart", function () {
           return false;
         });
-        addEvent(lis[i], "dragstart", function() {
+        addEvent(lis[i], "dragstart", function () {
           return false;
         });
       }
+
       remove_select(i);
     }
   }
+
   /*鼠标按下，触发鼠标移动*/
-  addEvent(ever, "mousedown", function(e) {
+  addEvent(ever, "mousedown", function (e) {
     if ($id(obj).isAnimate) {
       return false;
     }
@@ -1647,6 +1665,7 @@ function touchMove(obj, steper, inx, fn, o) {
   function mouse_move() {
     addEvent(obj, "mousemove", showx);
   }
+
   // 元素跟随鼠标x轴移动
   function showx(e) {
     var c = dr;
@@ -1672,9 +1691,10 @@ function touchMove(obj, steper, inx, fn, o) {
     }
     darg_end();
   }
+
   // 鼠标松开，根据松开时的位置判断并移动元素
   function darg_end() {
-    addEvent(obj, "mouseup", function(e) {
+    addEvent(obj, "mouseup", function (e) {
       removeEvent(obj, "mousemove", showx);
       if (drag_flag) {
         // 判断是否是元素按下，作用是让文档在鼠标松开的时候不进行元素移动的动作
@@ -1682,7 +1702,7 @@ function touchMove(obj, steper, inx, fn, o) {
       }
       drag_flag = false;
     });
-    addEvent(obj, "mouseout", function(e) {
+    addEvent(obj, "mouseout", function (e) {
       removeEvent(obj, "mousemove", showx);
       if (drag_flag) {
         // 判断是否是元素按下，作用是让文档在鼠标松开的时候不进行元素移动的动作
@@ -1691,6 +1711,7 @@ function touchMove(obj, steper, inx, fn, o) {
       drag_flag = false;
     });
   }
+
   // 鼠标释放后，根据当前的位置判断元素移动的位置
   function am(e) {
     if (!o) {
@@ -1714,28 +1735,33 @@ function touchMove(obj, steper, inx, fn, o) {
         this_index = ul_length;
       }
     }
+
     index();
     if (!o) {
       if (Math.abs(c) > 10) {
         $id(obj).transition({
           left: -(this_index * steper) + "px"
-        }, 500, function() {});
+        }, 500, function () {
+        });
         fn(this_index);
       } else {
         $id(obj).transition({
           left: start_x + "px"
-        }, 500, function() {});
+        }, 500, function () {
+        });
       }
     } else {
       if (Math.abs(c) > 10) {
         $id(obj).transition({
           top: -(this_index * steper) + "px"
-        }, 500, function() {});
+        }, 500, function () {
+        });
         fn(this_index);
       } else {
         $id(obj).transition({
           top: start_x + "px"
-        }, 500, function() {});
+        }, 500, function () {
+        });
       }
     }
   }
@@ -1759,6 +1785,7 @@ function serialize_form(obj) {
     function ii() {
       data += "&" + (inputs[i].id || inputs[i].name) + "=" + inputs[i].value;
     }
+
     switch (type) {
       case "text":
         if (inputs[i].value) {
@@ -1896,7 +1923,7 @@ function rgb2hex(rgb) {
 function CookieStorage() { // Arguments specify lifetime and scope
 
   // Get an object that holds all cookies
-  var cookies = (function() { // The getCookies() function shown earlier
+  var cookies = (function () { // The getCookies() function shown earlier
     var cookies = {}; // The object we will return
     var all = document.cookie; // Get all cookies in one big string
     if (all === "") // If the property is the empty string
@@ -1923,18 +1950,18 @@ function CookieStorage() { // Arguments specify lifetime and scope
   this.length = keys.length;
 
   // Return the name of the nth cookie, or null if n is out of range
-  this.key = function(n) {
+  this.key = function (n) {
     if (n < 0 || n >= keys.length) return null;
     return keys[n];
   };
 
   // Return the value of the named cookie, or null.
-  this.getItem = function(name) {
+  this.getItem = function (name) {
     return cookies[name] || null;
   };
 
   // Store a value
-  this.setItem = function(key, value, maxage, path) {
+  this.setItem = function (key, value, maxage, path) {
     if (!(key in cookies)) { // If no existing cookie with this name
       keys.push(key); // Add key to the array of keys
       this.length++; // And increment the length
@@ -1956,7 +1983,7 @@ function CookieStorage() { // Arguments specify lifetime and scope
   };
 
   // Remove the specified cookie
-  this.removeItem = function(key) {
+  this.removeItem = function (key) {
     if (!(key in cookies)) return; // If it doesn't exist, do nothing
 
     // Delete the cookie from our internal set of cookies
@@ -1978,7 +2005,7 @@ function CookieStorage() { // Arguments specify lifetime and scope
   };
 
   // Remove all cookies
-  this.clear = function() {
+  this.clear = function () {
     // Loop through the keys, removing the cookies
     for (var i = 0; i < keys.length; i++)
       document.cookie = keys[i] + "=; max-age=0";
@@ -1993,11 +2020,11 @@ function checkBrowser() {
   var Sys = {};
   var ua = navigator.userAgent.toLowerCase();
   var s;
-  (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1]:
+  (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
     (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
-    (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
-    (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
-    (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+      (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+        (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+          (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
   return Sys;
   // if (Sys.ie) { //Js判断为IE浏览器
   //   alert(Sys.ie + 'ie');
@@ -2039,7 +2066,7 @@ function formatCurrency(num) {
     cents = "0" + cents;
   for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
     num = num.substring(0, num.length - (4 * i + 3)) + ',' +
-    num.substring(num.length - (4 * i + 3));
+      num.substring(num.length - (4 * i + 3));
   return (((sign) ? '' : '-') + num + '.' + cents);
 }
 
@@ -2060,7 +2087,7 @@ function formatCurrencyTenThou(num) {
   num = Math.floor(num / 10).toString();
   for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
     num = num.substring(0, num.length - (4 * i + 3)) + ',' +
-    num.substring(num.length - (4 * i + 3));
+      num.substring(num.length - (4 * i + 3));
   return (((sign) ? '' : '-') + num + '.' + cents);
 }
 
