@@ -366,6 +366,17 @@ Array.prototype.shuffle3 = function(n) {
   return arr.slice(0, num)
 };
 
+// 随机排序
+arr.sort(function(){
+  return Math.random() * 2 - 1;
+});
+
+function shuffle(arr){
+  return arr.sort(function(){
+    return Math.round(Math.random());
+  });
+}
+
 /*
  // 使用例子
  var tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
