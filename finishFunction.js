@@ -184,7 +184,7 @@ function parentsUntil(o, select) {
 }
 
 if (typeof Array.prototype.indexOf !== 'function') {
-  Array.prototype.indexOf = function (e) {
+  Array.prototype.indexOf = function(e) {
     var i = 0;
     var l = this.length;
     for (; i < l; i++) {
@@ -194,6 +194,31 @@ if (typeof Array.prototype.indexOf !== 'function') {
     }
     return -1;
   }
+}
+
+// foreach
+if (!Array.prototype.forEach) {
+  Array.prototype.forEach = function(fn, thisObj) {
+    var scope = thisObj || window;
+    for (var i = 0, j = this.length; i < j; ++i) {
+      fn.call(scope, this[i], i, this);
+    }
+  };
+}
+
+// filter
+if (!Array.prototype.filter) {
+  Array.prototype.filter = function(fn, thisObj) {
+    var scope = thisObj || window;
+    var a = [];
+    for (var i = 0, j = this.length; i < j; ++i) {
+      if (!fn.call(scope, this[i], i, this)) {
+        continue;
+      }
+      a.push(this[i]);
+    }
+    return a;
+  };
 }
 
 /*// 判断浏览器是否支持indexOf ，indexOf 为ecmaScript5新方法 IE8以下（包括IE8， IE8只支持部分ecma5）不支持
@@ -216,17 +241,17 @@ if (typeof Array.prototype.indexOf !== 'function') {
  }
  }*/
 
-Array.join = Array.join || function (a, sep) {
-    return Array.prototype.join.call(a, sep);
-  };
+Array.join = Array.join || function(a, sep) {
+  return Array.prototype.join.call(a, sep);
+};
 
-Array.slice = Array.slice || function (a, from, to) {
-    return Array.prototype.slice.call(a, from, to);
-  };
+Array.slice = Array.slice || function(a, from, to) {
+  return Array.prototype.slice.call(a, from, to);
+};
 
-Array.map = Array.map || function (a, f, thisArg) {
-    return Array.prototype.map.call(a, f, thisArg);
-  };
+Array.map = Array.map || function(a, f, thisArg) {
+  return Array.prototype.map.call(a, f, thisArg);
+};
 // 在数组中查找所有出现的x，并返回一个包含匹配索引的数组
 function findAll(a, x) {
   var results = [],
@@ -283,7 +308,7 @@ function fillZero(a, b) {
  }*/
 // 判断是否是数组
 if (!Array.isArray) {
-  Array.isArray = function (arg) {
+  Array.isArray = function(arg) {
     return Object.prototype.toString.call(arg) === '[object Array]';
   };
 }
@@ -299,7 +324,7 @@ function inArray(arr, value) {
 }
 
 // 洗牌算法：给数组随机排序
-Array.prototype.shuffle = function () {
+Array.prototype.shuffle = function() {
   var input = this;
 
   for (var i = input.length - 1; i >= 0; i--) {
@@ -314,18 +339,18 @@ Array.prototype.shuffle = function () {
 };
 
 // 使用数组sort方法对数组元素随机排序
-Array.prototype.shuffle2 = function (n) {
+Array.prototype.shuffle2 = function(n) {
   var len = this.length,
     num = n ? Math.min(n, len) : len,
     arr = this.slice(0)
-  arr.sort(function (a, b) {
+  arr.sort(function(a, b) {
     return Math.random() - 0.5
   })
   return arr.slice(0, num - 1)
 };
 
 // 随机交换数组内的元素 原理from underscore.js
-Array.prototype.shuffle3 = function (n) {
+Array.prototype.shuffle3 = function(n) {
   var len = this.length,
     num = n ? Math.min(n, len) : len,
     arr = this.slice(0),
@@ -373,10 +398,10 @@ function unique3(array) {
   return newArray;
 }
 
-Array.prototype.max = function () {
+Array.prototype.max = function() {
   return Math.max.apply({}, this)
 }
-Array.prototype.min = function () {
+Array.prototype.min = function() {
   return Math.min.apply({}, this)
 }
 
@@ -512,11 +537,11 @@ function fixEvent(event) {
   return event;
 }
 
-fixEvent.preventDefault = function () {
+fixEvent.preventDefault = function() {
   this.returnValue = false;
 };
 
-fixEvent.stopPropagation = function () {
+fixEvent.stopPropagation = function() {
   this.cancelBubble = true;
 };
 
@@ -526,7 +551,7 @@ function getStyle(oElm, strCssRule) {
   if (document.defaultView && document.defaultView.getComputedStyle) {
     strValue = document.defaultView.getComputedStyle(oElm, "").getPropertyValue(strCssRule);
   } else if (oElm.currentStyle) {
-    strCssRule = strCssRule.replace(/\-(\w)/g, function (strMatch, p1) {
+    strCssRule = strCssRule.replace(/\-(\w)/g, function(strMatch, p1) {
       return p1.toUpperCase();
     });
     strValue = oElm.currentStyle[strCssRule];
@@ -748,9 +773,9 @@ function scrollTop(step) {
   // step = step || document.body.scrollTop / 100;
   step = 100;
   var top = getScrollOffsets().y;
-  document.body.scrollTop =  top - step;
+  document.body.scrollTop = top - step;
   // console.log(step)
-  if ( document.body.scrollTop > 0) {
+  if (document.body.scrollTop > 0) {
     window.requestAnimationFrame(scrollTop);
   }
 }
@@ -802,7 +827,7 @@ function getOffset(el) {
     docElem = doc.documentElement, // for ie
     clientTop = docElem.clientTop || body.clientTop || 0,
     clientLeft = docElem.clientLeft || body.clientLeft || 0, // In Internet Explorer 7 getBoundingClientRect property is treated as physical,
-  // while others are logical. Make all logical, like in IE8.
+    // while others are logical. Make all logical, like in IE8.
     zoom = 1;
   if (body.getBoundingClientRect) {
     var bound = body.getBoundingClientRect();
@@ -882,7 +907,7 @@ function getPointerPositionInDocument(eventObject) {
 }
 
 if (!Function.prototype.bind) {
-  Function.prototype.bind = function (oThis) {
+  Function.prototype.bind = function(oThis) {
     if (typeof this !== "function") {
       // closest thing possible to the ECMAScript 5 internal IsCallable function
       throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
@@ -890,9 +915,8 @@ if (!Function.prototype.bind) {
 
     var aArgs = Array.prototype.slice.call(arguments, 1),
       fToBind = this,
-      fNOP = function () {
-      },
-      fBound = function () {
+      fNOP = function() {},
+      fBound = function() {
         return fToBind.apply(this instanceof fNOP && oThis ? this : oThis || window,
           aArgs.concat(Array.prototype.slice.call(arguments)));
       };
@@ -963,8 +987,7 @@ function ajax(arr) {
   var url = arr["url"],
     method = arr["methods"] || "POST",
     async = arr["async"] || true,
-    fn = arr["suc"] || function (message) {
-      },
+    fn = arr["suc"] || function(message) {},
     data = arr["datas"] || "",
     name = arr["name"] || "Content-type",
     value = arr["value"] || "application/x-www-form-urlencoded",
@@ -976,7 +999,7 @@ function ajax(arr) {
     // code for IE6, IE5
     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
   }
-  xmlhttp.onreadystatechange = function () {
+  xmlhttp.onreadystatechange = function() {
     /*
      0 Uninitialized 初始化状态。XMLHttpRequest 对象已创建或已被 abort() 方法重置。
      1 Open  open() 方法已调用，但是 send() 方法未调用。请求还没有被发送。
@@ -1006,8 +1029,7 @@ function ajax(arr) {
         if (xmlhttp.status == 200) {
           var message = xmlhttp;
           fn(message);
-        } else {
-        }
+        } else {}
         break;
     }
   };
@@ -1079,7 +1101,7 @@ function noRepeatRandom(start, end) {
   for (; i < l; i++) {
     arr[i] = start + i;
   }
-  arr.sort(function () {
+  arr.sort(function() {
     return 0.5 - Math.random();
   });
 
@@ -1165,7 +1187,7 @@ function parseURL(url) {
     host: a.hostname,
     port: a.port,
     query: a.search,
-    params: function () {
+    params: function() {
       var ret = {},
         seg = a.search.replace(/^\?/, "").split("&"),
         len = seg.length,
@@ -1438,16 +1460,15 @@ function classof(o) {
 
 // 利用空对象作为中介来继承
 function extend(Child, Parent) {
-  var F = function () {
-  };
+  var F = function() {};
   F.prototype = Parent.prototype;
   Child.prototype = new F();
   Child.prototype.constructor = Child;
   Child.uber = Parent.prototype;
 }
+
 function extend(subClass, superClass) {
-  var F = function () {
-  };
+  var F = function() {};
   F.prototype = superClass.prototype;
   subClass.prototype = new F();
   subClass.prototype.constructor = subClass;
@@ -1478,7 +1499,7 @@ Object.defineProperty(Object.prototype, 'extend', {
   writable: true,
   enumerable: false,
   configurable: true,
-  value: function (o) {
+  value: function(o) {
     var names = Object.getOwnPropertyNames(o);
     for (var i = 0; i < names.length; i++) {
       if (names[i] in this) {
@@ -1503,8 +1524,7 @@ function inherit(p) {
     throw TypeError();
   }
 
-  function f() {
-  };
+  function f() {};
   f.prototype = p;
   return new f();
 }
@@ -1645,10 +1665,10 @@ function touchMove(obj, steper, inx, fn, o) {
     var lis = obj.childNodes;
     for (var i = 0, l = lis.length; i < l; i++) {
       function remove_select(i) {
-        addEvent(lis[i], "selectstart", function () {
+        addEvent(lis[i], "selectstart", function() {
           return false;
         });
-        addEvent(lis[i], "dragstart", function () {
+        addEvent(lis[i], "dragstart", function() {
           return false;
         });
       }
@@ -1658,7 +1678,7 @@ function touchMove(obj, steper, inx, fn, o) {
   }
 
   /*鼠标按下，触发鼠标移动*/
-  addEvent(ever, "mousedown", function (e) {
+  addEvent(ever, "mousedown", function(e) {
     if ($id(obj).isAnimate) {
       return false;
     }
@@ -1710,7 +1730,7 @@ function touchMove(obj, steper, inx, fn, o) {
 
   // 鼠标松开，根据松开时的位置判断并移动元素
   function darg_end() {
-    addEvent(obj, "mouseup", function (e) {
+    addEvent(obj, "mouseup", function(e) {
       removeEvent(obj, "mousemove", showx);
       if (drag_flag) {
         // 判断是否是元素按下，作用是让文档在鼠标松开的时候不进行元素移动的动作
@@ -1718,7 +1738,7 @@ function touchMove(obj, steper, inx, fn, o) {
       }
       drag_flag = false;
     });
-    addEvent(obj, "mouseout", function (e) {
+    addEvent(obj, "mouseout", function(e) {
       removeEvent(obj, "mousemove", showx);
       if (drag_flag) {
         // 判断是否是元素按下，作用是让文档在鼠标松开的时候不进行元素移动的动作
@@ -1757,27 +1777,23 @@ function touchMove(obj, steper, inx, fn, o) {
       if (Math.abs(c) > 10) {
         $id(obj).transition({
           left: -(this_index * steper) + "px"
-        }, 500, function () {
-        });
+        }, 500, function() {});
         fn(this_index);
       } else {
         $id(obj).transition({
           left: start_x + "px"
-        }, 500, function () {
-        });
+        }, 500, function() {});
       }
     } else {
       if (Math.abs(c) > 10) {
         $id(obj).transition({
           top: -(this_index * steper) + "px"
-        }, 500, function () {
-        });
+        }, 500, function() {});
         fn(this_index);
       } else {
         $id(obj).transition({
           top: start_x + "px"
-        }, 500, function () {
-        });
+        }, 500, function() {});
       }
     }
   }
@@ -1939,7 +1955,7 @@ function rgb2hex(rgb) {
 function CookieStorage() { // Arguments specify lifetime and scope
 
   // Get an object that holds all cookies
-  var cookies = (function () { // The getCookies() function shown earlier
+  var cookies = (function() { // The getCookies() function shown earlier
     var cookies = {}; // The object we will return
     var all = document.cookie; // Get all cookies in one big string
     if (all === "") // If the property is the empty string
@@ -1966,18 +1982,18 @@ function CookieStorage() { // Arguments specify lifetime and scope
   this.length = keys.length;
 
   // Return the name of the nth cookie, or null if n is out of range
-  this.key = function (n) {
+  this.key = function(n) {
     if (n < 0 || n >= keys.length) return null;
     return keys[n];
   };
 
   // Return the value of the named cookie, or null.
-  this.getItem = function (name) {
+  this.getItem = function(name) {
     return cookies[name] || null;
   };
 
   // Store a value
-  this.setItem = function (key, value, maxage, path) {
+  this.setItem = function(key, value, maxage, path) {
     if (!(key in cookies)) { // If no existing cookie with this name
       keys.push(key); // Add key to the array of keys
       this.length++; // And increment the length
@@ -1999,7 +2015,7 @@ function CookieStorage() { // Arguments specify lifetime and scope
   };
 
   // Remove the specified cookie
-  this.removeItem = function (key) {
+  this.removeItem = function(key) {
     if (!(key in cookies)) return; // If it doesn't exist, do nothing
 
     // Delete the cookie from our internal set of cookies
@@ -2021,7 +2037,7 @@ function CookieStorage() { // Arguments specify lifetime and scope
   };
 
   // Remove all cookies
-  this.clear = function () {
+  this.clear = function() {
     // Loop through the keys, removing the cookies
     for (var i = 0; i < keys.length; i++)
       document.cookie = keys[i] + "=; max-age=0";
@@ -2036,11 +2052,11 @@ function checkBrowser() {
   var Sys = {};
   var ua = navigator.userAgent.toLowerCase();
   var s;
-  (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+  (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1]:
     (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
-      (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
-        (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
-          (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+    (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+    (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+    (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
   return Sys;
   // if (Sys.ie) { //Js判断为IE浏览器
   //   alert(Sys.ie + 'ie');
@@ -2082,7 +2098,7 @@ function formatCurrency(num) {
     cents = "0" + cents;
   for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
     num = num.substring(0, num.length - (4 * i + 3)) + ',' +
-      num.substring(num.length - (4 * i + 3));
+    num.substring(num.length - (4 * i + 3));
   return (((sign) ? '' : '-') + num + '.' + cents);
 }
 
@@ -2103,7 +2119,7 @@ function formatCurrencyTenThou(num) {
   num = Math.floor(num / 10).toString();
   for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
     num = num.substring(0, num.length - (4 * i + 3)) + ',' +
-      num.substring(num.length - (4 * i + 3));
+    num.substring(num.length - (4 * i + 3));
   return (((sign) ? '' : '-') + num + '.' + cents);
 }
 
