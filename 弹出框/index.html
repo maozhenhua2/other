@@ -34,9 +34,13 @@
 <!--<script src="js/index.js"></script>-->
 <script src="js/popbox.js"></script>
 <script>
-  popbox.init();
+  popbox.init(true);
   $('#show').click(function () {
     popbox.show('#pop1');
+  });
+
+  $('#cancel').click(function(){
+    popbox.hide('#pop1');
   });
 
 
