@@ -1,46 +1,49 @@
+.overflow {
+  overflow: hidden;
+}
+
 .mask-box {
   position: fixed;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
-  z-index: 23;
+  z-index: 1060;
   visibility: hidden;
 }
-
 .mask-box.active {
   visibility: visible;
   overflow: auto;
 }
-
 .mask-box.active .msg {
   margin-top: 0;
   opacity: 1;
   visibility: visible;
 }
-
+.mask-box.transition .msg {
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
 .mask-box .table-box {
   display: table;
   width: 100%;
   height: 100%;
   margin: 0 auto;
 }
-
 .mask-box .table {
   display: table-cell;
   vertical-align: middle;
   position: relative;
 }
-
 .mask-box .msg {
   margin-top: 100px;
   position: relative;
-  z-index: 26;
+  z-index: 1063;
   opacity: 0;
   visibility: hidden;
-  transition: all .5s ease;
 }
-
 
 .mask {
   background-color: rgba(0, 0, 0, 0.5);
@@ -51,12 +54,16 @@
   top: 0;
   opacity: 0;
   visibility: hidden;
-  transition: all .5s ease;
   z-index: 0;
-
+}
+.mask.transition {
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 .mask.active {
-  z-index: 20;
+  z-index: 1057;
   opacity: 1;
   visibility: visible;
 }

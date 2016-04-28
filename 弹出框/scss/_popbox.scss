@@ -1,3 +1,7 @@
+@import "compass";
+
+$index: 1060;
+
 .overflow{
   overflow: hidden;
 }
@@ -7,7 +11,7 @@
   height: 100%;
   left: 0;
   top: 0;
-  z-index: 23;
+  z-index: $index;
   visibility: hidden;
   &.active {
     visibility: visible;
@@ -16,6 +20,11 @@
       margin-top: 0;
       opacity: 1;
       visibility: visible;
+    }
+  }
+  &.transition {
+    .msg {
+      @include transition(all .5s ease);
     }
   }
   .table-box{
@@ -32,10 +41,9 @@
   .msg{
     margin-top: 100px;
     position: relative;
-    z-index: 26;
+    z-index: $index + 3;
     opacity: 0;
     visibility: hidden;
-    transition: all .5s ease;
   }
 }
 .mask {
@@ -47,10 +55,12 @@
   top: 0;
   opacity: 0;
   visibility: hidden;
-  transition: all .5s ease;
   z-index: 0;
+  &.transition {
+    @include transition(all .5s ease);
+  }
   &.active{
-    z-index: 20;
+    z-index: $index - 3;
     opacity: 1;
     visibility: visible;
   }
