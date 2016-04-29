@@ -1,0 +1,336 @@
+@charset "UTF-8";
+//---------------
+@mixin background($url, $po) {
+	background: url(#{$url}) #{$po};
+}
+
+
+@mixin tip($w1, $w2, $p1, $p2, $c1, $c2) {
+	&::after,
+	&::before {
+		position: absolute;
+		content: "";
+		height: 0;
+		width: 0;
+		pointer-events: none;
+		border: solid transparent;
+	}
+	// top
+	&.top {
+		&::after {
+			bottom: 100%;
+			border-color: rgba(0, 0, 0, 0);
+			border-bottom-color: $c1;
+			border-width: $w1;
+			#{$p1}: $p2;
+			margin-left: -$w1;
+		}
+	}
+	&.top {
+		&::before {
+			bottom: 100%;
+			border-color: rgba(0, 0, 0, 0);
+			border-bottom-color: $c2;
+			border-width: $w2;
+			#{$p1}: $p2;
+			margin-left: -$w2;
+		}
+	}
+	// right
+	&.right{
+		&::after{
+			left: 100%;
+			border-color: rgba(0, 0, 0, 0);
+			border-left-color: $c1;
+			border-width: $w1;
+			#{$p1}: $p2;
+			margin-top: -$w1;
+		}
+		&::before{
+			left: 100%;
+			border-color: rgba(0, 0, 0, 0);
+			border-left-color: $c2;
+			border-width: $w2;
+			#{$p1}: $p2;
+			margin-top: -$w2;
+		}
+	}
+	// bottom
+	&.bottom{
+		&::after{
+			top: 100%;
+			border-color: rgba(0, 0, 0, 0);
+			border-top-color: $c1;
+			border-width: $w1;
+			#{$p1}: $p2;
+			margin-left: -$w1;
+		}
+		&::before{
+			top: 100%;
+			border-color: rgba(0, 0, 0, 0);
+			border-top-color: $c2;
+			border-width: $w2;
+			#{$p1}: $p2;
+			margin-left: -$w2;
+		}
+	}
+	// left
+	&.left{
+		&::after{
+			right: 100%;
+			border-color: rgba(0, 0, 0, 0);
+			border-right-color: $c1;
+			border-width: $w1;
+			#{$p1}: $p2;
+			margin-top: -$w1;
+		}
+		&::before{
+			right: 100%;
+			border-color: rgba(0, 0, 0, 0);
+			border-right-color: $c2;
+			border-width: $w2;
+			#{$p1}: $p2;
+			margin-top: -$w2;
+		}
+	}
+}
+
+@mixin triangle-up($size1, $size2, $color) {
+	width: 0;
+	height: 0;
+	border-left: $size1 solid transparent;
+	border-right: $size1 solid transparent;
+	border-bottom: $size2 solid $color;
+}
+
+@mixin triangle-down($size1, $size2, $color) {
+	width: 0;
+	height: 0;
+	border-left: $size1 solid transparent;
+	border-right: $size1 solid transparent;
+	border-top: $size2 solid $color;
+	font-size: 0;
+}
+
+@mixin triangle-left($size1, $size2, $color) {
+  width: 0;
+  height: 0;
+  border-top: $size1 solid transparent;
+  border-bottom: $size1 solid transparent;
+  border-right: $size2 solid $color;
+  font-size: 0;
+}
+
+@mixin triangle-right($size1, $size2, $color) {
+	width: 0;
+	height: 0;
+	border-top: $size1 solid transparent;
+	border-bottom: $size1 solid transparent;
+	border-left: $size2 solid $color;
+	font-size: 0;
+}
+
+@mixin size($width, $height) {
+	width: $width;
+	height: $height;
+}
+
+@mixin linkA($color, $colorHover, $underlineHover) {
+	a {
+		color: $color;
+		text-decoration: none;
+		&:hover {
+			color: $colorHover;
+			text-decoration: $underlineHover;
+		}
+	}
+}
+
+@mixin css3($property, $value) {
+	@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+		#{$prefix}#{$property}: $value;
+	}
+}
+
+
+%border-left-0 {
+	border-left: 0;
+}
+
+%border-left-1px {
+	border-left: 1px solid;
+}
+
+%font-size-0 {
+	font-size: 0;
+}
+
+%display-inline-box {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 10px;
+}
+
+%textOverflow {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+%marginCenter {
+	margin: auto;
+}
+
+%noStyle {
+	list-style-type: none;
+}
+
+%margin0 {
+	margin: 0;
+}
+
+%padding0 {
+	padding: 0;
+}
+
+%vMiddle {
+	vertical-align: middle;
+}
+
+%floatLeft {
+	float: left;
+}
+
+%floatRight {
+	float: right;
+}
+
+%display-block {
+	display: block;
+}
+
+%clearfix {
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+		overflow: hidden;
+	}
+}
+
+//------------
+$mainwidth: 1195px;
+$shadow: 1px 1px 2px #ccc;
+$hcolor: #f98109;
+$ccolor: #b18c56;
+$introBottomH: 142px;
+$leftH1Color: #cea85f;
+$familyyahei: '微软雅黑';
+$familysong: '宋体';
+$fontsize14px: 1.1666em;
+$fontsize16px: 1.333em;
+$imgWidth: 280px;
+$v: "?v=201411251550";
+//------------
+%mainwidth {
+	width: $mainwidth;
+}
+
+%bannerSize {
+	// min-width: 1000px;
+	width: 100%;
+	height: 320px;
+}
+
+%p1 {
+	h2 {
+		color: $hcolor;
+		font-size: 1.2857em;
+	}
+	p {
+		color: $ccolor;
+		line-height: 22px;
+	}
+	h3 {
+		color: #b18c56;
+	}
+}
+
+%rightR {
+	.right {
+		position: relative;
+		padding-bottom: 100px;
+	}
+}
+
+%logoPicSize {
+	@include size(500px, 191px);
+}
+
+%sblue {
+	color: #0b318f;
+}
+
+%sblueB {
+	@extend %sblue;
+	font-weight: bold;
+}
+
+%midhide {
+	.mid {
+		display: none;
+	}
+}
+
+@mixin gameImg($width, $height) {
+	overflow: hidden;
+	padding-bottom: 20px;
+	li {
+		width: $width;
+		@extend %floatLeft;
+		margin: {
+			right: 10px;
+			bottom: 10px;
+		}
+		text-align: center;
+		&.marginnone {
+			margin-right: 0;
+		}
+	}
+	div {
+		width: $width;
+		height: $height;
+		overflow: hidden;
+	}
+}
+
+@mixin animate($txt) {
+	@each $key in -webkit-, -moz-, -o-, '' {
+		#{$key}animation: $txt;
+	}
+}
+
+@mixin keyframes($name) {
+	@-webkit-keyframes #{$name} {
+		@content;
+	}
+	@-moz-keyframes #{$name} {
+		@content;
+	}
+	@-o-keyframes #{$name} {
+		@content;
+	}
+	@keyframes #{$name} {
+		@content;
+	}
+}
+
+@mixin css3($key, $value) {
+	-webkit-#{$key}: $value;
+	-moz-#{$key}: $value;
+	-o-#{$key}: $value;
+	#{$key}: $value;
+}

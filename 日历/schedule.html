@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>schedule</title>
+  <link rel="stylesheet" href="css/schedule.css">
+</head>
+<body>
+<div class="box">
+  <div>
+    <button type="button" class="c-left-btn">-</button>
+    <input type="text" name="" id="monthValue">
+    <button type="button" class="c-right-btn">+</button>
+  </div>
+  <table class="table calendar">
+    <thead>
+    <tr>
+      <th>周日</th>
+      <th>周一</th>
+      <th>周二</th>
+      <th>周三</th>
+      <th>周四</th>
+      <th>周五</th>
+      <th>周六</th>
+    </tr>
+    </thead>
+    <tbody id="tableCcalendar" class="tableCcalendar"></tbody>
+  </table>
+</div>
+<!--<script src="vendor/jquery-1.11.3.min.js"></script>-->
+<script src="js/schedule.js"></script>
+<script>
+  var Months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+  var nowDate = new Date();
+  var monthIndex = nowDate.getMonth();
+  var yearIndex = nowDate.getFullYear();
+
+  setMonthValue(monthIndex);
+  document.querySelector('.c-left-btn').addEventListener('click', function () {
+    monthIndex--;
+    monthIndex = monthIndex <= 0 ? 0 : monthIndex;
+    setMonthValue(monthIndex);
+    calendar1.change(yearIndex, monthIndex);
+    getDate(monthIndex);
+  });
+
+  document.querySelector('.c-right-btn').addEventListener('click', function () {
+    monthIndex++;
+    monthIndex = monthIndex >= 11 ? 11 : monthIndex;
+    setMonthValue(monthIndex);
+    calendar1.change(yearIndex, monthIndex);
+    getDate(monthIndex);
+  });
+
+  function setMonthValue(i) {
+    document.getElementById('monthValue').value = (Months[i]);
+  }
+
+  function getDate(i) {
+    var state = ['REJECT', 'PASS', 'SCHEDULED', 'COMPLETE'];
+
+    var index = 0;
+    var l = randomRange(1, 10);
+    var arr = [];
+    for (; index < l; index++) {
+      var date = randomRange(1, 27);
+      var stateIndex = randomRange(0, 3);
+      var data = {
+        "ID": date + "b412db9e-5e1b-4dbe-87a5-87b4a347f463",
+        "ImplementTime": "2016/" + (i + 1) + "/" + date + " 0:00:00",
+        "PerformState": state[stateIndex]
+      };
+      arr.push(data);
+    }
+//    console.log(arr)
+    setTimeout(function () {
+      calendar1.createSchedule(arr, function (o, id) {
+        o.onclick = function () {
+          console.log(this)
+        }
+      });
+    }, 100);
+  }
+
+  // 指定范围随机数
+  function randomRange(start, end) {
+    var total = end - start + 1;
+    return Math.floor(Math.random() * total + start);
+  }
+
+  calendar1.init({
+    id: 'tableCcalendar',
+    className: {
+      REJECT: 'plan plan-reject',
+      PASS: 'plan plan-complete',
+      SCHEDULED: 'plan',
+      COMPLETE: 'plan plan-nosubmit'
+    }
+  });
+
+  getDate(monthIndex);
+</script>
+</body>
+</html>
