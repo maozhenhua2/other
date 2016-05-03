@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+#monthValue {
+  width: 4em;
+  text-align: center;
+}
+
+.number {
+  &:after {
+    content: '.';
+    margin-right: 5px;
+  }
+}
+
+.pop-content {
+  display: inline-block;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  font-size: 12px;
+  text-align: left;
+  li {
+    margin: 5px 0;
+  }
+  button {
+    min-width: 30px;
+  }
+}
+
+.content-pannel {
+  text-align: center;
+  .btn {
+    width: auto;
+    margin: 0 5px;
+  }
+}

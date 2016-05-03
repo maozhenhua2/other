@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>schedule</title>
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/m.css">
+</head>
+<body>
+<div class="box">
+  <div class="text-center">
+    <button type="button" class="c-left-btn btn btn-primary">
+      <span class="glyphicon glyphicon-triangle-left"></span>
+    </button>
+    <input type="text" name="" id="monthValue" class="txt form-control inline-block" readonly>
+    <button type="button" class="c-right-btn btn btn-primary">
+      <span class="glyphicon glyphicon-triangle-right"></span>
+    </button>
+  </div>
+  <table class="table calendar">
+    <thead>
+    <tr>
+      <th>周日</th>
+      <th>周一</th>
+      <th>周二</th>
+      <th>周三</th>
+      <th>周四</th>
+      <th>周五</th>
+      <th>周六</th>
+    </tr>
+    </thead>
+    <tbody id="tableCcalendar" class="tableCcalendar"></tbody>
+  </table>
+</div>
+
+<div class="mask-box" id="pop1">
+  <div class="table-box">
+    <div class="table">
+      <div class="msg">
+        <div class="pop-content" id="popContent"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/jquery-1.11.3.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap-edit.min.js"></script>
+<script src="js/popbox.js"></script>
+<script src="js/schedule2.js"></script>
+<script src="js/schedule2index.js"></script>
+
+</body>
+</html>

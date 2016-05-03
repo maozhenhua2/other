@@ -1,3 +1,9 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -9,45 +15,17 @@ th {
   border: 1px solid #ccc;
   width: 14.2%;
   vertical-align: middle;
-  padding: 5px;
+  padding: 10px;
   text-align: center;
-  height: 140px;
-  position: relative;
+  height: 60px;
 }
 
 th {
-  height: auto;
-  text-align: left;
-  padding: 0 8px 4px;
-  font-weight: normal;
-  color: #bcc2cd;
-  font-size: 12px;
+  text-align: center;
 }
 
-td > span {
-  position: absolute;
-  width: 100%;
-  padding: 5px 1em;
-  display: block;
-  left: 0;
-  top: 0;
-  height: 27px;
-  font-size: 12px;
-  font-weight: bold;
-  color: #888;
-  text-align: left;
-}
-td ul {
-  text-align: left;
-  font-size: 12px;
-  margin: 0;
-  padding: 0;
-  list-style-type: square;
-  list-style-position: inside;
-}
-td li {
-  margin: 5px;
-  padding: 0;
+.c-today {
+  background-color: orangered;
 }
 
 .plan {
@@ -60,6 +38,7 @@ td li {
   background-color: orange;
   color: #fff;
 }
+
 .plan:after {
   content: ' ';
   display: block;
@@ -81,4 +60,11 @@ td li {
   background-color: blue;
 }
 
-/*# sourceMappingURL=schedule.css.map */
+.box {
+  width: 500px;
+}
+
+#monthValue {
+  width: 4em;
+  text-align: center;
+}

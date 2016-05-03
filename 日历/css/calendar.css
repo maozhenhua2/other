@@ -1,0 +1,148 @@
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+
+body,
+h1,
+ul,
+li {
+	margin: 0;
+	padding: 0
+}
+
+li {
+	list-style-type: none
+}
+
+.m-calendar {
+	width: 260px;
+	border: 1px solid #ccc;
+	background: #fff;
+	text-align: center;
+	margin-top: 5px;
+	box-shadow: 1px 1px 5px 1px #ccc;
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 3;
+}
+
+.m-calendar h1 {
+	margin: 10px 0;
+	font-size: 0;
+	position: relative;
+}
+
+.m-calendar h1 a {
+	font-size: 14px;
+	padding: 5px 10px;
+	cursor: pointer;
+	display: inline-block;
+}
+.m-calendar h1 a.prev{
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin-left: 5px;
+}
+.m-calendar h1 a.next{
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin-right: 5px;
+}
+.m-calendar h1 a:hover{
+	background: #eaeaea;
+}
+.m-calendar h1 a.title{
+	width: 100%;
+	padding: 0 35px;
+}
+.m-calendar h1 a.title span{
+	display: block;
+	padding: 5px 0;
+}
+.m-calendar h1 a.title:hover{
+	border-radius: 0;
+	background: transparent;
+}
+.m-calendar h1 a.title:hover span{
+	background: #eaeaea;
+}
+.m-calendar ul {
+	font-size: 0;
+}
+
+.m-calendar li {
+	font-size: 14px;
+	display: inline-block;
+	vertical-align: middle;
+	width: 36px;
+	height: 36px;
+	line-height: 16px;
+	padding: 10px;
+	border: 1px solid transparent;
+}
+
+.m-calendar li.m,
+.m-calendar li.y {
+	width: 64px;
+	height: 84px;
+	line-height: 64px;
+}
+
+.m-calendar li.prev,
+.m-calendar li.next {
+	color: #ccc;
+}
+
+.m-calendar li.y.gray {
+	color: #ccc;
+}
+
+.m-calendar .c-list li:hover {
+	color: #fff;
+	background: #6D6E79;
+	cursor: pointer;
+}
+
+.m-calendar .c-list li:empty {
+	cursor: default;
+	background: transparent;
+}
+
+.m-calendar .now {
+	/*background: #7276FF;
+	color: #fff;*/
+	border: 1px solid #000;
+}
+
+.m-calendar .selected {
+	background: #7276FF;
+	color: #fff;
+}
+.m-calendar .today{
+	display: block;
+	padding: 10px;
+	margin: 5px;
+}
+.m-calendar .today:hover{
+	background: #eaeaea;
+	cursor: pointer;
+}
+.m-calendar-input{
+	position: relative;
+	z-index: 4;
+}
+#documentBtn{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 2;
+	visibility: hidden;
+}

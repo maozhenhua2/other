@@ -1,0 +1,34 @@
+#monthValue {
+  width: 4em;
+  text-align: center;
+}
+
+.number:after {
+  content: '.';
+  margin-right: 5px;
+}
+
+.pop-content {
+  display: inline-block;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  font-size: 12px;
+  text-align: left;
+}
+.pop-content li {
+  margin: 5px 0;
+}
+.pop-content button {
+  min-width: 30px;
+}
+
+.content-pannel {
+  text-align: center;
+}
+.content-pannel .btn {
+  width: auto;
+  margin: 0 5px;
+}
+
+/*# sourceMappingURL=popcontent.css.map */

@@ -68,6 +68,11 @@ function hasClassName(element, className) {
   return false;
 }
 
+function hasClass(element, className) {
+  var re = new RegExp('\\b' + className + '\\b', 'i');
+  return element.className.match(re);
+}
+
 // 添加类
 function addClassName(element, className) {
   if (!(element = getId(element))) return false;
@@ -367,12 +372,12 @@ Array.prototype.shuffle3 = function(n) {
 };
 
 // 随机排序
-arr.sort(function(){
+arr.sort(function() {
   return Math.random() * 2 - 1;
 });
 
-function shuffle(arr){
-  return arr.sort(function(){
+function shuffle(arr) {
+  return arr.sort(function() {
     return Math.round(Math.random());
   });
 }

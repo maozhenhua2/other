@@ -121,7 +121,7 @@ var calendar1 = {
     var fday = this.fday === 0 ? 6 : this.fday;
     for (; i < l; i++) {
       dayIndex = new Date(arr[i]['ImplementTime']).getDate();
-      dataIndex = dayIndex + fday;
+      dataIndex = dayIndex + fday - 1;
       td = obj.querySelector('[data-index="' + dataIndex + '"]');
       className = this.className[arr[i]['PerformState']];
       if (callback && typeof callback === 'function') {
@@ -130,7 +130,7 @@ var calendar1 = {
 
       html = '';
       html += '<span class="' + className + '">';
-      html += dataIndex - fday;
+      html += dataIndex - fday + 1;
       html += '</span>';
       // console.dir(td, dataIndex, html)
       td.innerHTML = html;
