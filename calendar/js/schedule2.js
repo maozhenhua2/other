@@ -85,7 +85,7 @@ var calendar1 = {
         id = arr[index].ID ? arr[index].ID : '';
         html += '<td class="' + today + '" data-index="' + index + '" data-id="' + id + '">';
         if (today === 'c-today') {
-          html += '<span class="bg-primary">今天' + (this.nowDate.month + 1) + '月' + this.nowDate.date + '日' + '</span>';
+          html += '<span class="bg-default">今天' + (this.nowDate.month + 1) + '月' + this.nowDate.date + '日' + '</span>';
         } else {
           html += '<span>' + arr[index].txt + '</span>';
         }
@@ -204,18 +204,18 @@ var calendar1 = {
       for (; i < l; i++) {
         html += '<li>';
         html += '<input type="text" class="form-control inline-block" name="" id="" value="' + data[i].txt + '">';
-        html += '<button type="button" class="remove btn btn-primary">-</button>';
+        html += '<button type="button" class="remove btn btn-default"><span class="glyphicon glyphicon-minus"></span></button>';
         html += '</li>';
       }
     }
 
     html += '<li>';
     html += '<input type="text" name="" id="" class="form-control inline-block">';
-    html += '<button type="button" class="add btn btn-primary">+</button>';
+    html += '<button type="button" class="add btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>';
     html += '</li>';
 
     html += '</ol>';
-    html += '<div class="content-pannel"><button type="button" class="ok btn btn-primary">确定</button><button type="button" class="cancel btn btn-primary">取消</button></div>';
+    html += '<div class="content-pannel"><button type="button" class="ok btn btn-default">确定</button><button type="button" class="cancel btn btn-default">取消</button></div>';
     document.getElementById(this.contentId).innerHTML = html;
   },
   contentEvent: function () {
@@ -231,11 +231,11 @@ var calendar1 = {
           var li = document.createElement('li');
           var html = '';
           html += '<input type="text" name="" id="" class="form-control inline-block">';
-          html += '<button type="button" class="add btn btn-primary">+</button>';
+          html += '<button type="button" class="add btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>';
           li.innerHTML = html;
           _this.addContentLi(target, li);
-          target.className = 'remove btn btn-primary';
-          target.innerHTML = '-';
+          target.className = 'remove btn btn-default';
+          target.innerHTML = '<span class="glyphicon glyphicon-plus"></span>';
 
         } else if (hasClass(target, 'remove')) {// 删除行事件
           liIndex = index(target.parentNode, document.getElementById(_this.contentId).querySelectorAll('li'));
