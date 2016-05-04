@@ -3,11 +3,6 @@ var nowDate = new Date();
 var monthIndex = nowDate.getMonth();
 var yearIndex = nowDate.getFullYear();
 
-popbox.init({
-  maskhide: true,
-  transition: true
-});
-
 setMonthValue(monthIndex);
 document.querySelector('.c-left-btn').addEventListener('click', function () {
   monthIndex--;
@@ -29,6 +24,7 @@ function setMonthValue(i) {
   document.getElementById('monthValue').value = (Months[i]);
 }
 
+// 模拟数据
 function getDate(i) {
   var state = ['REJECT', 'PASS', 'SCHEDULED', 'COMPLETE'];
 
@@ -45,7 +41,7 @@ function getDate(i) {
         txt: '事件1' + date
       }, {
         txt: '事件2' + date
-      },{
+      }, {
         txt: '事件3' + date
       }, {
         txt: '事件4' + date
@@ -59,27 +55,32 @@ function getDate(i) {
   }, 100);
 }
 
+// 生成日历
+calendar1.init({
+  id: 'tableCcalendar',
+  contentId: 'popContent',
+  popId: '#pop1',
+  okFn: function () {
+    
+  }
+  // callback: function (o) {
+  //   var index = o.getAttribute('data-arrIndex');
+  //   // console.log(index)
+  //   calendar1.createPopContent(index);
+  //   popbox.show('#pop1');
+  // },
+  // className: {
+  //   REJECT: 'plan plan-reject',
+  //   PASS: 'plan plan-complete',
+  //   SCHEDULED: 'plan',
+  //   COMPLETE: 'plan plan-nosubmit'
+  // }
+});
+
+getDate(monthIndex);
+
 // 指定范围随机数
 function randomRange(start, end) {
   var total = end - start + 1;
   return Math.floor(Math.random() * total + start);
 }
-
-calendar1.init({
-  id: 'tableCcalendar',
-  contentId: 'popContent',
-  callback: function (o){
-    var index = o.getAttribute('data-arrIndex');
-    // console.log(index)
-    calendar1.createPopContent(index);
-    popbox.show('#pop1');
-  },
-  className: {
-    REJECT: 'plan plan-reject',
-    PASS: 'plan plan-complete',
-    SCHEDULED: 'plan',
-    COMPLETE: 'plan plan-nosubmit'
-  }
-});
-
-getDate(monthIndex);

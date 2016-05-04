@@ -158,6 +158,9 @@ function parentsUntil(o, select) {
   function setCondition(parent) {
     var condition;
     var arr = [];
+    if (parent.nodeName.toLowerCase() === 'html') {
+      return false;
+    }
     if (type === 'string') {
       if (select.indexOf('.') !== -1) {
         // console.log('class');

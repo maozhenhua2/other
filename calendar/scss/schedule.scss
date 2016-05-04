@@ -27,6 +27,12 @@ th {
 }
 
 td {
+  &.active {
+    background-color: #fff;
+    border: 1px solid #93d4fc;
+    box-shadow: 0 0 5px #60caff;
+    border-collapse: separate;
+  }
   & > span {
     position: absolute;
     width: 100%;

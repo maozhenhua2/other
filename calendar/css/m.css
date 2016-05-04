@@ -143,6 +143,12 @@ th {
   font-size: 12px;
 }
 
+td.active {
+  background-color: #fff;
+  border: 1px solid #93d4fc;
+  box-shadow: 0 0 5px #60caff;
+  border-collapse: separate;
+}
 td > span {
   position: absolute;
   width: 100%;
@@ -211,6 +217,10 @@ td li {
 
 .table > tbody > tr > td {
   padding-top: 27px;
+}
+
+.table > tbody > tr > td.active {
+  background-color: #fff;
 }
 
 .form-control.inline-block {

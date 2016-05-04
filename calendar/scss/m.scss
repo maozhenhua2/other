@@ -19,6 +19,10 @@
   padding-top: 27px;
 }
 
+.table > tbody > tr > td.active {
+  background-color: #fff;
+}
+
 .form-control {
   &.inline-block {
     width: auto;
