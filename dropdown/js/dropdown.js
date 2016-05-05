@@ -31,3 +31,13 @@ function cselect() {
 
   documentClickHide('.c-select-list');
 }
+
+function documentClickHide(sel) {
+  $(document).click(function(e) {
+    var p = $(e.target).find(sel).length;
+    var p2 = $(e.target).siblings(sel).length;
+    if ((p && !p2) || (!p && !p2)) {
+      $(sel).hide();
+    }
+  });
+}
