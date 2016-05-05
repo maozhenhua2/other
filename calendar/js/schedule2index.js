@@ -26,14 +26,14 @@ function setMonthValue(i) {
 
 // 模拟数据
 function getDate(i) {
-  var state = ['REJECT', 'PASS', 'SCHEDULED', 'COMPLETE'];
+  // var state = ['REJECT', 'PASS', 'SCHEDULED', 'COMPLETE'];
 
   var index = 0;
   var l = randomRange(1, 2);
   var arr = [];
   for (; index < l; index++) {
     var date = randomRange(1, 27);
-    var stateIndex = randomRange(0, 3);
+    // var stateIndex = randomRange(0, 3);
     var data = {
       "ID": date + "b412db9e-5e1b-4dbe-87a5-87b4a347f463",
       "ImplementTime": "2016/" + (i + 1) + "/" + date + " 0:00:00",
@@ -49,7 +49,8 @@ function getDate(i) {
     };
     arr.push(data);
   }
-//    console.log(arr)
+
+  // 模拟ajax异步
   setTimeout(function () {
     calendar1.createSchedule(arr);
   }, 100);
