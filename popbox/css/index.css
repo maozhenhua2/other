@@ -1,7 +1,13 @@
-.pop-content{
+.msg{
   width: 500px;
   margin: 0 auto;
   text-align: center;
   background-color: #fff;
-  padding: 20px;
+}
+.pop-title {
+  padding: 10px;
+}
+
+.pop-content {
+  padding: 10px;
 }

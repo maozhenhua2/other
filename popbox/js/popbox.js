@@ -3,24 +3,29 @@ var popbox = {
     var $this = this;
     var mask = '<div class="mask"></div>';
     var l = $('.mask').length;
-    if (l) {
-      $('.mask').addClass('active');
-    } else {
+    if (!l) {
       $('body').append(mask);
     }
 
     if (o.transition) {
       $('.mask-box').addClass('transition');
       $('.mask').addClass('transition');
+    } else {
+      $('.mask-box').removeClass('transition');
+      $('.mask').removeClass('transition');
     }
 
     if (o.maskhide) {
-      $('.mask-box').click(function(e) {
-        var l = $(e.target).find('.msg').length;
-        if (l || $(e.target).hasClass('msg') || $(e.target).hasClass('hide-pop')) {
-          $this.hide();
-        }
-      });
+      $('.mask-box').on('click', hide);
+    } else {
+      $('.mask-box').off('click', hide);
+    }
+
+    function hide(e) {
+      var l = $(e.target).find('.msg').length;
+      if (l || $(e.target).hasClass('msg') || $(e.target).hasClass('hide-pop')) {
+        $this.hide();
+      }
     }
     return this;
   },

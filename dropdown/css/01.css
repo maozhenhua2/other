@@ -1,0 +1,199 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  font-size: 14px;
+  font-family: "microsoft yahei", arial;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+.c-search,
+.c-select,
+.c-text,
+.c-left-right {
+  display: inline-block;
+  position: relative;
+}
+.c-search .input-text,
+.c-select .input-text,
+.c-text .input-text,
+.c-left-right .input-text {
+  width: 100%;
+  padding-right: 41px;
+}
+.c-search .text-area,
+.c-select .text-area,
+.c-text .text-area,
+.c-left-right .text-area {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: 1px solid transparent;
+  resize: none;
+  display: block;
+}
+.c-search.small,
+.c-select.small,
+.c-text.small,
+.c-left-right.small {
+  width: 160px;
+}
+
+.c-left-right {
+  width: 200px;
+}
+.c-left-right .input-text {
+  padding-left: 41px;
+}
+
+.c-search .input-text {
+  padding-right: 8px;
+}
+.c-search.only-btn .c-search-btn {
+  right: 0;
+}
+
+.c-file input[type=file] {
+  display: none;
+}
+.c-file .input-text {
+  border: 1px solid transparent;
+}
+
+.c-text .input-text {
+  width: 100%;
+  padding-right: 8px;
+}
+
+.c-search-btn,
+.c-select-btn,
+.c-left-btn,
+.c-right-btn {
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 33px;
+  height: 33px;
+  border: 1px solid #ccc;
+  background-image: url("../images/c-select.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  z-index: 7;
+}
+
+.c-left-btn {
+  background-color: #fff;
+  text-align: center;
+  left: 0;
+  right: auto;
+}
+
+.c-right-btn {
+  text-align: center;
+  background-image: none;
+  background-color: #fff;
+}
+
+.c-search-btn {
+  background-image: url("../images/search.png");
+}
+
+.c-select-list {
+  margin-top: -1px;
+  display: none;
+  border: 1px solid #ccc;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 33px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.c-select-list li {
+  height: 33px;
+  background-color: #fff;
+  padding: 8px 10px;
+  position: relative;
+}
+.c-select-list li:before {
+  content: '';
+  display: inline-block;
+  width: 100%;
+  height: 0;
+  border-top: 1px solid #ccc;
+  margin: 0 10px;
+  position: relative;
+  top: -8px;
+  left: -10px;
+  float: left;
+}
+.c-select-list li:first-child:before {
+  border-top: none;
+}
+.c-select-list li.cselected, .c-select-list li:hover {
+  background-color: #f6f6f6;
+}
+
+.input-text {
+  padding: 8px;
+  border: 1px solid #ccc;
+  color: #666;
+  background-color: #fff;
+  height: 33px;
+  position: relative;
+}
+
+.c-select-btn {
+  top: auto;
+  bottom: 0;
+  background-color: #ccc;
+  background-size: 50% 30%;
+}
+
+.c-search.only-btn {
+  width: 33px;
+  overflow: hidden;
+}
+
+.c-select-btn {
+  top: auto;
+  bottom: 0;
+  background-color: #ccc;
+  background-size: 50% 30%;
+}
+.c-select-btn.remove {
+  right: 33px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 33px;
+}
+
+.c-search-btn {
+  top: auto;
+  bottom: 0;
+  background-color: #0f0;
+  right: -40px;
+}
+
+.c-select-list {
+  top: 33px;
+}
+
+/*# sourceMappingURL=01.css.map */

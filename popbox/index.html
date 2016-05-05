@@ -20,6 +20,9 @@
   <div class="table-box">
     <div class="table">
       <div class="msg">
+        <div class="pop-title">
+          标题
+        </div>
         <div class="pop-content">
           <span></span>
           <input id="ok" type="button" value="确定">
@@ -47,6 +50,10 @@
     popbox.hide('#pop1');
   });
 
+  popbox.init({
+    maskhide: true,
+    transition: false
+  });
 
 </script>
 </body>

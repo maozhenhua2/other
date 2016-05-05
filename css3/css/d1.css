@@ -1,0 +1,81 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+.loading {
+  width: 20px;
+  height: 20px;
+  -moz-animation: rotates 2s linear infinite;
+  -webkit-animation: rotates 2s linear infinite;
+  animation: rotates 2s linear infinite;
+  position: relative;
+}
+.loading > div:nth-child(1) {
+  border: 2px solid #000;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 100%;
+}
+.loading > div:nth-child(2) {
+  border: 2px solid #fff;
+  width: 20px;
+  height: 5px;
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  top: 7.5px;
+}
+.loading > div:nth-child(3) {
+  position: absolute;
+  left: -2.66667px;
+  top: 50%;
+  margin-top: -5px;
+  width: 0;
+  height: 0;
+  -moz-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  -webkit-transform: rotate(15deg);
+  transform: rotate(15deg);
+  border-top: 5px solid #000;
+  border-bottom: 5px solid transparent;
+  border-left: 3.33333px solid transparent;
+  border-right: 3.33333px solid transparent;
+}
+.loading > div:nth-child(4) {
+  position: absolute;
+  right: -2.66667px;
+  top: 50%;
+  margin-top: -5px;
+  width: 0;
+  height: 0;
+  -moz-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  -webkit-transform: rotate(15deg);
+  transform: rotate(15deg);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid #000;
+  border-left: 3.33333px solid transparent;
+  border-right: 3.33333px solid transparent;
+}
+
+@keyframes rotates {
+  0% {
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+/*# sourceMappingURL=d1.css.map */

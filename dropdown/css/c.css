@@ -3,7 +3,6 @@
   width: 220px;
   position: relative;
 }
-
 .c-search .input-text,
 .c-select .input-text {
   width: 100%;
@@ -11,9 +10,8 @@
   padding: 5px;
   padding-right: 41px;
 }
-
 .c-search.small,
-.input-text.small {
+.c-select.small {
   width: 160px;
 }
 
@@ -48,14 +46,12 @@
   left: 0;
   top: 33px;
 }
-
 .c-select-list li {
   height: 33px;
   background-color: #fff;
   padding: 8px 10px;
   position: relative;
 }
-
 .c-select-list li:before {
   content: '';
   display: inline-block;
@@ -68,12 +64,11 @@
   left: -10px;
   float: left;
 }
-
 .c-select-list li:first-child:before {
   border-top: none;
 }
-
-.c-select-list li.cselected,
-.c-select-list li:hover {
+.c-select-list li.cselected, .c-select-list li:hover {
   background-color: #f6f6f6;
 }
+
+/*# sourceMappingURL=c.css.map */
