@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title></title>
+</head>
+<body>
+<div>
+  <form id="form">
+    <ol>
+      <li><label for="f1">f1:</label><input type="file" name="f1" id="f1" multiple></li>
+      <li><label for="f2">f2:</label><input type="file" name="f2" id="f2"></li>
+      <li><label for="f3">f3:</label><input type="file" name="f3" id="f3"></li>
+      <li><button id="submit" type="button">submit</button></li>
+    </ol>
+  </form>
+</div>
+
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+var f1 = document.getElementById('f1');
+  document.getElementById('submit').addEventListener('click', function () {
+    console.dir(document.getElementById('form'));
+//    Array.prototype.map.call(f1.files, (function (v, i, all) {
+//      console.log(v.name);
+//    }))
+  });
+</script>
+</body>
+</html>

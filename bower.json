@@ -1,0 +1,20 @@
+{
+  "name": "other",
+  "homepage": "https://github.com/maozhenhua2/other",
+  "authors": [
+    "m.max <1036310327@qq.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.11.3"
+  }
+}

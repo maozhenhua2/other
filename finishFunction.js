@@ -564,6 +564,24 @@ fixEvent.stopPropagation = function() {
   this.cancelBubble = true;
 };
 
+var addEvents = function(elem, type, handler) {
+  if (window.addEventListener) {
+    addEvents = function(elem, type, handler) {
+      elem.addEventListener(type, handler, false);
+    };
+  } else if (window.attachEvent) {
+    addEvents = function(elem, type, handler) {
+      elem.attachEvent('on' + type, handler);
+    };
+  } else {
+    addEvents = function(elem, type, handler) {
+      elem['on' + type] = handler;
+    };
+  }
+
+  addEvents(elem, type, handler);
+};
+
 // 获取指定css样式
 function getStyle(oElm, strCssRule) {
   var strValue = "";
