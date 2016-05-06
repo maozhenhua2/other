@@ -7,17 +7,25 @@ function cselect() {
     var t = e.target;
     var sel = '.c-select-list';
     var cSelectList = $(sel);
-    if ($(t).hasClass('c-select-btn') || ($(t).hasClass('input-text') && $(t).parent().hasClass('c-select'))) {
-      var l = cSelectList.length;
-      var i = 0;
-      for (; i < l; i++) {
-        $(cSelectList[i]).css({
-          'z-index': 15 + (l - i)
-        });
+    var l = cSelectList.length;
+    var i = 0;
+    var parent;
+    for (; i < l; i++) {
+      $(cSelectList[i]).css({
+        'z-index': 15 + (l - i)
+      });
+    }
+
+    if ($(t).hasClass('c-select-btn') || $(t).parent().hasClass('c-select-btn') || ($(t).hasClass('input-text') && $(t).parent().hasClass('c-select'))) {
+
+      if ($(t).parent().hasClass('c-select-btn')) {
+        parent = $(t).parent().parent().children(sel);
+      } else {
+        parent = $(t).parent().children(sel);
       }
 
-      cSelectList.not($(t).parent().children(sel)).hide();
-      $(t).parent().children(sel).toggle();
+      cSelectList.not(parent).hide();
+      parent.toggle();
     }
 
     if ($(t).parent().parent().hasClass('c-select-list')) {
@@ -27,17 +35,15 @@ function cselect() {
       p.parent().children('.input-text').val($(t).html());
     }
 
-  });
-
-  documentClickHide('.c-select-list');
-}
-
-function documentClickHide(sel) {
-  $(document).click(function(e) {
-    var p = $(e.target).find(sel).length;
+    var p1 = $(e.target).find(sel).length;
     var p2 = $(e.target).siblings(sel).length;
-    if ((p && !p2) || (!p && !p2)) {
+    var p3 = $(e.target).parent().siblings(sel).length;
+    // console.log(p1, p2, p3)
+
+    if ((p1 && !p2 && !p3) || (!p1 && !p2 && !p3)) {
       $(sel).hide();
     }
+
   });
+
 }
