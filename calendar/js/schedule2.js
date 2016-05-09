@@ -89,6 +89,7 @@ var calendar1 = {
         today = arr[index].txt === this.nowDate.date && t1 ? 'c-today active' : '';
         id = arr[index].ID ? arr[index].ID : '';
         html += '<td class="' + today + '" data-index="' + index + '" data-id="' + id + '">';
+        html += '<div>';
         if (today === 'c-today active') {
           html += '<span class="bg-default">今天' + (this.nowDate.month + 1) + '月' + this.nowDate.date + '日' + '</span>';
         } else {
@@ -96,6 +97,7 @@ var calendar1 = {
         }
 
         html += '<div class="day-list"></div>';
+        html += '</div>';
         html += '</td>';
       }
       html += '</tr>';
@@ -152,7 +154,7 @@ var calendar1 = {
     }
     return this;
   },
-  // 根据指定日期数据显示日程列表
+  // 根据指定日期数据显示日程列表，不是弹窗
   createDaySchedule: function (d) {
     var html = '';
     var i = 0;

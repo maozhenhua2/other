@@ -216,7 +216,11 @@ td li {
 }
 
 .table > tbody > tr > td {
-  padding-top: 27px;
+  padding: 0;
+}
+
+.table > tbody > tr > td > div {
+  padding: 27px 5px 5px 5px;
 }
 
 .table > tbody > tr > td.active {
