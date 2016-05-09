@@ -34,6 +34,15 @@ var calendar1 = {
       fday: _this.getFDay(new Date(y, m, 0))
     };
   },
+  // 新建事件按钮
+  _addLi: function () {
+    var li = document.createElement('li');
+    li.className = 'addLi';
+    var span = document.createElement('span');
+    span.innerHTML = '新建事件······';
+    li.appendChild(span);
+    return li;
+  },
   /*
    * days: 每个月天数
    * fday: 每个月的第一天是星期几
@@ -68,44 +77,60 @@ var calendar1 = {
   },
   /*
    * arr: _createTdArr所生成的数据
+   * 生成日历表格，不含任何数据
    * */
   _createTbody: function (arr) {
     var i = 0;
     var j = 0;
     var l = arr.length / 7;
     var k = 7;
-    var html = '';
     var t1 = false;
     var index = 0;
     var id = '';
     if (this.year === this.nowDate.year && this.month === this.nowDate.month) {
       t1 = true;
     }
+    var oFragment = document.createDocumentFragment();
+
     for (; i < l; i++) {
-      html += '<tr>';
+      var tr = document.createElement('tr');
       for (j = 0; j < k; j++) {
         index = (i * 7) + j;
         var today = '';
         today = arr[index].txt === this.nowDate.date && t1 ? 'c-today active' : '';
         id = arr[index].ID ? arr[index].ID : '';
-        html += '<td class="' + today + '" data-index="' + index + '" data-id="' + id + '">';
-        html += '<div>';
-        if (today === 'c-today active') {
-          html += '<span class="bg-default">今天' + (this.nowDate.month + 1) + '月' + this.nowDate.date + '日' + '</span>';
-        } else {
-          html += '<span>' + arr[index].txt + '</span>';
-        }
 
-        html += '<div class="day-list"></div>';
-        html += '</div>';
-        html += '</td>';
+        var td = document.createElement('td');
+        td.className = today;
+        td.setAttribute('data-index', index);
+        td.setAttribute('data-id', id);
+
+        var div = document.createElement('div');
+        var span = document.createElement('span');
+        var div2 = document.createElement('div');
+        div2.className = 'day-list';
+        if (today === 'c-today active') {
+          span.className = 'bg-default';
+          span.innerHTML = '今天' + (this.nowDate.month + 1) + '月' + this.nowDate.date + '日';
+          div2.appendChild(this._addLi());
+        } else {
+          span.innerHTML = arr[index].txt;
+          div2.className = 'day-list';
+        }
+        div.appendChild(span);
+        div.appendChild(div2);
+        td.appendChild(div);
+
+        tr.appendChild(td);
       }
-      html += '</tr>';
+
+      oFragment.appendChild(tr);
     }
-    return html;
+    return oFragment;
   },
   _createHtml: function (id, h) {
-    document.getElementById(id).innerHTML = h;
+    document.getElementById(id).innerHTML = '';
+    document.getElementById(id).appendChild(h);
   },
   /*
    * y: 年份
@@ -127,6 +152,7 @@ var calendar1 = {
   /*
    * d: 数据
    * callback: 有数据td上对应的回调函数
+   * 在表格的基础上添加对应日期上的数据列表
    * */
   createSchedule: function (d) {
     var obj = document.getElementById(this.id);
@@ -139,19 +165,21 @@ var calendar1 = {
     var html = '';
     var dataIndex = 0;
     var fday = this.fday === 0 ? 6 : this.fday;
-
     for (; i < l; i++) {
       dayIndex = new Date(arr[i]['ImplementTime']).getDate();
       dataIndex = dayIndex + fday;
       td = obj.querySelector('[data-index="' + dataIndex + '"]');
       td.setAttribute('data-id', arr[i]['ID']);
       td.setAttribute('data-arrIndex', i);
-      // console.log(arr[i])
-      html = this.createDaySchedule(arr[i]['PerformState']);
-
-      td.querySelector('.day-list').innerHTML = html;
-
+      var ul = document.createElement('ul');
+      ul.appendChild(this.createDaySchedule(arr[i]['PerformState']));
+      if (hasClass(td, 'active')) {
+        ul.appendChild(this._addLi());
+      }
+      td.querySelector('.day-list').innerHTML = '';
+      td.querySelector('.day-list').appendChild(ul);
     }
+
     return this;
   },
   // 根据指定日期数据显示日程列表，不是弹窗
@@ -159,39 +187,104 @@ var calendar1 = {
     var html = '';
     var i = 0;
     var l = d.length;
-    html += '<ul>';
+    var oFragment = document.createDocumentFragment();
     for (; i < l; i++) {
-      html += '<li><span>' + d[i].txt + '</span></li>';
+      var li = document.createElement('li');
+      li.title = d[i].txt;
+      var span = document.createElement('span');
+      span.innerHTML = d[i].txt;
+      li.appendChild(span);
+      oFragment.appendChild(li);
     }
-    html += '</ul>';
-    return html;
+    return oFragment;
   },
   // 点击日期弹窗
-  callbackFn: function () {
+  createPop: function () {
     var _this = this;
     document.getElementById(this.id).addEventListener('click', function (e) {
-      e.stopPropagation();
       var td = parentsUntil(e.target, 'td');
+      // 获取点击的td
+      _this.td = td;
+      // 已经选择了td
       if (td.nodeName.toLowerCase() === 'td' && hasClass(td, 'active')) {
-        _this.td = td;
-        // if (callback && typeof callback === 'function') {
-        var fday = _this.fday === 0 ? 6 : _this.fday;
-        _this.currentDay = parseInt(_this.td.getAttribute('data-index'), 10) - fday;
-        var index = _this.td.getAttribute('data-arrIndex');
-        calendar1.createPopContent(index);
-        popbox.show(_this.popId);
-        // }
-      } else if (td.nodeName.toLowerCase() === 'td') {
+        // 点击添加事件
+        if (hasClass(e.target.parentNode, 'addLi') || hasClass(e.target, 'addLi')) {
+          // 获取点击的是第几天
+          var fday = _this.fday === 0 ? 6 : _this.fday;
+          _this.currentDay = parseInt(_this.td.getAttribute('data-index'), 10) - fday;
+          calendar1.createPopContent(_this.td.getAttribute('data-arrIndex'), 'add');
+          popbox.show(_this.popId);
+        }
 
+        removeLi(e);
+
+      } else if (td.nodeName.toLowerCase() === 'td') {
+        // 还没选择td
+
+        var addLi;
         var actives = td.parentNode.parentNode.querySelectorAll('.active');
         if (actives.length) {
-          Array.prototype.map.call(actives, function (value, index, array) {
-            removeClassName(value, 'active');
-          });
+          var i = 0;
+          var l = actives.length;
+          for (; i < l; i++) {
+            removeClassName(actives[i], 'active');
+            addLi = actives[i].querySelector('.addLi');
+            // 有新建事件按钮
+            if (addLi) {
+              var k = actives[i].querySelectorAll('li').length;
+              // 如果只有新建事件按钮
+              if (k === 1) {
+                actives[i].querySelector('.day-list').innerHTML = '';
+              } else {// 如果已经有日程列表
+                actives[i].querySelector('ul').removeChild(addLi);
+              }
+            }
+          }
         }
 
         addClassName(td, 'active');
+
+        var dayList = td.querySelector('.day-list');
+        addLi = dayList.querySelector('.addLi');
+
+        if (dayList.innerHTML) {
+          // 如果已经日程列表
+          if (!addLi) {
+            dayList.childNodes[0].appendChild(_this._addLi());
+          }
+        } else {
+          // 当前td内容为空，并且没有新建事件按钮
+          if (!addLi) {
+            var ul = document.createElement('ul');
+            ul.appendChild(_this._addLi());
+            dayList.appendChild(ul);
+          }
+
+        }
+
+        removeLi(e);
+
       }
+
+      function removeLi(e) {
+        if (e.target.title || e.target.parentNode.title) {
+          var liIndex;
+          var p;
+          if (e.target.nodeName.toLowerCase() === 'li') {
+            p = e.target;
+          } else if (e.target.parentNode.nodeName.toLowerCase() === 'li') {
+            p = e.target.parentNode;
+          }
+          liIndex = index(p, p.parentNode.childNodes);
+          addClassName(p, 'selected');
+
+          var tdindex = td.getAttribute('data-arrindex');
+          _this.createPopContent(tdindex, 'edit', liIndex);
+          popbox.show(_this.popId);
+        }
+      }
+
+
     });
   },
   // 返回日程数据
@@ -199,7 +292,7 @@ var calendar1 = {
     return this.data;
   },
   // 生成弹窗内容
-  createPopContent: function (index) {
+  createPopContent: function (index, type, index2) {
     var data;
     if (!this.data[index]) {
       data = [];
@@ -211,89 +304,86 @@ var calendar1 = {
       data: data,
       index: index
     };
-    var i = 0;
-    var l = data.length;
     var html = '';
-    html += '<ol data-index="' + index + '">';
-    if (l >= 1) {
-      for (; i < l; i++) {
-        html += '<li>';
-        html += '<input type="text" class="form-control inline-block" name="" id="" value="' + data[i].txt + '">';
-        html += '<button type="button" class="remove btn btn-default"><span class="glyphicon glyphicon-minus"></span></button>';
-        html += '</li>';
-      }
+    var ol = document.createElement('ol');
+    ol.setAttribute('data-index', index);
+    var li = document.createElement('li');
+    li.setAttribute('data-index', index2);
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'form-control inline-block';
+    if (type === 'edit') {
+      input.value = data[index2].txt;
     }
-
-    html += '<li>';
-    html += '<input type="text" name="" id="" class="form-control inline-block">';
-    html += '<button type="button" class="add btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>';
-    html += '</li>';
-
-    html += '</ol>';
-    html += '<div class="content-pannel"><button type="button" class="ok btn btn-default">确定</button><button type="button" class="cancel btn btn-default">取消</button></div>';
-    document.getElementById(this.contentId).innerHTML = html;
+    li.appendChild(input);
+    ol.appendChild(li);
+    var div = document.createElement('div');
+    html += '<div class="content-pannel">';
+    html += '<button type="button" class="' + type + ' btn btn-default">确定</button>';
+    if (type === 'edit') {
+      html += '<button type="button" class="remove btn btn-default">删除</button>';
+    }
+    html += '<button type="button" class="cancel btn btn-default">取消</button>';
+    html += '</div>';
+    div.innerHTML = html;
+    document.getElementById(this.contentId).innerHTML = '';
+    document.getElementById(this.contentId).appendChild(ol);
+    document.getElementById(this.contentId).appendChild(div);
   },
   // 弹窗后添加删除等事件
   contentEvent: function () {
     var _this = this;
-    var liIndex = 0;
     if (this.contentId) {
       document.getElementById(this.contentId).addEventListener('click', function (e) {
         var target = e.target;
-        var liNode;
-        if (hasClass(target, 'add') || hasClass(target.parentNode, 'add')) {// 添加行事件
-          liNode = parentsUntil(target, 'li');
-          liIndex = index(liNode, document.getElementById(_this.contentId).querySelectorAll('li'));
-          var li = document.createElement('li');
-          var html = '';
-          html += '<input type="text" name="" id="" class="form-control inline-block">';
-          html += '<button type="button" class="add btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>';
-          li.innerHTML = html;
-          liNode.parentNode.appendChild(li);
-          liNode.querySelector('button').className = 'remove btn btn-default';
-          liNode.querySelector('button').innerHTML = '<span class="glyphicon glyphicon-minus"></span>';
+        var td = _this.td;
+        var index1 = document.querySelector(_this.popId).querySelector('ol').getAttribute('data-index');
+        var index2 = document.querySelector(_this.popId).querySelector('li').getAttribute('data-index');
 
-        } else if (hasClass(target, 'remove') || hasClass(target.parentNode, 'remove')) {// 删除行事件
-          liNode = parentsUntil(target, 'li');
-          liIndex = index(liNode, document.getElementById(_this.contentId).querySelectorAll('li'));
-          liNode.parentNode.removeChild(liNode);
-
-        } else if (hasClass(target, 'cancel')) {// 取消弹窗事件
-
-          popbox.hide('#pop1');
-        } else if (hasClass(target, 'ok')) {// 确定事件
-
-          var td = _this.td;
-          if (_this.contentData.index === null) {
-            _this.contentData.index = _this.data.length;
-          }
-
+        if (hasClass(target, 'add')) {
           _this.contentData.data = _this.createContentData();
-
           if (_this.contentData.data.length === 0) {
             popbox.hide('#pop1');
             return false;
           }
 
-          if (!_this.data[_this.contentData.index]) {
+          if (_this.contentData.index === null) {
+            _this.contentData.index = _this.data.length;
+          }
+
+          if (_this.data[_this.contentData.index]) {
+            _this.contentData.data.map(function (v, i, all) {
+              _this.data[_this.contentData.index]['PerformState'].push(v);
+            });
+          } else {
             _this.data.push({
               ID: '',
               ImplementTime: new Date(_this.year + '-' + (_this.month + 1) + '-' + _this.currentDay),
               PerformState: _this.contentData.data
             });
-          } else {
-            _this.data[_this.contentData.index]['PerformState'] = _this.contentData.data;
           }
-
-          td.setAttribute('data-arrIndex', _this.contentData.index);
-          td.querySelector('.day-list').innerHTML = _this.createDaySchedule(_this.contentData.data);
           popbox.hide('#pop1');
+        } else if (hasClass(target, 'edit')) {
+          _this.contentData.data = _this.createContentData();
+          _this.data[index1]['PerformState'][index2].txt = _this.contentData.data[0].txt;
+          popbox.hide('#pop1');
+        } else if (hasClass(target, 'remove')) {
+          _this.data[index1]['PerformState'].splice(index2, 1);
+          popbox.hide('#pop1');
+        } else if (hasClass(target, 'cancel')) {// 取消弹窗事件
 
-          if (_this.okFn && typeof _this.okFn === 'function') {
-            _this.okFn();
-          }
-
+          popbox.hide('#pop1');
         }
+
+        if(!_this.data[_this.contentData.index]) {
+          return;
+        }
+        var ul = document.createElement('ul');
+        ul.appendChild(_this.createDaySchedule(_this.data[_this.contentData.index]['PerformState']));
+        ul.appendChild(_this._addLi());
+        td.setAttribute('data-arrIndex', _this.contentData.index);
+        td.querySelector('.day-list').innerHTML = '';
+        td.querySelector('.day-list').appendChild(ul);
       });
     }
   },
@@ -347,7 +437,7 @@ var calendar1 = {
     this.arr = this._createTdArr(this.days, this.fday);
     this.h = this._createTbody(this.arr);
     this._createHtml(this.id, this.h);
-    this.callbackFn();
+    this.createPop();
     this.contentEvent();
     return this;
   }

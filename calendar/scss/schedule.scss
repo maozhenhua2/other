@@ -12,7 +12,7 @@ th {
   width: 14.2%;
   vertical-align: middle;
   padding: 5px;
-  text-align: center;
+  //text-align: center;
   height: 140px;
   position: relative;
 }
@@ -28,10 +28,18 @@ th {
 
 td {
   &.active {
-    background-color: #fff;
-    border: 1px solid #93d4fc;
-    box-shadow: 0 0 5px #60caff;
-    border-collapse: separate;
+    & > div {
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #93d4fc;
+      box-shadow: 0 0 5px #60caff;
+      border-collapse: separate;
+      min-width: 100%;
+      min-height: 100%;
+      height: auto;
+      overflow: inherit;
+      z-index: 1;
+    }
   }
   & > span {
     position: absolute;
@@ -56,11 +64,46 @@ td {
   }
 
   li {
-    margin: 5px;
-    padding: 0;
+    padding: 0 5px;
+    line-height: 1.8;
+  }
+
+  li:hover,
+  .selected {
+    background-color: #3bb4f2;
+    color: #fff;
+  }
+
+  & > div {
+    background-color: #fff;
+    height: 150px;
+    overflow: hidden;
+    & > span {
+      padding: 5px;
+      display: block;
+    }
+    &:hover {
+      .addLi {
+        visibility: visible;
+      }
+    }
   }
 }
 
+.day-list {
+  //height: 100px;
+  //overflow: auto;
+
+}
+
+.addLi {
+  visibility: hidden;
+  color: #999;
+  &:hover {
+    background-color: #00b3ee;
+    color: #fff;
+  }
+}
 
 .c-today {
   //background-color: #f2dede;

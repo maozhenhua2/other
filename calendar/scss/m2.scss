@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+@import "base/base";
+@import "part";
+@import "popbox";
+@import "popcontent";
+@import "schedule";
+
+.table > thead:first-child > tr:first-child > th {
+  border: 1px solid transparent;
+  border-bottom: 1px solid #ddd;
+}
+
+.table > thead > tr > th {
+  vertical-align: middle;
+}
+
+.table > tbody > tr > td {
+  padding: 0;
+}
+
+.table > tbody > tr > td > div {
+  padding: 0;
+}
+
+.table > tbody > tr > td.active {
+  background-color: #fff;
+}
+
+.form-control {
+  &.inline-block {
+    width: auto;
+    vertical-align: middle;
+    display: inline-block;
+  }
+}
+
+.box {
+  width: 90%;
+  margin: 0 auto;
+}

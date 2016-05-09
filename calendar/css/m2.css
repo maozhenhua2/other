@@ -251,7 +251,7 @@ td > div:hover .addLi {
 }
 
 .table > tbody > tr > td > div {
-  padding: 27px 5px 5px 5px;
+  padding: 0;
 }
 
 .table > tbody > tr > td.active {
@@ -264,4 +264,9 @@ td > div:hover .addLi {
   display: inline-block;
 }
 
-/*# sourceMappingURL=m.css.map */
+.box {
+  width: 90%;
+  margin: 0 auto;
+}
+
+/*# sourceMappingURL=m2.css.map */
