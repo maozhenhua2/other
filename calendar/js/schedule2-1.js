@@ -22,6 +22,7 @@ var calendar1 = {
   getFDay: function (d) {
     return d.getDay();
   },
+  // 今天
   today: function (d) {
     var _this = this;
     var y = _this.getYear(d);
@@ -53,14 +54,21 @@ var calendar1 = {
     var arr = [];
     var i = 0;
     var l = 42;
+    // 上个月天数
+    var pdays = this.getDays(new Date(this.year, this.month, 0));
+    // 下个月天数
+    var ndays = 1;
     for (; i < l; i++) {
+
       if (i < fday) {
         arr.push({
-          txt: ''
+          txt: pdays - 6,
+          prev: true
         });
       } else if (fday === 0 && i < 7) {
         arr.push({
-          txt: ''
+          txt: pdays - 6,
+          prev: true
         });
       } else if (d <= days) {
         arr.push({
@@ -69,9 +77,12 @@ var calendar1 = {
         d++;
       } else {
         arr.push({
-          txt: ''
+          txt: ndays,
+          next: true
         });
+        ndays++;
       }
+      pdays++;
     }
     return arr;
   },
@@ -117,13 +128,18 @@ var calendar1 = {
           span.innerHTML = arr[index].txt;
           div2.className = 'day-list';
         }
+        // 上个月
+        if (arr[index].prev) {
+          span.className += 'prev';
+        } else if (arr[index].next) {
+          // 下个月
+          span.className += 'next';
+        }
         div.appendChild(span);
         div.appendChild(div2);
         td.appendChild(div);
-
         tr.appendChild(td);
       }
-
       oFragment.appendChild(tr);
     }
     return oFragment;
@@ -146,8 +162,13 @@ var calendar1 = {
     this._createHtml(this.id, this.h);
     return this;
   },
+  // 设置日程数据
   _setData: function (d) {
     this.data = d && d.length ? d : [];
+  },
+  // 返回日程数据
+  getData: function () {
+    return this.data;
   },
   /*
    * d: 数据
@@ -162,7 +183,6 @@ var calendar1 = {
     var l = arr.length;
     var dayIndex = 0;
     var td = '';
-    var html = '';
     var dataIndex = 0;
     var fday = this.fday === 0 ? 6 : this.fday;
     for (; i < l; i++) {
@@ -184,7 +204,6 @@ var calendar1 = {
   },
   // 根据指定日期数据显示日程列表，不是弹窗
   createDaySchedule: function (d) {
-    var html = '';
     var i = 0;
     var l = d.length;
     var oFragment = document.createDocumentFragment();
@@ -202,6 +221,11 @@ var calendar1 = {
   createPop: function () {
     var _this = this;
     document.getElementById(this.id).addEventListener('click', function (e) {
+      var selected = document.querySelector('.selected');
+      if (selected) {
+        removeClassName(selected, 'selected');
+      }
+
       var td = parentsUntil(e.target, 'td');
       // 获取点击的td
       _this.td = td;
@@ -210,13 +234,25 @@ var calendar1 = {
         // 点击添加事件
         if (hasClass(e.target.parentNode, 'addLi') || hasClass(e.target, 'addLi')) {
           // 获取点击的是第几天
-          var fday = _this.fday === 0 ? 6 : _this.fday;
-          _this.currentDay = parseInt(_this.td.getAttribute('data-index'), 10) - fday;
-          calendar1.createPopContent(_this.td.getAttribute('data-arrIndex'), 'add');
-          popbox.show(_this.popId);
+          // var fday = _this.fday === 0 ? 6 : _this.fday;
+          // _this.currentDay = parseInt(_this.td.getAttribute('data-index'), 10) - fday;
+          // console.log(_this.td.childNodes[0].childNodes[0].innerHTML)
+          var span = _this.td.childNodes[0].childNodes[0];
+          _this.currentDay = parseInt(span.innerHTML, 10);
+          calendar1.createPopContent(_this.td.getAttribute('data-arrIndex'), 'add', span.className);
+
+          var p;
+          if (e.target.nodeName.toLowerCase() === 'li') {
+            p = e.target;
+          } else if (e.target.parentNode.nodeName.toLowerCase() === 'li') {
+            p = e.target.parentNode;
+          }
+
+          addClassName(p, 'selected');
+          _this.popShow(td);
         }
 
-        removeLi(e);
+        _this.editLi.call(_this, td, e);
 
       } else if (td.nodeName.toLowerCase() === 'td') {
         // 还没选择td
@@ -244,6 +280,8 @@ var calendar1 = {
 
         addClassName(td, 'active');
 
+        _this.popHide();
+
         var dayList = td.querySelector('.day-list');
         addLi = dayList.querySelector('.addLi');
 
@@ -256,40 +294,33 @@ var calendar1 = {
           // 当前td内容为空，并且没有新建事件按钮
           if (!addLi) {
             var ul = document.createElement('ul');
-            ul.appendChild(_this._addLi());
+            if (dayList.previousElementSibling.innerHTML !== '') {
+              ul.appendChild(_this._addLi());
+            }
             dayList.appendChild(ul);
           }
-
         }
-
-        removeLi(e);
-
+        _this.editLi.call(_this, td, e);
       }
-
-      function removeLi(e) {
-        if (e.target.title || e.target.parentNode.title) {
-          var liIndex;
-          var p;
-          if (e.target.nodeName.toLowerCase() === 'li') {
-            p = e.target;
-          } else if (e.target.parentNode.nodeName.toLowerCase() === 'li') {
-            p = e.target.parentNode;
-          }
-          liIndex = index(p, p.parentNode.childNodes);
-          addClassName(p, 'selected');
-
-          var tdindex = td.getAttribute('data-arrindex');
-          _this.createPopContent(tdindex, 'edit', liIndex);
-          popbox.show(_this.popId);
-        }
-      }
-
-
     });
   },
-  // 返回日程数据
-  getData: function () {
-    return this.data;
+  // 点击已存在的数据，弹出编辑
+  editLi: function (td, e) {
+    if (e.target.title || e.target.parentNode.title) {
+      var liIndex;
+      var p;
+      if (e.target.nodeName.toLowerCase() === 'li') {
+        p = e.target;
+      } else if (e.target.parentNode.nodeName.toLowerCase() === 'li') {
+        p = e.target.parentNode;
+      }
+      liIndex = index(p, p.parentNode.childNodes);
+      addClassName(p, 'selected');
+
+      var tdindex = td.getAttribute('data-arrindex');
+      this.createPopContent(tdindex, 'edit', liIndex);
+      this.popShow(td);
+    }
   },
   // 生成弹窗内容
   createPopContent: function (index, type, index2) {
@@ -300,50 +331,63 @@ var calendar1 = {
       data = this.data[index]['PerformState'];
     }
 
+    var types;
+    var index3;
+
+    if (typeof index2 === 'string') {
+      types = index2;
+    } else if (typeof index2 === 'number') {
+      index3 = index2;
+    }
+
+
     this.contentData = {
       data: data,
-      index: index
+      index: index,
+      type: types
     };
     var html = '';
     var ol = document.createElement('ol');
     ol.setAttribute('data-index', index);
     var li = document.createElement('li');
-    li.setAttribute('data-index', index2);
+    li.setAttribute('data-index', index3);
     var input = document.createElement('input');
     input.type = 'text';
     input.className = 'form-control inline-block';
     if (type === 'edit') {
-      input.value = data[index2].txt;
+      input.value = data[index3].txt;
     }
     li.appendChild(input);
     ol.appendChild(li);
     var div = document.createElement('div');
     html += '<div class="content-pannel">';
-    html += '<button type="button" class="' + type + ' btn btn-default">确定</button>';
     if (type === 'edit') {
-      html += '<button type="button" class="remove btn btn-default">删除</button>';
+      html += '<button type="button" class="remove btn-danger float-left btn">删除</button>';
     }
-    html += '<button type="button" class="cancel btn btn-default">取消</button>';
+    html += '<button type="button" class="cancel btn btn-default float-right">取消</button>';
+    html += '<button type="button" class="' + type + ' btn btn-primary float-right">确定</button>';
     html += '</div>';
     div.innerHTML = html;
-    document.getElementById(this.contentId).innerHTML = '';
-    document.getElementById(this.contentId).appendChild(ol);
-    document.getElementById(this.contentId).appendChild(div);
+    document.getElementById(this.popId).innerHTML = '';
+    document.getElementById(this.popId).appendChild(ol);
+    document.getElementById(this.popId).appendChild(div);
   },
   // 弹窗后添加删除等事件
   contentEvent: function () {
     var _this = this;
-    if (this.contentId) {
-      document.getElementById(this.contentId).addEventListener('click', function (e) {
+    var popId = document.getElementById(this.popId);
+    if (this.popId) {
+      popId.addEventListener('click', function (e) {
         var target = e.target;
         var td = _this.td;
-        var index1 = document.querySelector(_this.popId).querySelector('ol').getAttribute('data-index');
-        var index2 = document.querySelector(_this.popId).querySelector('li').getAttribute('data-index');
+        var index1 = popId.querySelector('ol').getAttribute('data-index');
+        var index2 = popId.querySelector('li').getAttribute('data-index');
 
+        // 添加
         if (hasClass(target, 'add')) {
           _this.contentData.data = _this.createContentData();
           if (_this.contentData.data.length === 0) {
-            popbox.hide('#pop1');
+            _this.popHide();
             return false;
           }
 
@@ -356,40 +400,60 @@ var calendar1 = {
               _this.data[_this.contentData.index]['PerformState'].push(v);
             });
           } else {
+            var m = _this.month + 1;
+
+            if (_this.contentData.type === 'prev') {
+              m = m - 1;
+            } else if (_this.contentData.type === 'next') {
+              m = m + 1;
+            }
+
             _this.data.push({
               ID: '',
-              ImplementTime: new Date(_this.year + '-' + (_this.month + 1) + '-' + _this.currentDay),
+              // ImplementTime: new Date(_this.year + '-' + m + '-' + _this.currentDay),
+              ImplementTime: _this.year + '/' + m + '/' + _this.currentDay + ' 0:00:00',
               PerformState: _this.contentData.data
             });
           }
-          popbox.hide('#pop1');
+          createHtml();
+          _this.popHide();
+          console.log(_this.data);
+          //  编辑
         } else if (hasClass(target, 'edit')) {
           _this.contentData.data = _this.createContentData();
           _this.data[index1]['PerformState'][index2].txt = _this.contentData.data[0].txt;
-          popbox.hide('#pop1');
+          createHtml();
+          _this.popHide();
+          console.log(_this.data);
+          //  删除
         } else if (hasClass(target, 'remove')) {
           _this.data[index1]['PerformState'].splice(index2, 1);
-          popbox.hide('#pop1');
+          createHtml();
+          _this.popHide();
+          console.log(_this.data);
+          //  取消
         } else if (hasClass(target, 'cancel')) {// 取消弹窗事件
-
-          popbox.hide('#pop1');
+          _this.popHide();
         }
 
-        if(!_this.data[_this.contentData.index]) {
-          return;
+
+        function createHtml() {
+          if (!_this.data[_this.contentData.index]) {
+            return;
+          }
+          var ul = document.createElement('ul');
+          ul.appendChild(_this.createDaySchedule(_this.data[_this.contentData.index]['PerformState']));
+          ul.appendChild(_this._addLi());
+          td.setAttribute('data-arrIndex', _this.contentData.index);
+          td.querySelector('.day-list').innerHTML = '';
+          td.querySelector('.day-list').appendChild(ul);
         }
-        var ul = document.createElement('ul');
-        ul.appendChild(_this.createDaySchedule(_this.data[_this.contentData.index]['PerformState']));
-        ul.appendChild(_this._addLi());
-        td.setAttribute('data-arrIndex', _this.contentData.index);
-        td.querySelector('.day-list').innerHTML = '';
-        td.querySelector('.day-list').appendChild(ul);
       });
     }
   },
   // 获取弹窗所输入的内容
   createContentData: function () {
-    var li = document.getElementById(this.contentId).querySelectorAll('li');
+    var li = document.getElementById(this.popId).querySelectorAll('li');
     var i = 0;
     var l = li.length;
     var arr = [];
@@ -404,6 +468,34 @@ var calendar1 = {
     }
     return arr;
   },
+  // 显示弹框
+  popShow: function (o) {
+    var po = getElementPosition(o);
+    var y = index(o);
+    var box = document.getElementById(this.popId);
+    var size = getObjSize(o);
+    if (y >= 5) {
+      box.style.left = po.left - 260 + 'px';
+    } else {
+      box.style.left = po.left + size.w + 'px';
+    }
+
+    box.style.top = po.top + 'px';
+    box.style.minHeight = size.h + 'px';
+    addClassName(box, 'active');
+  },
+  // 隐藏弹框
+  popHide: function () {
+    var box = document.getElementById(this.popId);
+    removeClassName(box, 'active');
+    this.hideAddLi();
+  },
+  hideAddLi: function () {
+    var addLi = document.querySelector('.addLi.selected');
+    if (addLi) {
+      removeClassName(addLi, 'selected');
+    }
+  },
   /*
    * option:
    * id: 表格tbody的id
@@ -414,15 +506,9 @@ var calendar1 = {
    * popId: 弹窗id
    * */
   init: function (option) {
-    // 弹窗
-    popbox.init({
-      maskhide: true,
-      transition: true
-    });
 
     this.data = [];
     var d = option.time || this.now();
-    this.contentId = option.contentId;
     this.nowDate = this.today(d);
     var m = option.month;
     m = m ? m - 1 : this.getMonth(d);
@@ -443,113 +529,3 @@ var calendar1 = {
   }
 
 };
-
-
-// 获取向上范围的指定父级元素
-function parentsUntil(o, select) {
-  var parent = o;
-  var type = typeof select;
-
-  function setCondition(parent) {
-    var condition;
-    var arr = [];
-    if (parent.nodeName.toLowerCase() === 'html') {
-      return false;
-    }
-    if (type === 'string') {
-      if (select.indexOf('.') !== -1) {
-        arr = select.split('.');
-        arr.shift();
-        condition = arr.indexOf(parent.className) === -1;
-      } else if (select.indexOf('#') !== -1) {
-        arr = select.split('#');
-        arr.shift();
-        condition = arr.indexOf(parent.id) === -1;
-      } else {
-        condition = parent.nodeName.toLowerCase() !== select;
-      }
-
-    } else if (type === 'object') {
-      condition = parent != select;
-    }
-
-    return condition;
-  }
-
-  while (setCondition(parent)) {
-    parent = parent.parentNode;
-  }
-
-  return parent;
-}
-
-// 获取索引
-function index(current, obj) {
-  for (var i = 0, length = obj.length; i < length; i++) {
-    if (obj[i] == current) {
-      return i;
-    }
-  }
-}
-
-// 将节点插入到某节点前
-function prependChild(parent, newChild) {
-  if (parent.firstChild) {
-    // 如果存在一个子节点就在这个子节点之前插入
-    parent.insertBefore(newChild, parent.firstChild);
-  } else {
-    // 如果没有就直接添加
-    parent.appendChild(newChild);
-  }
-  // 返回父元素实现方法连缀
-  return parent;
-}
-
-// 判断是否含有指定class
-function hasClass(element, className) {
-  var re = new RegExp('\\b' + className + '\\b', 'i');
-  return element.className.match(re);
-}
-
-// 去除文字两边空白
-function trim(string) {
-  return string.replace(/^\s+|\s+$/g, "");
-}
-
-// 添加类
-function addClassName(element, className) {
-  element.className += (element.className ? " " : "") + className;
-  return true;
-}
-
-// 删除类
-function removeClassName(element, className) {
-  var classes = getClassNames(element),
-    length = classes.length,
-    i = length - 1;
-  for (; i >= 0; i--) {
-    if (classes[i] === className) {
-      // delete(classes[i]);
-      classes.splice(i, 1);
-    }
-  }
-  element.className = classes.join(" ");
-  return length === classes.length;
-}
-
-// 获取元素节点的class
-function getClassNames(element) {
-  return element.className.replace(/\s+/, " ").split(" ");
-}
-
-if (typeof Array.prototype.map != "function") {
-  Array.prototype.map = function (fn, context) {
-    var arr = [];
-    if (typeof fn === "function") {
-      for (var k = 0, length = this.length; k < length; k++) {
-        arr.push(fn.call(context, this[k], k, this));
-      }
-    }
-    return arr;
-  };
-}

@@ -3,7 +3,33 @@ var nowDate = new Date();
 var monthIndex = nowDate.getMonth();
 var yearIndex = nowDate.getFullYear();
 
+// 生成日历
+calendar1.init({
+  id: 'tableCcalendar',
+  contentId: 'popContent',
+  popId: 'popbox',
+  okFn: function () {
+
+  }
+});
+
+
+getDate(monthIndex);
+
 setMonthValue(monthIndex);
+
+document.getElementById('today').addEventListener('click', function () {
+  var now = calendar1.today(calendar1.now());
+  if (monthIndex !== now.month) {
+    monthIndex = now.month;
+    setMonthValue(monthIndex);
+    calendar1.change(now.year, monthIndex);
+    getDate(monthIndex);
+  }
+
+
+});
+
 document.querySelector('.c-left-btn').addEventListener('click', function () {
   monthIndex--;
   monthIndex = monthIndex <= 0 ? 0 : monthIndex;
@@ -53,18 +79,6 @@ function getDate(i) {
     calendar1.createSchedule(arr);
   }, 100);
 }
-
-// 生成日历
-calendar1.init({
-  id: 'tableCcalendar',
-  contentId: 'popContent',
-  popId: '#pop1',
-  okFn: function () {
-    
-  }
-});
-
-getDate(monthIndex);
 
 // 指定范围随机数
 function randomRange(start, end) {

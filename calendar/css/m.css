@@ -8,9 +8,15 @@
 
 .txt,
 .btn {
-  border: 1px solid #ccc;
-  padding: 5px 10px;
-  background-color: #fff;
+  height: 22px;
+  min-width: 24px;
+  line-height: 22px;
+  padding: 0 12px;
+  display: inline-block;
+  font-size: 12px;
+  vertical-align: middle;
+  font-family: "lucida Grande",Verdana,"Microsoft Yahei";
+  margin: 0;
 }
 
 .overflow {
@@ -149,7 +155,7 @@ td.active > div {
   box-shadow: 0 0 5px #60caff;
   border-collapse: separate;
   min-width: 100%;
-  min-height: 100%;
+  min-height: 150px;
   height: auto;
   overflow: inherit;
   z-index: 1;
@@ -201,9 +207,12 @@ td > div:hover .addLi {
   visibility: hidden;
   color: #999;
 }
-.addLi:hover {
-  background-color: #00b3ee;
-  color: #fff;
+.addLi.selected, .addLi:hover {
+  background-color: #ceeafb;
+  color: #333;
+}
+.addLi.selected {
+  visibility: visible;
 }
 
 .plan {
@@ -235,6 +244,58 @@ td > div:hover .addLi {
 
 .plan-nosubmit:after {
   background-color: blue;
+}
+
+.popbox {
+  position: absolute;
+  width: 260px;
+  padding: 10px;
+  left: 0;
+  top: 0;
+  display: none;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  z-index: 3;
+  padding-bottom: 52px;
+}
+.popbox.active {
+  display: block;
+}
+.popbox ol,
+.popbox li {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+.popbox input[type="text"] {
+  width: 100%;
+}
+
+.content-pannel {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  padding: 10px 0;
+  background-color: #f1f1f1;
+  border-top: 1px solid #ccc;
+}
+
+.prev {
+  color: #ccc;
+}
+
+.next {
+  color: #ccc;
+}
+
+.relative {
+  position: relative;
+}
+
+#today {
+  position: absolute;
+  left: 0;
 }
 
 .table > thead:first-child > tr:first-child > th {

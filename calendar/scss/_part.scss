@@ -1,8 +1,21 @@
 @charset "UTF-8";
-
+@import "compass";
 .txt,
 .btn {
-  border: 1px solid #ccc;
-  padding: 5px 10px;
-  background-color: #fff;
+  height: 22px;
+  min-width: 24px;
+  line-height: 22px;
+  padding: 0 12px;
+  //background-color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  vertical-align: middle;
+  font-family: "lucida Grande",Verdana,"Microsoft Yahei";
+  margin: 0;
+}
+
+.remove {
+  //background-color: #f00;
+
+  //background-image: linear-gradient(to bottom,#F99 0,#FF3A3A 100%);
 }

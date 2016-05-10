@@ -15,7 +15,9 @@
 </head>
 <body>
 <div class="box">
-  <div class="text-center">
+  <div class="text-center relative">
+    <button type="button" id="today" class="float-left btn btn-default">今天</button>
+
     <button type="button" class="c-left-btn btn btn-default">
       <span class="glyphicon glyphicon-triangle-left"></span>
     </button>
@@ -50,9 +52,11 @@
   </div>
 </div>
 
+<div class="popbox" id="popbox"></div>
+
 <script src="vendor/jquery-1.11.3.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap-edit.min.js"></script>
-<script src="js/popbox.js"></script>
+<script src="js/fn.js"></script>
 <script src="js/schedule2-1.js"></script>
 <script src="js/schedule2-1index.js"></script>
 
