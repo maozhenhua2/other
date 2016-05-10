@@ -234,9 +234,6 @@ var calendar1 = {
         // 点击添加事件
         if (hasClass(e.target.parentNode, 'addLi') || hasClass(e.target, 'addLi')) {
           // 获取点击的是第几天
-          // var fday = _this.fday === 0 ? 6 : _this.fday;
-          // _this.currentDay = parseInt(_this.td.getAttribute('data-index'), 10) - fday;
-          // console.log(_this.td.childNodes[0].childNodes[0].innerHTML)
           var span = _this.td.childNodes[0].childNodes[0];
           _this.currentDay = parseInt(span.innerHTML, 10);
           calendar1.createPopContent(_this.td.getAttribute('data-arrIndex'), 'add', span.className);
@@ -410,7 +407,6 @@ var calendar1 = {
 
             _this.data.push({
               ID: '',
-              // ImplementTime: new Date(_this.year + '-' + m + '-' + _this.currentDay),
               ImplementTime: _this.year + '/' + m + '/' + _this.currentDay + ' 0:00:00',
               PerformState: _this.contentData.data
             });
@@ -418,6 +414,7 @@ var calendar1 = {
           createHtml();
           _this.popHide();
           console.log(_this.data);
+          _this.addFn();
           //  编辑
         } else if (hasClass(target, 'edit')) {
           _this.contentData.data = _this.createContentData();
@@ -425,12 +422,14 @@ var calendar1 = {
           createHtml();
           _this.popHide();
           console.log(_this.data);
+          this.editFn();
           //  删除
         } else if (hasClass(target, 'remove')) {
           _this.data[index1]['PerformState'].splice(index2, 1);
           createHtml();
           _this.popHide();
           console.log(_this.data);
+          _this.removeFn();
           //  取消
         } else if (hasClass(target, 'cancel')) {// 取消弹窗事件
           _this.popHide();
@@ -516,7 +515,12 @@ var calendar1 = {
     this.id = option.id;
     this.popId = option.popId;
     this.year = option.year || this.getYear(d);
-    this.okFn = option.okFn;
+    // 点击添加按钮后回调函数
+    this.addFn = option.addFn;
+    // 点击删除按钮后回调函数
+    this.removeFn = option.removeFn;
+    //点击修改按钮后回调函数
+    this.editFn = option.editFn;
     this.date = this.getDate(d);
     this.days = this.getDays(new Date(this.year, this.month + 1, 0));
     this.fday = this.getFDay(new Date(this.year, this.month, 1));

@@ -6,10 +6,15 @@ var yearIndex = nowDate.getFullYear();
 // 生成日历
 calendar1.init({
   id: 'tableCcalendar',
-  contentId: 'popContent',
   popId: 'popbox',
-  okFn: function () {
+  addFn: function () {
 
+  },
+  removeFn: function () {
+    
+  },
+  editFn: function () {
+    
   }
 });
 
