@@ -192,7 +192,7 @@ var calendar1 = {
       td.setAttribute('data-id', arr[i]['ID']);
       td.setAttribute('data-arrIndex', i);
       var ul = document.createElement('ul');
-      ul.appendChild(this.createDaySchedule(arr[i]['PerformState']));
+      ul.appendChild(this._createDaySchedule(arr[i]['PerformState']));
       if (hasClass(td, 'active')) {
         ul.appendChild(this._addLi());
       }
@@ -203,7 +203,7 @@ var calendar1 = {
     return this;
   },
   // 根据指定日期数据显示日程列表，不是弹窗
-  createDaySchedule: function (d) {
+  _createDaySchedule: function (d) {
     var i = 0;
     var l = d.length;
     var oFragment = document.createDocumentFragment();
@@ -218,7 +218,7 @@ var calendar1 = {
     return oFragment;
   },
   // 点击日期弹窗
-  createPop: function () {
+  _createPop: function () {
     var _this = this;
     document.getElementById(this.id).addEventListener('click', function (e) {
       var selected = document.querySelector('.selected');
@@ -236,7 +236,7 @@ var calendar1 = {
           // 获取点击的是第几天
           var span = _this.td.childNodes[0].childNodes[0];
           _this.currentDay = parseInt(span.innerHTML, 10);
-          calendar1.createPopContent(_this.td.getAttribute('data-arrIndex'), 'add', span.className);
+          calendar1._createPopContent(_this.td.getAttribute('data-arrIndex'), 'add', span.className);
 
           var p;
           if (e.target.nodeName.toLowerCase() === 'li') {
@@ -246,10 +246,10 @@ var calendar1 = {
           }
 
           addClassName(p, 'selected');
-          _this.popShow(td);
+          _this._popShow(td);
         }
 
-        _this.editLi.call(_this, td, e);
+        _this._editLi.call(_this, td, e);
 
       } else if (td.nodeName.toLowerCase() === 'td') {
         // 还没选择td
@@ -277,7 +277,7 @@ var calendar1 = {
 
         addClassName(td, 'active');
 
-        _this.popHide();
+        _this._popHide();
 
         var dayList = td.querySelector('.day-list');
         addLi = dayList.querySelector('.addLi');
@@ -297,12 +297,12 @@ var calendar1 = {
             dayList.appendChild(ul);
           }
         }
-        _this.editLi.call(_this, td, e);
+        _this._editLi.call(_this, td, e);
       }
     });
   },
   // 点击已存在的数据，弹出编辑
-  editLi: function (td, e) {
+  _editLi: function (td, e) {
     if (e.target.title || e.target.parentNode.title) {
       var liIndex;
       var p;
@@ -315,12 +315,12 @@ var calendar1 = {
       addClassName(p, 'selected');
 
       var tdindex = td.getAttribute('data-arrindex');
-      this.createPopContent(tdindex, 'edit', liIndex);
-      this.popShow(td);
+      this._createPopContent(tdindex, 'edit', liIndex);
+      this._popShow(td);
     }
   },
   // 生成弹窗内容
-  createPopContent: function (index, type, index2) {
+  _createPopContent: function (index, type, index2) {
     var data;
     if (!this.data[index]) {
       data = [];
@@ -370,7 +370,7 @@ var calendar1 = {
     document.getElementById(this.popId).appendChild(div);
   },
   // 弹窗后添加删除等事件
-  contentEvent: function () {
+  _contentEvent: function () {
     var _this = this;
     var popId = document.getElementById(this.popId);
     if (this.popId) {
@@ -382,9 +382,9 @@ var calendar1 = {
 
         // 添加
         if (hasClass(target, 'add')) {
-          _this.contentData.data = _this.createContentData();
+          _this.contentData.data = _this._createContentData();
           if (_this.contentData.data.length === 0) {
-            _this.popHide();
+            _this._popHide();
             return false;
           }
 
@@ -412,27 +412,27 @@ var calendar1 = {
             });
           }
           createHtml();
-          _this.popHide();
+          _this._popHide();
           console.log(_this.data);
           _this.addFn();
           //  编辑
         } else if (hasClass(target, 'edit')) {
-          _this.contentData.data = _this.createContentData();
+          _this.contentData.data = _this._createContentData();
           _this.data[index1]['PerformState'][index2].txt = _this.contentData.data[0].txt;
           createHtml();
-          _this.popHide();
+          _this._popHide();
           console.log(_this.data);
-          this.editFn();
+          _this.editFn();
           //  删除
         } else if (hasClass(target, 'remove')) {
           _this.data[index1]['PerformState'].splice(index2, 1);
           createHtml();
-          _this.popHide();
+          _this._popHide();
           console.log(_this.data);
           _this.removeFn();
           //  取消
         } else if (hasClass(target, 'cancel')) {// 取消弹窗事件
-          _this.popHide();
+          _this._popHide();
         }
 
 
@@ -441,7 +441,7 @@ var calendar1 = {
             return;
           }
           var ul = document.createElement('ul');
-          ul.appendChild(_this.createDaySchedule(_this.data[_this.contentData.index]['PerformState']));
+          ul.appendChild(_this._createDaySchedule(_this.data[_this.contentData.index]['PerformState']));
           ul.appendChild(_this._addLi());
           td.setAttribute('data-arrIndex', _this.contentData.index);
           td.querySelector('.day-list').innerHTML = '';
@@ -451,7 +451,7 @@ var calendar1 = {
     }
   },
   // 获取弹窗所输入的内容
-  createContentData: function () {
+  _createContentData: function () {
     var li = document.getElementById(this.popId).querySelectorAll('li');
     var i = 0;
     var l = li.length;
@@ -468,7 +468,7 @@ var calendar1 = {
     return arr;
   },
   // 显示弹框
-  popShow: function (o) {
+  _popShow: function (o) {
     var po = getElementPosition(o);
     var y = index(o);
     var box = document.getElementById(this.popId);
@@ -484,12 +484,12 @@ var calendar1 = {
     addClassName(box, 'active');
   },
   // 隐藏弹框
-  popHide: function () {
+  _popHide: function () {
     var box = document.getElementById(this.popId);
     removeClassName(box, 'active');
-    this.hideAddLi();
+    this._hideAddLi();
   },
-  hideAddLi: function () {
+  _hideAddLi: function () {
     var addLi = document.querySelector('.addLi.selected');
     if (addLi) {
       removeClassName(addLi, 'selected');
@@ -527,8 +527,8 @@ var calendar1 = {
     this.arr = this._createTdArr(this.days, this.fday);
     this.h = this._createTbody(this.arr);
     this._createHtml(this.id, this.h);
-    this.createPop();
-    this.contentEvent();
+    this._createPop();
+    this._contentEvent();
     return this;
   }
 
