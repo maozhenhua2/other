@@ -834,6 +834,13 @@ function getElementPosition(element) {
   return position;
 }
 
+/*
+返回top, right, bottom, left, width, height
+ */
+function getElementPoInfo(o) {
+  return o.getBoundingClientRect();
+}
+
 // 获取网页元素的相对位置，需要getElementPosition函数
 function getElementViewPosition(element) {
   var position = getElementPosition(element);
