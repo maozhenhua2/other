@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>00-公告列表</title>
+  <link rel="stylesheet" href="css/m.css">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="c-search margin-bottom-10">
+      <input type="search" name="" id="sss" class="input-text" placeholder="查询经销商">
+      <a class="c-search-btn icon icon-search"></a>
+      <a class="filter icon icon-filter active"></a>
+    </div>
+    <ul class="list">
+      <li>
+        <p>
+          <span>InControl系统培训公告</span>
+          <span class="right">双品牌</span>
+        </p>
+        <p class="font-size-12 gray-light">
+          <span>内训信息</span>
+          <span class="right">2016/02/02</span>
+        </p>
+      </li>
+       <!--<li>
+         <p>
+           <span>InControl系统培训公告</span>
+           <span class="right">双品牌</span>
+         </p>
+         <p class="font-size-12 gray-light">
+           <span>内训信息</span>
+           <span class="right">2016/02/02</span>
+         </p>
+       </li>
+       <li>
+         <p>
+           <span>InControl系统培训公告</span>
+           <span class="right">双品牌</span>
+         </p>
+         <p class="font-size-12 gray-light">
+           <span>内训信息</span>
+           <span class="right">2016/02/02</span>
+         </p>
+       </li>
+       <li>
+         <p>
+           <span>InControl系统培训公告</span>
+           <span class="right">双品牌</span>
+         </p>
+         <p class="font-size-12 gray-light">
+           <span>内训信息</span>
+           <span class="right">2016/02/02</span>
+         </p>
+       </li>
+       <li>
+         <p>
+           <span>InControl系统培训公告</span>
+           <span class="right">双品牌</span>
+         </p>
+         <p class="font-size-12 gray-light">
+           <span>内训信息</span>
+           <span class="right">2016/02/02</span>
+         </p>
+       </li>
+       <li>
+         <p>
+           <span>InControl系统培训公告</span>
+           <span class="right">双品牌</span>
+         </p>
+         <p class="font-size-12 gray-light">
+           <span>内训信息</span>
+           <span class="right">2016/02/02</span>
+         </p>
+       </li>
+       <li>
+         <p>
+           <span>InControl系统培训公告</span>
+           <span class="right">双品牌</span>
+         </p>
+         <p class="font-size-12 gray-light">
+           <span>内训信息</span>
+           <span class="right">2016/02/02</span>
+         </p>
+       </li>
+       <li>
+         <p>
+           <span>InControl系统培训公告</span>
+           <span class="right">双品牌</span>
+         </p>
+         <p class="font-size-12 gray-light">
+           <span>内训信息</span>
+           <span class="right">2016/02/02</span>
+         </p>
+       </li>
+       <li>
+         <p>
+           <span>InControl系统培训公告</span>
+           <span class="right">双品牌</span>
+         </p>
+         <p class="font-size-12 gray-light">
+           <span>内训信息</span>
+           <span class="right">2016/02/02</span>
+         </p>
+       </li>
+       <li>
+         <p>
+           <span>InControl系统培训公告</span>
+           <span class="right">双品牌</span>
+         </p>
+         <p class="font-size-12 gray-light">
+           <span>内训信息</span>
+           <span class="right">2016/02/02</span>
+         </p>
+       </li>
+       <li>
+         <p>
+           <span>InControl系统培训公告</span>
+           <span class="right">双品牌</span>
+         </p>
+         <p class="font-size-12 gray-light">
+           <span>内训信息</span>
+           <span class="right">2016/02/02</span>
+         </p>
+       </li>
+       <li>
+         <p>
+           <span>InControl系统培训公告</span>
+           <span class="right">双品牌</span>
+         </p>
+         <p class="font-size-12 gray-light">
+           <span>内训信息</span>
+           <span class="right">2016/02/02</span>
+         </p>
+       </li>-->
+    </ul>
+  </div>
+
+<script src="vendor/zepto.min.js"></script>
+<script src="js/m.js"></script>
+<script>
+  // 判断是否滚动到底部
+  function isScrollBottom(obj) {
+    var scrollTop = getScrollOffsets().y;
+    // 如果body的高度为0，则获取指定元素的高度
+    var scrollHeight = documentSize().height || getObjSize(obj).h;
+    var windowHeight = documentVisibleSize().height;
+    return (scrollTop + windowHeight) === scrollHeight;
+  }
+  var i = 0;
+  document.querySelector('.wrapper .list').style.minHeight = $(window).height() + 1 + 'px';
+  $(window).on('scroll', function () {
+    var scrollTop = $(this).scrollTop();
+    var scrollHeight = $('.wrapper').height();
+    var windowHeight = $(this).height();
+    $('#sss').val(scrollTop)
+    console.log(scrollTop);
+    if(scrollTop != 0 ) {
+      if (scrollTop + windowHeight == scrollHeight) {
+        i++;
+        document.querySelector('.wrapper ul').innerHTML += '<li><p><span>' + i + 'InControl系统培训公告</span><span class="right">双品牌</span></p><p class="font-size-12 gray-light"><span>内训信息</span><span class="right">2016/02/02</span></p></li>';
+      }
+
+    }
+
+
+  });
+</script>
+</body>
+</html>
