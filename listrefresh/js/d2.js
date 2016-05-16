@@ -19,18 +19,18 @@ var listHeight = 0;
 var scrollEnd = false;
 var maxHeight = document.querySelector('#list .update').offsetHeight / 2 * 3;
 var loading = createLoading();
-var hasLoading = false;
+var canMove = false;
 /*
-'<div class="down-update">' +
-'  <div class="loading">' +
-'    <div></div>' +
-'    <div></div>' +
-'    <div></div>' +
-'    <div></div>' +
-'  </div>' +
-'  <span>加载新数据······</span>' +
-'</div>';
-*/
+ '<div class="down-update">' +
+ '  <div class="loading">' +
+ '    <div></div>' +
+ '    <div></div>' +
+ '    <div></div>' +
+ '    <div></div>' +
+ '  </div>' +
+ '  <span>加载新数据······</span>' +
+ '</div>';
+ */
 
 function createLoading() {
   var down = document.createElement('div');
@@ -42,7 +42,7 @@ function createLoading() {
   span.innerHTML = '加载新数据······';
   var i = 0;
   var l = 4;
-  for (;i < l;i++) {
+  for (; i < l; i++) {
     loading.appendChild(document.createElement('div'));
     loading.appendChild(document.createElement('div'));
     loading.appendChild(document.createElement('div'));
@@ -68,23 +68,30 @@ list.appendChild(createLi(i, l));
 
 listHeight = getObjSize(list).h;
 
-list.addEventListener('touchstart', function (e) {
+list.addEventListener('mousedown', function (e) {
   if (!topAnimateId && !bottomAnimateId) {
     checkPosition();
     startEvent.call(this, e);
+    canMove = true;
   }
 });
 
-list.addEventListener('touchmove', function (e) {
+list.addEventListener('mousemove', function (e) {
   if (!topAnimateId && !bottomAnimateId) {
-    moveEvent.call(this, e);
+    if (canMove) {
+      list.style['-webkit-user-select'] = 'none';
+      moveEvent.call(this, e);
+    }
   }
 });
-list.addEventListener('touchend', function (e) {
-
+list.addEventListener('mouseup', function (e) {
+  canMove = false;
   dir = move > 0 ? 'up' : 'down';
   startTop = endMove;
-  document.body.style.overflow = 'auto';
+  // 移动端
+  // document.body.style.overflow = 'auto';
+
+  list.style['-webkit-user-select'] = 'inherit';
   if (!topAnimateId && !bottomAnimateId) {
     // console.log(isBottom)
     if (isTop) {
@@ -103,13 +110,17 @@ list.addEventListener('touchend', function (e) {
 // 按下事件
 function startEvent(e) {
   startTop = startTop || 0;
-  startY = e.touches[0].pageY;
+  // 移动端
+  // startY = e.touches[0].pageY;
+  startY = e.pageY;
   list.style.top = startTop + 'px';
 }
 
 // 移动事件
 function moveEvent(e) {
-  moveY = e.touches[0].pageY;
+  // 移动端
+  // moveY = e.touches[0].pageY;
+  moveY = e.pageY;
   move = (moveY - startY) / 3.5;
   dir = move > 0 ? 'up' : 'down';
   var percent = parseInt(move / maxHeight * 100, 10);
@@ -125,15 +136,13 @@ function moveEvent(e) {
 
   if (isTop) {
     if (dir === 'up') {
-      document.body.style.overflow = 'hidden';
+      // 移动端
+      // document.body.style.overflow = 'hidden';
       list.style.top = endMove + 'px';
     }
   } else if (isBottom) {
     if (dir === 'down') {
-      // if (!hasLoading) {
-        list.appendChild(loading);
-        // hasLoading = true;
-      // }
+      list.appendChild(loading);
       list.style.top = endMove + 'px';
     }
   }
