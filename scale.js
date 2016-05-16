@@ -10,8 +10,8 @@ css3 缩放
  */
 cscale('.scale');
 
-function cscale(class) {
-  $(class).each(function() {
+function cscale(classs) {
+  $(classs).each(function() {
     var h1 = $(this).parent().height();
     var h2 = $(this).height() + 5;
     var s1 = h1 / h2;
