@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>iScroll demo: probe</title>
+
+<script type="text/javascript" src="../../build/iscroll-probe.js"></script>
+
+<script type="text/javascript">
+
+var myScroll;
+var position;
+
+function updatePosition () {
+	position.innerHTML = this.y>>0;
+}
+
+function loaded () {
+	position = document.getElementById('position');
+
+	myScroll = new IScroll('#wrapper', { probeType: 3, mouseWheel: true, click: true  });
+
+	myScroll.on('scroll', updatePosition);
+	myScroll.on('scrollEnd', updatePosition);
+}
+
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+</script>
+
+<style type="text/css">
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html {
+	-ms-touch-action: none;
+}
+
+body,ul,li {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+body {
+	font-size: 12px;
+	font-family: ubuntu, helvetica, arial;
+	overflow: hidden; /* this is important to prevent the whole page to bounce */
+}
+
+#wrapper {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 50%;
+	background: #ccc;
+	overflow: hidden;
+}
+
+#scroller {
+	position: absolute;
+	z-index: 1;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	width: 100%;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	-o-text-size-adjust: none;
+	text-size-adjust: none;
+}
+
+#scroller ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	text-align: left;
+}
+
+#scroller li {
+	padding: 0 10px;
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #fff;
+	background-color: #fafafa;
+	font-size: 14px;
+}
+
+#monitor {
+	position: absolute;
+	left: 51%;
+}
+
+</style>
+</head>
+<body onload="loaded()">
+
+<div id="monitor">Y position: <strong id="position">0</strong></div>
+
+<div id="wrapper">
+	<div id="scroller">
+		<ul>
+			<li><a href="http://www.baidu.com">Pretty row 1</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 2</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 3</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 4</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 5</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 6</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 7</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 8</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 9</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 10</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 11</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 12</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 13</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 14</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 15</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 16</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 17</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 18</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 19</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 20</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 21</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 22</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 23</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 24</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 25</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 26</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 27</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 28</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 29</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 30</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 31</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 32</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 33</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 34</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 35</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 36</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 37</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 38</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 39</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 40</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 41</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 42</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 43</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 44</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 45</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 46</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 47</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 48</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 49</a></li>
+			<li><a href="http://www.baidu.com">Pretty row 50</a></li>
+		</ul>
+	</div>
+</div>
+
+</body>
+</html>

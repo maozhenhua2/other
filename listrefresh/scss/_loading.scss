@@ -1,0 +1,68 @@
+@charset "UTF-8";
+@import "compass";
+
+$width: 15px;
+$height: 15px;
+$height2: 4px;
+$border-size: 2px;
+$border-width: 4px;
+
+.loading {
+  width: $width;
+  height: $height;
+  @include animation(rotates 2s linear infinite);
+  position: relative;
+  & > div:nth-child(1) {
+    border: $border-size solid #000;
+    width: $width;
+    height: $height;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 100%;
+  }
+  &  > div:nth-child(2) {
+    border: $border-size solid #fff;
+    width: $width;
+    height: $height2;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: ($height - $height2) / 2;
+  }
+  &  > div:nth-child(3) {
+    position: absolute;
+    left: -$border-width / 3 * 2 / 2 - 1;
+    top: 50%;
+    margin-top: -$border-width;
+    width: 0;
+    height: 0;
+    @include transform(rotate(15deg));
+    border-top: $border-width solid #000;
+    border-bottom: $border-width solid transparent;
+    border-left: $border-width / 3 * 2 solid transparent;
+    border-right: $border-width / 3 * 2 solid transparent;
+  }
+  &  > div:nth-child(4) {
+    position: absolute;
+    right: -$border-width / 3 * 2 / 2 - 1;
+    top: 50%;
+    margin-top: -$border-width;
+    width: 0;
+    height: 0;
+    @include transform(rotate(15deg));
+    border-top: $border-width solid transparent;
+    border-bottom: $border-width solid #000;
+    border-left: $border-width / 3 * 2 solid transparent;
+    border-right: $border-width / 3 * 2 solid transparent;
+  }
+}
+
+@keyframes rotates {
+  0% {
+    @include rotate(0deg);
+  }
+  100% {
+    @include rotate(360deg);
+  }
+}
