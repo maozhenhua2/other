@@ -1,0 +1,39 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body,
+ul,
+li {
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.scroll {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.scroll ul {
+  -moz-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+.scroll li {
+  padding: 5px;
+  border: 1px solid  #000;
+  margin-top: -1px;
+}
+.scroll li:first-child {
+  margin-top: 1px;
+}
+
+/*# sourceMappingURL=d1.css.map */

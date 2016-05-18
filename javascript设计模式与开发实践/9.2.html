@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>Title</title>
+</head>
+<body>
+<button id="button1">点击按钮 1</button>
+<button id="button2">点击按钮 2</button>
+<button id="button3">点击按钮 3</button>
+<script src="js/command.js"></script>
+<script>
+  var button1 = document.getElementById( 'button1' );
+  var button2 = document.getElementById( 'button2' );
+  var button3 = document.getElementById( 'button3' );
+
+  var refreshMenuBarCommand = new RefreshMenuBarCommand(MenuBar);
+  var addSubMenuCommand = new AddSubMenuCommand(SubMenu);
+  var delSubMenuCommand = new DelSubMenuCommand(SubMenu);
+
+  setCommand(button1, refreshMenuBarCommand);
+  setCommand(button2, addSubMenuCommand);
+  setCommand(button3, delSubMenuCommand);
+</script>
+</body>
+</html>
