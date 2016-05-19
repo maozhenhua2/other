@@ -9,16 +9,55 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <title>Title</title>
-</head>
+  <link rel="stylesheet" href="css/d1.css"></head>
 <body>
-<form id="registerForm">
-  <ul>
-    <li><label for="userName">userName</label><input type="text" name="userName" id="userName"></li>
-    <li><label for="password">password</label><input type="password" name="password" id="password"></li>
-    <li><label for="phoneNumber">phoneNumber</label><input type="tel" name="phoneNumber" id="phoneNumber"></li>
-    <li><button type="submit">submit</button></li>
-  </ul>
-</form>
-<script src="js/formcheck.js"></script>
+  <div class="text-center">
+    <form id="registerForm" class="text-left">
+      <ul>
+        <li>
+          <label for="userName">userName</label>
+          <input type="text" class="input-text" name="userName" id="userName"></li>
+        <li>
+          <label for="password">password</label>
+          <input type="password" class="input-text" name="password" id="password"></li>
+        <li>
+          <label for="phoneNumber">phoneNumber</label>
+          <input type="tel" class="input-text" name="phoneNumber" id="phoneNumber"></li>
+        <li>
+          <label>sex</label>
+          <input type="radio" name="sex" id="male">
+          <label for="male">male</label>
+          <input type="radio" name="sex" id="female">
+          <label for="female">female</label>
+        </li>
+        <li>
+          <label>city</label>
+          <select name="city" id="city" class="select">
+            <option value="shanghai">shanghai</option>
+            <option value="beijing">beijing</option>
+            <option value="chongqing">chongqing</option>
+            <option value="tianjing">tianjing</option>
+          </select>
+        </li>
+
+        <li>
+          <label>interest</label>
+          <input type="checkbox" name="football" id="football">
+          <label for="football">football</label>
+          <input type="checkbox" name="baseball" id="baseball">
+          <label for="baseball">baseball</label>
+        </li>
+        <li>
+          <label></label>
+          <input type="checkbox" name="rember" id="rember">
+          <label for="rember">rember me</label>
+        </li>
+        <li class="text-center">
+          <button type="submit" class="btn" id="submit">submit</button>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <script src="js/formcheck.js"></script>
 </body>
 </html>

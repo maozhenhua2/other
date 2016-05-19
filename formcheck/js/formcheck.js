@@ -22,7 +22,7 @@ var Validator = function () {
   this.cache = []; // 保存校验规则
 };
 
-Validator.prototype.add = function (dom, rules) {
+Validator.prototype.add = function (value, rules) {
   var self = this;
 
   for (var i = 0, rule; rule = rules[i++];) {
@@ -32,9 +32,9 @@ Validator.prototype.add = function (dom, rules) {
 
       self.cache.push(function () {
         var strategy = strategyAry.shift();
-        strategyAry.unshift(dom.value);
+        strategyAry.unshift(value);
         strategyAry.push(errorMsg);
-        return strategies[strategy].apply(dom, strategyAry);
+        return strategies[strategy].apply(value, strategyAry);
       });
     })(rule)
   }
@@ -55,7 +55,7 @@ var registerForm = document.getElementById('registerForm');
 var validataFunc = function () {
   var validator = new Validator();
 
-  validator.add(registerForm.userName, [{
+  validator.add(registerForm.userName.value, [{
     strategy: 'isNonEmpty',
     errorMsg: '用户名不能为空'
   }, {
@@ -63,12 +63,12 @@ var validataFunc = function () {
     errorMsg: '用户名长度不能小于 10 位'
   }]);
 
-  validator.add(registerForm.password, [{
+  validator.add(registerForm.password.value, [{
     strategy: 'minLength:6',
     errorMsg: '密码长度不能小于 6 位'
   }]);
 
-  validator.add(registerForm.phoneNumber, [{
+  validator.add(registerForm.phoneNumber.value, [{
     strategy: 'isMobile',
     errorMsg: '手机号码格式不正确'
   }]);
@@ -77,10 +77,10 @@ var validataFunc = function () {
 };
 
 registerForm.onsubmit = function () {
-  var errorMsg = validataFunc();
-
-  if (errorMsg) {
-    alert(errorMsg);
-    return false;
-  }
+  return false;
 };
+
+document.getElementById('submit').addEventListener('click', function () {
+  console.dir(registerForm);
+  
+});
