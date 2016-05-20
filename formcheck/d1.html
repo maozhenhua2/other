@@ -1,34 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta name="format-detection" content="telephone=no,email=no">
-  <meta name="renderer" content="webkit"/>
+  <meta name="renderer" content="webkit" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <title>Title</title>
-  <link rel="stylesheet" href="css/d1.css"></head>
+  <link rel="stylesheet" href="css/d1.css">
+</head>
+
 <body>
   <div class="text-center">
     <form id="registerForm" class="text-left">
       <ul>
         <li>
           <label for="userName">userName</label>
-          <input type="text" class="input-text" name="userName" id="userName"></li>
+          <input type="text" class="input-text" name="userName" id="userName">
+        </li>
         <li>
           <label for="password">password</label>
-          <input type="password" class="input-text" name="password" id="password"></li>
+          <input type="password" class="input-text" name="password" id="password">
+        </li>
         <li>
           <label for="phoneNumber">phoneNumber</label>
-          <input type="tel" class="input-text" name="phoneNumber" id="phoneNumber"></li>
+          <input type="tel" class="input-text" name="phoneNumber" id="phoneNumber">
+        </li>
         <li>
           <label>sex</label>
-          <input type="radio" name="sex" id="male">
+          <input type="radio" name="sex" id="male" value="male">
           <label for="male">male</label>
-          <input type="radio" name="sex" id="female">
+          <input type="radio" name="sex" id="female" value="female">
           <label for="female">female</label>
+        </li>
+        <li>
+          <label>marry</label>
+          <input type="radio" name="marry" id="already">
+          <label for="already">already</label>
+          <input type="radio" name="marry" id="not">
+          <label for="not">not</label>
         </li>
         <li>
           <label>city</label>
@@ -39,7 +52,6 @@
             <option value="tianjing">tianjing</option>
           </select>
         </li>
-
         <li>
           <label>interest</label>
           <input type="checkbox" name="football" id="football">
@@ -59,5 +71,101 @@
     </form>
   </div>
   <script src="js/formcheck.js"></script>
+  <script>
+    /***********************客户调用代码**************************/
+    var registerForm = document.getElementById('registerForm');
+
+    var validataFunc = function () {
+      var validator = new Validator();
+
+      validator.add(registerForm.userName.value, [{
+        strategy: 'isNonEmpty',
+        errorMsg: '用户名不能为空'
+      }, {
+        strategy: 'minLength:6',
+        errorMsg: '用户名长度不能小于 10 位'
+      }]);
+
+      validator.add(registerForm.password.value, [{
+        strategy: 'minLength:6',
+        errorMsg: '密码长度不能小于 6 位'
+      }]);
+
+      validator.add(registerForm.phoneNumber.value, [{
+        strategy: 'isMobile',
+        errorMsg: '手机号码格式不正确'
+      }]);
+
+      return validator.start();
+    };
+    
+    registerForm.onsubmit = function () {
+      return false;
+    };
+
+    document.getElementById('submit').addEventListener('click', function () {
+      console.dir(registerForm);
+      getValue();
+    });
+
+
+    function getValue() {
+      var i = 0;
+      var l = registerForm.length;
+      var arr = [];
+      var radio = [];
+      var checkbox = [];
+      for (; i < l; i++) {
+        // console.log(registerForm[i].type, registerForm[i].nodeName)
+        // console.log(radio, checkbox);
+        if (registerForm[i].type !== 'radio' && registerForm[i].type !== 'checkbox') {
+          getRadioValue(radio);
+          radio = [];
+          checkbox = [];
+          arr.push({
+            dom: registerForm[i],
+            val: registerForm[i].value
+          })
+        } else if (registerForm[i].type === 'select-one') {
+          var value = '';
+          if (registerForm[i].selectedIndex !== -1) {
+            value = registerForm[i][registerForm[i].selectedIndex].value;
+          }
+          arr.push({
+            dom: registerForm[i],
+            val: value
+          })
+        } else if (registerForm[i].type === 'radio') {
+          radio.push(registerForm[i]);
+        }
+        // console.log(radio);
+        // if (registerForm[i].type === 'radio') {
+        //   checkbox = [];
+        //   radio.push(registerForm[i]);
+        // } else if (registerForm[i].type === 'checkbox') {
+        //   radio = [];
+        //   checkbox.push(registerForm[i]);
+        // }
+        // arr.push({
+        //   dom: [registerForm[i]],
+        //   val: registerForm[i].value
+        // })
+      }
+      console.log(arr);
+    }
+
+    function getRadioValue(o) {
+      var obj = o;
+      var arr = {};
+      var i = 0;
+      var l = obj.length;
+      for (; i< l;i++) {
+        console.log(arr[obj[i].name])
+        // arr[obj[i].name].push(obj[i]);
+      }
+      // console.log(arr)
+    }
+  </script>
 </body>
+
 </html>
