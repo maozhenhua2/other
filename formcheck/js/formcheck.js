@@ -22,8 +22,8 @@ var strategies = {
   },
   isChinese: function (value, errorMsg) {
     function isChinese(str) {
-      var lst = /[u00-uFF]/;
-      return !lst.test(str);
+      var lst = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
+      return lst.test(str);
     }
 
     for (i = 0; i < value.length; i++) {
@@ -31,6 +31,7 @@ var strategies = {
         return errorMsg;
       }
     }
+
   },
   isSABA: function (value, errorMsg) {
     if (!/^CN\d+$/.test(value)) {
