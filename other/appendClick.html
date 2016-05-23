@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>Title</title>
+</head>
+<body>
+<ul id="ul"></ul>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    for (var i = 0, l = 10; i < l; i++) {
+      $('#ul').append('<li onclick="ab(' + i + ')">' + i + '</li>');
+      // onclick 出错 会显示ab未定义
+    }
+      // 把函数放到$(document).ready就好了
+    function ab(i) {
+      console.log(i)
+    }
+  });
+
+</script>
+</body>
+</html>
