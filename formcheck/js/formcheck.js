@@ -34,7 +34,7 @@ var strategies = {
 
   },
   isSABA: function (value, errorMsg) {
-    if (!/^CN\d+$/.test(value)) {
+    if (!/^CN\d+$/i.test(value)) {
       return errorMsg;
     }
   },
@@ -76,8 +76,8 @@ var strategies = {
       82: "澳门",
       91: "国外 "
     };
-
-    if (!/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(value)) {
+    // ^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$
+    if (!/^\d{6}(1[8-9]|2[0-9])\d{2}(0[1-9]|1[0-2])(0[0-9]|[1-2][0-9]|3[0-1])\d{3}(\d|x)$/i.test(value)) {
       // tip = "身份证号格式错误";
       return errorMsg;
     } else if (!city[value.substr(0, 2)]) {
