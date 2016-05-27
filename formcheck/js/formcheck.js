@@ -10,6 +10,11 @@ var strategies = {
       return errorMsg;
     }
   },
+  isMail: function(value, errorMsg) {
+    if (!/^([a-zA-Z0-9]+[_|\_|\.-]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test(value)) {
+      return errorMsg;
+    }
+  },
   isMobile: function (value, errorMsg) { // 手机号码格式
     if (!/(^1\d{10}$)/.test(value)) {
       return errorMsg;
