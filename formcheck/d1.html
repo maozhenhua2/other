@@ -74,6 +74,7 @@
   <script>
     /***********************客户调用代码**************************/
     var registerForm = document.getElementById('registerForm');
+    var transed = false;
 
     var validataFunc = function () {
       var validator = new Validator();
@@ -82,19 +83,19 @@
         strategy: 'isNonEmpty',
         errorMsg: '用户名不能为空'
       }, {
-        strategy: 'minLength:6',
-        errorMsg: '用户名长度不能小于 10 位'
-      }]);
+        strategy: 'minLength:1',
+        errorMsg: '用户名长度不能小于 1 位'
+      }], registerForm.userName);
 
       validator.add(registerForm.password.value, [{
         strategy: 'minLength:6',
         errorMsg: '密码长度不能小于 6 位'
-      }]);
+      }], registerForm.password);
 
       validator.add(registerForm.phoneNumber.value, [{
         strategy: 'isMobile',
         errorMsg: '手机号码格式不正确'
-      }]);
+      }], registerForm.phoneNumber);
 
       return validator.start();
     };
@@ -104,12 +105,56 @@
     };
 
     document.getElementById('submit').addEventListener('click', function () {
-      console.dir(registerForm);
-      getValue();
+      if (transed) {
+        return;
+      }
+      var info = validataFunc();
+      if (!info) {
+        return;
+      }
+
+      if (info[0]) {
+        transed = true;
+      }
+
+      var po = {
+        l: info[1].offsetLeft,
+        t: info[1].offsetTop
+      };
+      var span;
+      if (!info[1].parentNode.querySelector('span')) {
+        span = document.createElement('span');
+        span.style.position = 'absolute';
+        span.style.left = po.l + 'px';
+        span.style.top = po.t + 'px';
+        span.style.width = info[1].offsetWidth + 'px';
+        span.style.height = info[1].offsetHeight + 'px';
+        span.style.display = 'block';
+        span.style.background = '#f00';
+        span.style.color = '#fff';
+        span.style.textAlign = 'center';
+        span.style.lineHeight = info[1].offsetHeight + 'px';
+        span.style.transform = 'perspective(48px) rotateX(270deg)';
+        span.style.transformOrigin = '50% 0';
+        span.style.transition = 'all 0.5s linear';
+        info[1].parentNode.appendChild(span);
+      } else {
+        span = info[1].parentNode.querySelector('span');
+      }
+
+
+      span.innerHTML = info[0];
+      setTimeout(function () {
+        span.style.transform = 'rotateX(360deg)';
+      }, 0);
+      setTimeout(function () {
+        span.style.transform = 'rotateX(270deg)';
+        transed = false;
+      }, 1500);
     });
 
 
-    function getValue() {
+    /*function getValue() {
       var i = 0;
       var l = registerForm.length;
       var arr = [];
@@ -152,9 +197,9 @@
         // })
       }
       console.log(arr);
-    }
+    }*/
 
-    function getRadioValue(o) {
+    /*function getRadioValue(o) {
       var obj = o;
       var arr = {};
       var i = 0;
@@ -164,7 +209,7 @@
         // arr[obj[i].name].push(obj[i]);
       }
       // console.log(arr)
-    }
+    }*/
   </script>
 </body>
 
