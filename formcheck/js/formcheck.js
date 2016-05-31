@@ -120,7 +120,7 @@ var Validator = function () {
   this.cache = []; // 保存校验规则
 };
 
-Validator.prototype.add = function (value, rules) {
+Validator.prototype.add = function (value, rules, dom) {
   var self = this;
 
   for (var i = 0, rule; rule = rules[i++];) {
@@ -132,7 +132,7 @@ Validator.prototype.add = function (value, rules) {
         var strategy = strategyAry.shift();
         strategyAry.unshift(value);
         strategyAry.push(errorMsg);
-        return strategies[strategy].apply(value, strategyAry);
+        return [strategies[strategy].apply(value, strategyAry), dom];
       });
     })(rule)
   }
