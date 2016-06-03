@@ -108,7 +108,11 @@ var calendar1 = {
       for (j = 0; j < k; j++) {
         index = (i * 7) + j;
         var today = '';
-        today = arr[index].txt === this.nowDate.date && t1 ? 'c-today active' : '';
+
+        if (arr[index].txt === this.nowDate.date && t1 && !arr[index].prev && !arr[index].next) {
+          today = 'c-today active';
+        }
+        
         id = arr[index].ID ? arr[index].ID : '';
 
         var td = document.createElement('td');
