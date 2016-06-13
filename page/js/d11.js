@@ -72,7 +72,6 @@ function loadHtml(callback) {
           pageSize: 10,
           selecter: $('.page'),
           pageEvent: function(i) {
-            // console.log(info.datas[info.tab].current);
             info.datas[info.tab].current = i;
             info.datas[info.tab].pageSize = 10;
             pageShow(i);
@@ -82,15 +81,16 @@ function loadHtml(callback) {
 
       commentPage.init();
 
-      callback(data);
+      if (callback && typeof callback === 'function') {
+        callback(data);
+      }
+
     }(data));
   });
 }
 var commentPage;
 
-loadHtml(function(data) {
-
-});
+loadHtml(function(data) {});
 
 function pageShow(i) {
   setTimeout(function() {
@@ -105,7 +105,6 @@ $('#myTabs a').click(function(e) {
   $(this).parent().addClass('active').siblings().removeClass('active');
   $('.tab-content').children().eq($(this).parent().index()).addClass('active').siblings().removeClass('active');
   info.tab = index;
-  // console.log(info.datas[info.tab].current);
   loadHtml(function() {});
 
 });
