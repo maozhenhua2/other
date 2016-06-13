@@ -1,11 +1,21 @@
 /***********************策略对象**************************/
 var strategies = {
-  isNonEmpty: function (value, errorMsg) { // 不为空
+  isNonEmpty: function(value, errorMsg) { // 不为空
     if (value === '') {
       return errorMsg;
     }
   },
-  minLength: function (value, length, errorMsg) { // 限制最小长度
+  isNumber: function (value, errorMsg) {
+    if (!/^(\d)+(\.{1}\d{1}|\d{0,})$/g.test(value)) {
+      return errorMsg;
+    }
+  },
+  isRMB: function (value, errorMsg) {
+    if (!/^(\d)+(\.{1}\d{2}|\d{0,})$/g.test(value)) {
+      return errorMsg;
+    }
+  },
+  minLength: function(value, length, errorMsg) { // 限制最小长度
     if (value.length < length) {
       return errorMsg;
     }
@@ -15,17 +25,17 @@ var strategies = {
       return errorMsg;
     }
   },
-  isMobile: function (value, errorMsg) { // 手机号码格式
+  isMobile: function(value, errorMsg) { // 手机号码格式
     if (!/(^1\d{10}$)/.test(value)) {
       return errorMsg;
     }
   },
-  isUserName: function (value, errorMsg) { // 字母、数字、下划线组成，字母开头，4-16位。
+  isUserName: function(value, errorMsg) { // 字母、数字、下划线组成，字母开头，4-16位。
     if (!/^[a-zA-z]\w{3,15}$/.test(value)) {
       return errorMsg;
     }
   },
-  isChinese: function (value, errorMsg) {
+  isChinese: function(value, errorMsg) {
     function isChinese(str) {
       var lst = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
       return lst.test(str);
@@ -36,14 +46,13 @@ var strategies = {
         return errorMsg;
       }
     }
-
   },
-  isSABA: function (value, errorMsg) {
+  isSABA: function(value, errorMsg) {
     if (!/^CN\d+$/i.test(value)) {
       return errorMsg;
     }
   },
-  idCheck: function (value, errorMsg) {
+  idCheck: function(value, errorMsg) {
     var city = {
       11: "北京",
       12: "天津",
@@ -81,7 +90,7 @@ var strategies = {
       82: "澳门",
       91: "国外 "
     };
-    // ^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$
+    // ^\d{6}(1[8-9]|2[0-9])\d{2}(0[1-9]|1[0-2])(0[0-9]|[1-2][0-9]|3[0-1])\d{3}(\d|x)$
     if (!/^\d{6}(1[8-9]|2[0-9])\d{2}(0[1-9]|1[0-2])(0[0-9]|[1-2][0-9]|3[0-1])\d{3}(\d|x)$/i.test(value)) {
       // tip = "身份证号格式错误";
       return errorMsg;
@@ -116,33 +125,32 @@ var strategies = {
 };
 
 /***********************Validator 类**************************/
-var Validator = function () {
+var Validator = function() {
   this.cache = []; // 保存校验规则
 };
 
-Validator.prototype.add = function (value, rules, dom) {
+Validator.prototype.add = function(value, rules) {
   var self = this;
 
   for (var i = 0, rule; rule = rules[i++];) {
-    (function (rule) {
+    (function(rule) {
       var strategyAry = rule.strategy.split(':');
       var errorMsg = rule.errorMsg;
 
-      self.cache.push(function () {
+      self.cache.push(function() {
         var strategy = strategyAry.shift();
         strategyAry.unshift(value);
         strategyAry.push(errorMsg);
-        return [strategies[strategy].apply(value, strategyAry), dom];
+        return strategies[strategy].apply(value, strategyAry);
       });
     })(rule)
   }
-
 };
 
-Validator.prototype.start = function () {
+Validator.prototype.start = function() {
   for (var i = 0, validatorFunc; validatorFunc = this.cache[i++];) {
     var errorMsg = validatorFunc();
-    if (errorMsg[0]) {
+    if (errorMsg) {
       return errorMsg;
     }
   }
