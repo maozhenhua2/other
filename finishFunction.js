@@ -1278,6 +1278,16 @@ function trim(string) {
   return string.replace(/^\s+|\s+$/g, "");
 }
 
+
+// 生成26个字母
+function getAToZ() {
+  var A_Z = [];
+  for (var j = 65; j < 91; j++) {
+    A_Z.push(String.fromCharCode(j));
+  }
+  return A_Z;
+}
+
 // 确定鼠标哪个按钮被按下
 function getMouseButton(eventObject) {
   eventObject = eventObject || window.event;
