@@ -2220,3 +2220,41 @@ var after = function(fn, afterfn) {
     return ret;
   }
 }
+
+/**
+ * 设置光标在短连接输入框中的位置
+ * @param inputId 框Id
+ * @param pos
+ * @return {*}s
+ */
+function setCursorPos(inputId, pos) {
+
+  var inpObj = document.getElementById(inputId);
+  if (navigator.userAgent.indexOf('MSIE') > -1) {
+    var range = document.selection.createRange();
+    var textRange = inpObj.createTextRange();
+    textRange.moveStart('character', pos);
+    textRange.collapse();
+    textRange.select();
+  } else {
+    inpObj.setSelectionRange(n, n);
+  }
+}
+
+
+/**
+ * 获取光标在短连接输入框中的位置
+ * @param inputId 框Id
+ * @return {*}
+ */
+function getCursorPos(inputId) {
+  var inpObj = document.getElementById(inputId);
+  if (navigator.userAgent.indexOf('MSIE') > -1) { // IE
+    var range = document.selection.createRange();
+    range.text = '';
+    range.setEndPoint('StartToStart', inpObj.createTextRange());
+    return range.text.length;
+  } else {
+    return inpObj.selectionStart;
+  }
+}
