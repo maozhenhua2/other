@@ -331,34 +331,34 @@ function mCalendar(obj) {
 			// var hourAdd = hour.querySelector('.add');
 			// var hourMinus = hour.querySelector('.minus');
 			// hour
-			_this.calendarBox.find('.hour').on('click', '.add', function() {
+			_this.calendarBox.find('.hour .add').off('click').on('click', function() {
 				var v = parseInt(addEvents(this, 23), 10);
 				_this.info.hour = v;
 			});
 
-			_this.calendarBox.find('.hour').on('click', '.minus', function() {
+			_this.calendarBox.find('.hour .minus').off('click').on('click', function() {
 				var v = parseInt(minusEvents(this), 10);
 				_this.info.hour = v;
 			});
 
 			// minutes
-			_this.calendarBox.find('.minute').on('click', '.add', function() {
+			_this.calendarBox.find('.minute .add').off('click').on('click', function() {
 				var v = parseInt(addEvents(this, 59), 10);
 				_this.info.minute = v;
 			});
 
-			_this.calendarBox.find('.minute').on('click', '.minus', function() {
+			_this.calendarBox.find('.minute .minus').off('click').on('click', function() {
 				var v = parseInt(minusEvents(this), 10);
 				_this.info.minute = v;
 			});
 
 			// second
-			_this.calendarBox.find('.second').on('click', '.add', function() {
+			_this.calendarBox.find('.second .add').off('click').on('click', function() {
 				var v = parseInt(addEvents(this, 59), 10);
 				_this.info.second = v;
 			});
 
-			_this.calendarBox.find('.second').on('click', '.minus', function() {
+			_this.calendarBox.find('.second .minus').off('click').on('click', function() {
 				var v = parseInt(minusEvents(this), 10);
 				_this.info.second = v;
 			});
@@ -566,6 +566,10 @@ function mCalendar(obj) {
 					_this.setDateTitle();
 					_this.dateThShow();
 					_this.setDateList();
+					if (_this.showTime) {
+						_this.getTime();
+						_this.timeEvent();
+					}
 				} else {
 					$(_this.input).val(_this.setDateFormat({
 						year: _this.info.year,
