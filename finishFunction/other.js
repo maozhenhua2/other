@@ -1040,3 +1040,8 @@ function getCursorPos(inputId) {
     return inpObj.selectionStart;
   }
 }
+
+// 提取字符串中的字母和数字
+function getA0(t) {
+  return t.replace(/[^A-Za-z0-9]/ig, '');
+}
