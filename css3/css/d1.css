@@ -5,8 +5,9 @@
 }
 
 .loading {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
   -moz-animation: rotates 2s linear infinite;
   -webkit-animation: rotates 2s linear infinite;
   animation: rotates 2s linear infinite;
@@ -14,8 +15,8 @@
 }
 .loading > div:nth-child(1) {
   border: 2px solid #000;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   position: absolute;
   left: 0;
   top: 0;
@@ -23,44 +24,44 @@
 }
 .loading > div:nth-child(2) {
   border: 2px solid #fff;
-  width: 20px;
-  height: 5px;
+  width: 15px;
+  height: 4px;
   background-color: #fff;
   position: absolute;
   left: 0;
-  top: 7.5px;
+  top: 5.5px;
 }
 .loading > div:nth-child(3) {
   position: absolute;
-  left: -2.66667px;
+  left: -2.33333px;
   top: 50%;
-  margin-top: -5px;
+  margin-top: -4px;
   width: 0;
   height: 0;
   -moz-transform: rotate(15deg);
   -ms-transform: rotate(15deg);
   -webkit-transform: rotate(15deg);
   transform: rotate(15deg);
-  border-top: 5px solid #000;
-  border-bottom: 5px solid transparent;
-  border-left: 3.33333px solid transparent;
-  border-right: 3.33333px solid transparent;
+  border-top: 4px solid #000;
+  border-bottom: 4px solid transparent;
+  border-left: 2.66667px solid transparent;
+  border-right: 2.66667px solid transparent;
 }
 .loading > div:nth-child(4) {
   position: absolute;
-  right: -2.66667px;
+  right: -2.33333px;
   top: 50%;
-  margin-top: -5px;
+  margin-top: -4px;
   width: 0;
   height: 0;
   -moz-transform: rotate(15deg);
   -ms-transform: rotate(15deg);
   -webkit-transform: rotate(15deg);
   transform: rotate(15deg);
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid #000;
-  border-left: 3.33333px solid transparent;
-  border-right: 3.33333px solid transparent;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid #000;
+  border-left: 2.66667px solid transparent;
+  border-right: 2.66667px solid transparent;
 }
 
 @keyframes rotates {

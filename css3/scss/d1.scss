@@ -7,15 +7,16 @@
   box-sizing: border-box;
 }
 
-$width: 20px;
-$height: 20px;
-$height2: 5px;
+$width: 15px;
+$height: 15px;
+$height2: 4px;
 $border-size: 2px;
-$border-width: 5px;
+$border-width: 4px;
 
 .loading {
   width: $width;
   height: $height;
+  display: inline-block;
   @include animation(rotates 2s linear infinite);
   position: relative;
   & > div:nth-child(1) {

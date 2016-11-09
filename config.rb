@@ -3,7 +3,7 @@ Encoding.default_external = Encoding.find('utf-8')
 # Require any additional compass plugins here.
 
 # Set this to the root of your project when deployed:
-project_path = "listrefresh"
+project_path = "css3"
 http_path = "../"
 css_dir = "css"
 sass_dir = "scss"
