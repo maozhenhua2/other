@@ -1639,6 +1639,18 @@ function instersection(o, p) {
 }
 
 /*
+ 判断是否是空对象
+ */
+function isEmptyObject(o) {
+  var hasProp = false;
+  for (var key in o) {
+    hasProp = true;
+    break;
+  }
+  return hasProp;
+}
+
+/*
  功能
  拖动，只能用于绝对定位元素，需要 getScrollOffsets()
  */

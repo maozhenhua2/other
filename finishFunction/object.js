@@ -204,3 +204,15 @@ function union(o, p) {
 function instersection(o, p) {
   return restrict(extend({}, o), p);
 }
+
+/*
+ 判断是否是空对象
+ */
+function isEmptyObject(o) {
+  var hasProp = false;
+  for (var key in o) {
+    hasProp = true;
+    break;
+  }
+  return hasProp;
+}
