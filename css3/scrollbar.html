@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta name="viewport"content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection"content="telephone=no,email=no">
+  <meta name="renderer"content="webkit"/>
+  <meta name="apple-mobile-web-app-capable"content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style"content="black">
+  <meta http-equiv="X-UA-Compatible"content="IE=Edge,chrome=1">
+  <style>
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+#container ul li {
+  border: 1px solid #000;
+  min-height: 200px;
+  list-style-type: none;
+  margin-top: -1px;
+}
+
+#top {
+  padding: 0 15px;
+  overflow-x: auto;
+}
+
+#top::-webkit-scrollbar,
+#top ol::-webkit-scrollbar {
+  display: none;
+}
+
+#top ol {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  font-size: 0;
+  list-style: none;
+  counter-reset: item;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+#top ol:after,
+#top ol:before {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+li {
+  list-style-position: inside;
+}
+
+#top ol li {
+  height: 50px;
+  width: 60px;
+  line-height: 60px;
+  font-size: 16px;
+  display: inline-block;
+}
+
+#top ol li:before {
+  font-size: 16px;
+  counter-increment: item;
+  content: counter(item)".";
+  color: #f00;
+}
+
+header,
+footer {
+  width: 100%;
+  height: 50px;
+  background-color: #333;
+  color: #fff;
+  position: fixed;
+  left: 0;
+  z-index: 6;
+  text-align: center;
+}
+
+header {
+  top: 0;
+}
+
+footer {
+  bottom: 0;
+}
+
+body {
+  counter-reset: section;
+}
+
+h1 {
+  counter-reset: subsection;
+}
+
+h1:before {
+  content: "Section "counter(section) ". ";
+  counter-increment: section;
+}
+
+h2:before {
+  counter-increment: subsection;
+  content: counter(section) "." counter(subsection) " ";
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+
+/* ::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: rgba(0, 0, 0, 0);
+} */
+
+/*定义滚动条轨道 内阴影+圆角*/
+
+/* ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.0);
+  border-radius: 100%;
+  background-color: rgba(0, 0, 0, 0);
+}
+ */
+
+/*定义滑块 内阴影+圆角*/
+
+/* ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  width: 5px;
+  height: 5px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+} */
+
+</style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>header</header>
+    <div id="container">
+      <div id="top">
+        <ol>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+      <div>
+        <ul>
+          <li>
+            <h1></h1>
+            <h1></h1>
+            <h1></h1>
+            <h1></h1>
+            <h1></h1>
+
+          </li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+    <footer>footer</footer>
+  </div>
+</body>
+
+</html>
