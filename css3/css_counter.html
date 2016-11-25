@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>css counter</title>
+<style type="text/css">
+body{font-family: 'Microsoft Yahei'; font-size: 16px; background: white; }
+#temp1 {display: none;}
+#temp2 {display: none;}
+ol{ list-style-type: none; }
+
+#demo1 ol { counter-reset: section; }
+#demo1 ol li { counter-increment: section; }
+#demo1 ol li:before { content: counters(section, ".") ". "; }
+
+#demo2 ol { counter-reset: section; }
+#demo2 ol li { counter-increment: section; }
+#demo2 ol li:before { content: counter(section) ". "; }
+
+#demo3 > ol { counter-reset: section; }
+#demo3 ol li { counter-increment: section; }
+#demo3 ol li:before { content: counter(section) ". "; }
+
+#demo4 ol { counter-reset: section; }
+#demo4 ol li { counter-increment: section; }
+#demo4 ol li:before { content: counter(section, upper-roman) ". "; }
+
+#demo5 ol { counter-reset: section; }
+#demo5 ol li { counter-increment: section; }
+#demo5 ol li:before { content: counter(section, cjk-ideographic) "、"; }
+
+#demo6 ol { counter-reset: section 5; }
+#demo6 ol li { counter-increment: section; }
+#demo6 ol li:before { content: counter(section) ". "; }
+
+#demo7 ol { counter-reset: section 5; }
+#demo7 ol li { counter-increment: section 2; }
+#demo7 ol li:before { content: counter(section) ". "; }
+
+#demo8 ol { counter-reset: section 6; }
+#demo8 ol li { counter-increment: section -1; }
+#demo8 ol li:before { content: counter(section) ". "; }
+
+#demo9 ol { counter-reset: section; }
+#demo9 ol li { counter-increment: section; }
+#demo9 ol li:before { content: "==" counter(section, lower-alpha) counters(section, '-') "** "; }
+
+</style>
+</head>
+<body>
+  <h1>CSS计数器示例：</h1>
+
+  <h2>嵌套风格：</h2>
+  <div id="demo1">
+    <ol>
+      <li>进风口的爽肤水
+        <ol>
+          <li>非进口商的</li>
+          <li>非进口商的</li>
+          <li>非进口商的</li>
+        </ol>
+      </li>
+      <li>进风口的爽肤水
+        <ol>
+          <li>非进口商的</li>
+          <li>
+            非进口商的
+            <ol>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+            </ol>
+          </li>
+          <li>非进口商的</li>
+        </ol>
+      </li>
+      <li>进风口的爽肤水</li>
+    </ol>
+  </div>
+
+  <h2>非嵌套风格1：</h2>
+  <div id="demo2">
+    <ol>
+      <li>进风口的爽肤水
+        <ol>
+          <li>非进口商的</li>
+          <li>非进口商的</li>
+          <li>非进口商的</li>
+        </ol>
+      </li>
+      <li>进风口的爽肤水
+        <ol>
+          <li>非进口商的</li>
+          <li>
+            非进口商的
+            <ol>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+            </ol>
+          </li>
+          <li>非进口商的</li>
+        </ol>
+      </li>
+      <li>进风口的爽肤水</li>
+    </ol>
+  </div>
+
+  <h2>非嵌套风格2(从头到尾一直计数)：</h2>
+  <div id="demo3">
+    <ol>
+      <li>进风口的爽肤水
+        <ol>
+          <li>非进口商的</li>
+          <li>非进口商的</li>
+          <li>非进口商的</li>
+        </ol>
+      </li>
+      <li>进风口的爽肤水
+        <ol>
+          <li>非进口商的</li>
+          <li>
+            非进口商的
+            <ol>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+            </ol>
+          </li>
+          <li>非进口商的</li>
+        </ol>
+      </li>
+      <li>进风口的爽肤水</li>
+    </ol>
+  </div>
+  
+  <h2>使用罗马数字计数</h2>
+  <div id="demo4">
+    <ol>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+    </ol>
+  </div>
+
+  <h2>使用中文计数（IE可能不支持）</h2>
+  <div id="demo5">
+    <ol>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+    </ol>
+  </div>
+
+  <h2>从5开始计数（不包括5）</h2>
+  <div id="demo6">
+    <ol>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+    </ol>
+  </div>
+
+  <h2>从5开始计数，每次递增2</h2>
+  <div id="demo7">
+    <ol>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+    </ol>
+  </div>
+
+  <h2>递减计数</h2>
+  <div id="demo8">
+    <ol>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+    </ol>
+  </div>
+
+  <h2>多个计数器、字符串同时使用</h2>
+  <div id="demo9">
+    <ol>
+      <li>进风口的爽肤水
+        <ol>
+          <li>非进口商的</li>
+          <li>非进口商的</li>
+          <li>非进口商的</li>
+        </ol>
+      </li>
+      <li>进风口的爽肤水
+        <ol>
+          <li>非进口商的</li>
+          <li>
+            非进口商的
+            <ol>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+            </ol>
+          </li>
+          <li>非进口商的</li>
+        </ol>
+      </li>
+      <li>进风口的爽肤水</li>
+    </ol>
+  </div>
+
+  <div id="temp1">
+    <ol>
+      <li>进风口的爽肤水
+        <ol>
+          <li>非进口商的</li>
+          <li>非进口商的</li>
+          <li>非进口商的</li>
+        </ol>
+      </li>
+      <li>进风口的爽肤水
+        <ol>
+          <li>非进口商的</li>
+          <li>
+            非进口商的
+            <ol>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+              <li>将咖啡色的开发商</li>
+            </ol>
+          </li>
+          <li>非进口商的</li>
+        </ol>
+      </li>
+      <li>进风口的爽肤水</li>
+    </ol>
+  </div>
+  <div id="temp2">
+    <ol>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+      <li>将咖啡色的开发商</li>
+    </ol>
+  </div>
+  
+
+</body>
+</html>
