@@ -164,7 +164,6 @@ function ajax(arr) {
  其他
  */
 
-
 // 指定范围随机数
 function randomRange(start, end) {
   var total = end - start + 1;
@@ -197,7 +196,6 @@ function getRandomPositiveNegative() {
 function degreeToRadian(degree) {
   return degree * Math.PI / 180;
 }
-
 
 // 获取当前选中的文本
 function getSelectionString() {
@@ -293,7 +291,6 @@ function strlen(str) {
 function trim(string) {
   return string.replace(/^\s+|\s+$/g, "");
 }
-
 
 // 生成26个字母
 function getAToZ() {
@@ -418,7 +415,6 @@ function getKeyPressed(eventObject) {
     value: value
   };
 }
-
 
 /*
  功能
@@ -1023,7 +1019,6 @@ function setCursorPos(inputId, pos) {
   }
 }
 
-
 /**
  * 获取光标在短连接输入框中的位置
  * @param inputId 框Id
@@ -1045,3 +1040,40 @@ function getCursorPos(inputId) {
 function getA0(t) {
   return t.replace(/[^A-Za-z0-9]/ig, '');
 }
+
+//将26进制转10进制  
+var ConvertNum = function(str) {
+  var n = 0;
+  var s = str.match(/./g); //求出字符数组  
+  var j = 0;
+  for (var i = str.length - 1, j = 1; i >= 0; i--, j *= 26) {
+    var c = s[i].toUpperCase();
+    if (c < 'A' || c > 'Z') {
+      return 0;
+    }
+    n += (c.charCodeAt(0) - 64) * j;
+  }
+  return n;
+}
+
+//测试  
+// var teststr = "AB";
+// alert(ConvertNum(teststr));
+
+//将10进制转26进制  
+var Convert26 = function(num) {
+  var str = "";
+  while (num > 0) {
+    var m = num % 26;
+    if (m == 0) {
+      m = 26;
+    }
+    str = String.fromCharCode(m + 64) + str;
+    num = (num - m) / 26;
+  }
+  return str;
+}
+
+//测试  
+// var num = 28;
+// alert(Convert26(num));
