@@ -1077,3 +1077,24 @@ var Convert26 = function(num) {
 //测试  
 // var num = 28;
 // alert(Convert26(num));
+
+// 判断是否为整数
+// 方法1
+function isInteger(obj) {
+  return Math.floor(obj) === obj
+}
+
+// 方法2
+function isInteger(obj) {
+  return typeof obj === 'number' && obj % 1 === 0
+}
+
+// 方法3
+function isInteger(obj) {
+  return parseInt(obj, 10) === obj
+}
+
+// 方法4
+function isInteger(obj) {
+  return (obj | 0) === obj
+}
