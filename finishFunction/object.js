@@ -40,6 +40,14 @@ function deepCopy(p, c) {
   return c;
 }
 
+function deepCopy(source) {
+  var result = {};
+  for (var key in source) {
+    result[key] = typeof source[key] === 'object' ? deepCopy(source[key]) : source[key];
+  }
+  return result;
+}
+
 // 判断值的类型
 function type(o) {
   var t, c, n;

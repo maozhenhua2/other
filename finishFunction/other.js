@@ -1098,3 +1098,37 @@ function isInteger(obj) {
 function isInteger(obj) {
   return (obj | 0) === obj
 }
+
+// 限制输入
+function onlyInput(select, value, term) {
+  var ncount = 0;
+  var nresult = '';
+  $(select).on('keydown', function(e) {
+    var v = value(e, this);
+    if (term(v)) {
+      ncount++;
+      if (ncount < 2) {
+        nresult = $(this).val();
+      } else {
+        $(this).val(nresult);
+      }
+    } else {
+      nresult = $(this).val();
+    }
+  });
+  $(select).on('keyup', function(e) {
+    var v = value(e, this);
+    //console.log(nresult);
+    if (term(v)) {
+      $(this).val(nresult);
+    }
+  });
+}
+
+// 加减日期
+function opDate(date, days) {
+  var d = date;
+  d.setDate(d.getDate() + days);
+  var m = d.getMonth() + 1;
+  return d.getFullYear() + '/' + m + '/' + d.getDate();
+}
