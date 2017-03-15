@@ -1,0 +1,328 @@
+/* from css揭秘 */
+
+/* 背景波点 */
+@mixin polka($size, $dot, $base, $accent) {
+  background: $base;
+  background-image: radial-gradient($accent $dot, transparent 0), radial-gradient($accent $dot, transparent 0);
+  background-size: $size $size;
+  background-position: 0 0, $size/2 $size/2;
+}
+
+/* 调用
+@include polka(30px, 30%, #655, tan); */
+
+/* 棋盘背景 */
+@mixin checkerboard($size, $base, $accent:rgba(0, 0, 0, .25)) {
+  background: $base;
+  background-image: linear-gradient(45deg, $accent 25%, transparent 0, transparent 75%, $accent 0), linear-gradient(45deg, $accent 25%, transparent 0, transparent 75%, $accent 0);
+  background-position: 0 0, $size $size, background-size:2*$size 2*$size;
+}
+
+/* 调用
+@include checkerboard(15px, #58a, tan); */
+
+/* 斜面切角效果 */
+@mixin beveled-corners($bg, $tl:0, $tr:$tl, $br:$tl, $bl:$tr) {
+  background: $bg;
+  background: linear-gradient(135deg, transparent $tl, $bg 0) 
+  top left, linear-gradient(225deg, transparent $tr, $bg 0) 
+  top right, linear-gradient(-45deg, transparent $br, $bg 0) 
+  bottom right, linear-gradient(45deg, transparent $bl, $bg 0) 
+  bottom left;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+/* 调用
+@include beveled-corners(#58a, 15px, 5px); */
+
+/* svg版本 */
+border: 20px solid #58a;
+border-image: 1 url('data:image/svg+xml,\ 
+    <svg xmlns=!string!\ 
+         width=!string!height=!string!fill=!string!>\ 
+    <polygon points=!string!/>\ 
+    </svg>');
+background: #58a;
+background-clip: padding-box;
+//
+
+/* clip-path版本 */
+background: #58a;
+clip-path: polygon(20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px), 0 20px);
+
+//
+
+/* 折角效果 */
+@mixin folded-corner($background, $size, $angle:30deg) {
+  position: relative;
+  background: $background; /* 回退样式 */
+  background: linear-gradient($angle - 180deg, transparent $size, $background 0);
+  border-radius: .5em;
+  $x: $size / sin($angle);
+  $y: $size / cos($angle);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: linear-gradient(to left bottom, transparent 50%, rgba(0, 0, 0, .2) 0, rgba(0, 0, 0, .4)) 100% 0 no-repeat;
+    width: $y;
+    height: $x;
+    transform: translateY($y - $x) 
+    rotate(2*$angle - 90deg);
+    transform-origin: bottom right;
+    border-bottom-left-radius: inherit;
+    box-shadow: -.2em .2em .3em -.1em rgba(0, 0, 0, .2);
+  }
+}
+
+/* 当调用时... */
+
+/* .note {
+  @include folded-corner(#58a, 2em, 40deg);
+} */
+//
+
+/* 伪随机线条背景svg版本 */
+background: #eee url('data:image/svg+xml,\ 
+            <svg xmlns=!string!\ 
+                 width=!string!height=!string!\ 
+                 fill-opacity=!string!>\ 
+            <rect x=!string!width=!string!height=!string!/> \ 
+            <rect y=!string!width=!string!height=!string!/> \ 
+            </svg>');
+background-size: 30px 30px;
+//
+
+/* 伪随机背景 */
+background: hsl(20, 40%, 90%);
+background-image: linear-gradient(90deg, #fb3 11px, transparent 0), linear-gradient(90deg, #ab4 23px, transparent 0), linear-gradient(90deg, #655 23px, transparent 0);
+background-size: 83px 100%, 61px 100%, 41px 100%;
+
+//
+
+/* 蚂蚁行军 */
+@keyframes ants {
+  to {
+    background-position: 100% 100%
+  }
+}
+div {
+  padding: 1em;
+  border: 1px solid transparent;
+  background: linear-gradient(white, white) padding-box, repeating-linear-gradient(-45deg, black 0, black 25%, transparent 0, transparent 50%) 0 / .6em .6em;
+  animation: ants 12s linear infinite;
+  max-width: 20em;
+  font: 100%/1.6 Baskerville, Palatino, serif;
+}
+
+/* 菱形图片 via clip-path 版本 */
+img {
+  max-width: 250px;
+  margin: 20px;
+  -webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  transition: 1s;
+}
+img:hover {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* 弧形切角 */
+background: #58a;
+background: radial-gradient(circle at top left, transparent 15px, #58a 0) top left, radial-gradient(circle at top right, transparent 15px, #58a 0) top right, radial-gradient(circle at bottom right, transparent 15px, #58a 0) bottom right, radial-gradient(circle at bottom left, transparent 15px, #58a 0) bottom left;
+background-size: 50% 50%;
+background-repeat: no-repeat;
+
+/**
+ * 梯形标签页
+ */
+body {
+  padding: 40px;
+  font: 130%/2 Frutiger LT Std, sans-serif;
+}
+nav {
+  position: relative;
+  z-index: 1;
+  padding-left: 1em;
+}
+nav > a {
+  position: relative;
+  display: inline-block;
+  padding: .3em 1em 0;
+  color: inherit;
+  text-decoration: none;
+  margin: 0 -.3em;
+}
+nav > a::before, main {
+  border: .1em solid rgba(0, 0, 0, .4);
+}
+nav a::before {
+  content: ''; /* To generate the box */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-bottom: none;
+  border-radius: .5em .5em 0 0;
+  background: #ccc linear-gradient(hsla(0, 0%, 100%, .6), hsla(0, 0%, 100%, 0));
+  box-shadow: 0 .15em white inset;
+  transform: scale(1.1, 1.3) perspective(.5em) rotateX(5deg);
+  transform-origin: bottom;
+}
+nav a.selected {
+  z-index: 2;
+}
+nav a.selected::before {
+  background-color: #eee;
+  margin-bottom: -.08em;
+}
+main {
+  display: block;
+  margin-bottom: 1em;
+  background: #eee;
+  padding: 1em;
+  border-radius: .15em;
+}
+nav.left > a::before {
+  transform: scale(1.2, 1.3) perspective(.5em) rotateX(5deg);
+  transform-origin: bottom left;
+}
+nav.right {
+  padding-left: 2em;
+}
+nav.right > a::before {
+  transform: scale(1.2, 1.3) perspective(.5em) rotateX(5deg);
+  transform-origin: bottom right;
+}
+
+/**
+ * 动画饼图
+ */
+.pie {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: yellowgreen;
+  background-image: linear-gradient(to right, transparent 50%, currentColor 0);
+  color: #655;
+}
+.pie::before {
+  content: '';
+  display: block;
+  margin-left: 50%;
+  height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  background-color: inherit;
+  transform-origin: left;
+  animation: spin 3s linear infinite, bg 6s step-end infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(.5turn);
+  }
+}
+@keyframes bg {
+  50% {
+    background: currentColor;
+  }
+}
+
+/**
+ * 毛玻璃效果
+ */
+body {
+  min-height: 100vh;
+  box-sizing: border-box;
+  margin: 0;
+  padding-top: calc(50vh - 6em);
+  font: 150%/1.6 Baskerville, Palatino, serif;
+}
+body, main::before {
+  background: url("http://csssecrets.io/images/tiger.jpg") 0 / cover fixed;
+}
+main {
+  position: relative;
+  margin: 0 auto;
+  padding: 1em;
+  max-width: 23em;
+  background: hsla(0, 0%, 100%, .25) border-box;
+  overflow: hidden;
+  border-radius: .3em;
+  box-shadow: 0 0 0 1px hsla(0, 0%, 100%, .3) inset, 0 .5em 1em rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 1px hsla(0, 0%, 100%, .3);
+}
+main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: -30px;
+  z-index: -1;
+  -webkit-filter: blur(20px);
+  filter: blur(20px);
+}
+//
+
+/* 
+<dl>
+  <dt>Name:</dt>
+  <dd>Lea Verou</dd>
+  
+  <dt>Email:</dt>
+  <dd>lea@verou.me</dd>
+  <dd>leaverou@mit.edu</dd>
+  
+  <dt>Location:</dt>
+  <dd>Earth</dd>
+</dl>
+ */
+
+/* 插入换行 */
+
+dt, dd {
+  display: inline;
+  margin: 0;
+}
+dd {
+  font-weight: 600;
+}
+dd + dt::before {
+  content: "\A";
+  white-space: pre;
+}
+dd + dd::before {
+  content: ', ';
+  font-weight: normal;
+  margin-left: -.25em;
+}
+//
+
+/* 
+<pre><code>while (true) {
+  var d = new Date();
+  if (d.getDate()==1 &amp;&amp;
+      d.getMonth()==3) {
+    alert("TROLOLOL");
+  }
+}</code></pre>
+ */
+
+/* 斑马线 */
+
+pre {
+  padding: .5em;
+  line-height: 1.5;
+  background: hsl(20, 50%, 95%);
+  background-image: linear-gradient(rgba(120, 0, 0, .1) 50%, transparent 0);
+  background-size: auto 3em;
+  background-origin: content-box;
+  font-family: Consolas, Monaco, monospace;
+}
