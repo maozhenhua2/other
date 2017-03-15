@@ -117,7 +117,7 @@ function isScrollBottom(obj) {
 }
 
 // 滚动到顶部
-function scrollTop(step) {
+function scrollTop() {
   // step = step || document.body.scrollTop / 100;
   step = 100;
   var top = getScrollOffsets().y;

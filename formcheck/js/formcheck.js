@@ -1,7 +1,24 @@
 /***********************策略对象**************************/
+// 判断是否是数组
+if (!Array.isArray) {
+  Array.isArray = function(arg) {
+    return Object.prototype.toString.call(arg) === '[object Array]';
+  };
+}
+/*
+ 判断是否是空对象
+ */
+function isEmptyObject(o) {
+  var hasProp = false;
+  for (var key in o) {
+    hasProp = true;
+    break;
+  }
+  return hasProp;
+}
 var strategies = {
   isNonEmpty: function(value, errorMsg) { // 不为空
-    if (value === '') {
+    if (isEmptyObject(value) || (Array.isArray(value) && value.length === 0) || (typeof value === 'string' && value.replace(/^\s+|\s+$/g, '').length === 0) || s === null || s === undefined) {
       return errorMsg;
     }
   },

@@ -769,6 +769,7 @@ function v2h(value) {
   value = parseInt(value).toString(16);
   return value.length < 2 ? value + "0" : value;
 }
+
 // 将颜色转成#000000模式
 function rgb2hex(rgb) {
   if (rgb.match(/^rgb/) == null) return rgb;
@@ -879,6 +880,7 @@ function CookieStorage() { // Arguments specify lifetime and scope
     this.length = 0;
   };
 }
+
 // 判断浏览器
 function checkBrowser() {
   var Sys = {};
@@ -966,12 +968,12 @@ function unescapeString(s) {
 }
 
 Function.prototype.before = function(beforefn) {
-  var __self = this; // 保存原函数的引用 
-  return function() { // 返回包含了原函数和新函数的"代理"函数 
-    beforefn.apply(this, arguments); // 执行新函数，且保证 this 不被劫持，新函数接受的参数 
-    // 也会被原封不动地传入原函数，新函数在原函数之前执行 
-    return __self.apply(this, arguments); // 执行原函数并返回原函数的执行结果， 
-    // 并且保证 this 不被劫持 
+  var __self = this; // 保存原函数的引用
+  return function() { // 返回包含了原函数和新函数的"代理"函数
+    beforefn.apply(this, arguments); // 执行新函数，且保证 this 不被劫持，新函数接受的参数
+    // 也会被原封不动地传入原函数，新函数在原函数之前执行
+    return __self.apply(this, arguments); // 执行原函数并返回原函数的执行结果，
+    // 并且保证 this 不被劫持
   }
 }
 
@@ -1041,10 +1043,10 @@ function getA0(t) {
   return t.replace(/[^A-Za-z0-9]/ig, '');
 }
 
-//将26进制转10进制  
+//将26进制转10进制
 var ConvertNum = function(str) {
   var n = 0;
-  var s = str.match(/./g); //求出字符数组  
+  var s = str.match(/./g); //求出字符数组
   var j = 0;
   for (var i = str.length - 1, j = 1; i >= 0; i--, j *= 26) {
     var c = s[i].toUpperCase();
@@ -1056,11 +1058,11 @@ var ConvertNum = function(str) {
   return n;
 }
 
-//测试  
+//测试
 // var teststr = "AB";
 // alert(ConvertNum(teststr));
 
-//将10进制转26进制  
+//将10进制转26进制
 var Convert26 = function(num) {
   var str = "";
   while (num > 0) {
@@ -1074,7 +1076,7 @@ var Convert26 = function(num) {
   return str;
 }
 
-//测试  
+//测试
 // var num = 28;
 // alert(Convert26(num));
 
@@ -1191,6 +1193,7 @@ function launchFullscreen(element) {
 
   }
 }
+
 //退出全屏
 function exitFullscreen() {
   if (document.exitFullscreen) {
@@ -1213,6 +1216,7 @@ function exitFullscreen() {
     document.IsFullScreen = false;
   }
 }
+
 document.getElementById('fullScreenBtn').addEventListener('click', function() {
   launchFullscreen(document.getElementById('video'));
   window.setTimeout(function exit() {
@@ -1223,11 +1227,3 @@ document.getElementById('fullScreenBtn').addEventListener('click', function() {
   }, 5 * 1000);
 }, false);
 
-// 为空判断
-function isBlank(s) {
-  if (s.replace(/^\s+|\s+$/g, '').length === 0 || s === null || s === undefined) {
-    return true;
-  } else {
-    return false;
-  }
-}
