@@ -326,3 +326,22 @@ pre {
   background-origin: content-box;
   font-family: Consolas, Monaco, monospace;
 }
+
+/* css文字3d */
+
+@mixin text-3d($color: white, $depth: 5) { 
+    $shadows: ();  
+    $shadow-color: $color; 
+ 
+    @for $i from 1 through $depth { 
+        $shadow-color: darken($shadow-color, 10%);  
+        $shadows: append($shadows, 
+                    0 ($i * 1px) $shadow-color, comma); 
+    } 
+ 
+    color: $color; 
+    text-shadow: append($shadows, 
+                    0 ($depth * 1px) 10px black, comma); 
+} 
+
+/* @include text-3d(#eee, 4); */

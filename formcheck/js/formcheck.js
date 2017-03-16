@@ -18,7 +18,7 @@ function isEmptyObject(o) {
 }
 var strategies = {
   isNonEmpty: function(value, errorMsg) { // 不为空
-    if (isEmptyObject(value) || (Array.isArray(value) && value.length === 0) || (typeof value === 'string' && value.replace(/^\s+|\s+$/g, '').length === 0) || s === null || s === undefined) {
+    if (isEmptyObject(value) || (Array.isArray(value) && value.length === 0) || (typeof value === 'string' && value.replace(/^\s+|\s+$/g, '').length === 0) || value === null || value === undefined) {
       return errorMsg;
     }
   },
