@@ -408,3 +408,174 @@ $$('.circular').forEach(function(el) {
 });
 
  */
+
+/* 自定义复选框 */
+input[type="checkbox"] {
+  position: absolute;
+  clip: rect(0,0,0,0);
+}
+
+input[type="checkbox"] + label::before {
+  content: '\a0';
+  display: inline-block;
+  vertical-align: .2em;
+  width: .8em;
+  height: .8em;
+  margin-right: .2em;
+  border-radius: .2em;
+  background: silver;
+  text-indent: .15em;
+  line-height: .65;
+}
+
+input[type="checkbox"]:checked + label::before {
+  content: '\2713';
+  background: yellowgreen;
+}
+
+input[type="checkbox"]:focus + label::before {
+  box-shadow: 0 0 .1em .1em #58a;
+}
+
+input[type="checkbox"]:disabled + label::before {
+  background: gray;
+  box-shadow: none;
+  color: #555;
+  cursor: not-allowed;
+}
+
+
+/* 自定义按钮切换状态 */
+input[type="checkbox"] {
+  position: absolute;
+  clip: rect(0,0,0,0);
+}
+
+input[type="checkbox"] + label {
+  display: inline-block;
+  padding: .35em .5em .2em;
+  background: #ccc;
+  background-image: linear-gradient(#ddd, #bbb);
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: .3em;
+  box-shadow: 0 1px white inset;
+  text-align: center;
+  text-shadow: 0 1px 1px white;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label,
+input[type="checkbox"]:active + label {
+  box-shadow: .04em .1em .2em rgba(0,0,0,.6) inset;
+  border-color: rgba(0,0,0,.3);
+  background: #bbb;
+}
+
+
+/* 浏览器自带遮罩层，兼容性不好 */
+dialog::backdrop { 
+  background: rgba(0, 0, 0, .8); 
+}
+
+/* 弹框背景模糊和阴影 */
+main {
+  transition: .6s;
+  background: white;
+}
+
+main.de-emphasized {
+  -webkit-filter: blur(3px);
+  filter: blur(3px);
+}
+
+dialog {
+  position: fixed;
+  top: 50%; left: 50%;
+  z-index: 1;
+  width: 10em;
+  padding: 2em;
+  margin: -5em;
+  border: 1px solid silver;
+  border-radius: .5em;
+  box-shadow: 0 .2em .5em rgba(0,0,0,.5),
+              0 0 0 100vmax rgba(0,0,0,.2);
+}
+
+/* 滚动提示 */
+ul {
+  display: inline-block;
+  overflow: auto;
+  width: 7.2em;
+  height: 7em;
+  border: 1px solid silver;
+  padding: .3em .5em;
+  list-style: none;
+  margin-top: 2em;
+  font: 100 200%/1.6 'Frutiger LT Std', sans-serif;
+  background: linear-gradient(white 15px, hsla(0,0%,100%,0)) 0 0 / 100% 50px,
+              radial-gradient(at top, rgba(0,0,0,.2), transparent 70%) 0 0 / 100% 15px,
+              linear-gradient(to top, white 15px, hsla(0,0%,100%,0)) bottom / 100% 50px,
+              radial-gradient(at bottom, rgba(0,0,0,.2), transparent 70%) bottom / 100% 15px;
+  background-repeat: no-repeat;
+  background-attachment: local, scroll, local, scroll;
+  margin-top: 30px;
+}
+
+
+/* 交互式图像 */
+.image-slider {
+  position:relative;
+  display: inline-block;
+}
+
+.image-slider > div {
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 50%;
+  max-width: 100%;
+  overflow: hidden;
+  resize: horizontal;
+}
+
+.image-slider > div:before {
+  content: '';
+  position: absolute;
+  right: 0; bottom: 0;
+  width: 12px; height: 12px;
+  padding: 5px;
+  background: linear-gradient(-45deg, white 50%, transparent 0);
+  background-clip: content-box;
+  cursor: ew-resize;
+  -webkit-filter: drop-shadow(0 0 2px black);
+  filter: drop-shadow(0 0 2px black);
+}
+
+.image-slider img {
+  display: block;
+  user-select: none;
+}
+
+/* 自适应内部元素 */
+figure {
+  max-width: 300px;
+  max-width: min-content;
+  margin: auto;
+}
+
+figure > img { max-width: inherit }
+
+/* 根据兄弟元素的数量来设置样式 */
+/* 定义mixin */ 
+@mixin n-items($n) { 
+    &:first-child:nth-last-child(#{$n}), 
+    &:first-child:nth-last-child(#{$n}) ~ & { 
+        @content; 
+    } 
+} 
+ 
+/* 调用时是这样的： */ 
+li { 
+    @include n-items(4) { 
+        /* 属性与值写在这里 */ 
+    } 
+}
