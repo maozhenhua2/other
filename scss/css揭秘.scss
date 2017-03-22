@@ -579,3 +579,239 @@ li {
         /* 属性与值写在这里 */ 
     } 
 }
+
+
+/* 根据兄弟元素的数量范围来匹配元素 */
+li:first-child:nth-last-child(n+4), 
+li:first-child:nth-last-child(n+4) ~ li { 
+    /* 当列表至少包含四项时，命中所有列表项 */ 
+}
+
+li:first-child:nth-last-child(-n+4), 
+li:first-child:nth-last-child(-n+4) ~ li { 
+    /* 当列表最多包含四项时，命中所有列表项 */ 
+}
+
+li:first-child:nth-last-child(n+2):nth-last-child(-n+6), 
+li:first-child:nth-last-child(n+2):nth-last-child(-n+6) ~ li { 
+    /* 当列表包含2～6项时，命中所有列表项 */ 
+}
+
+
+
+/* 弹性转换 */
+
+input:not(:focus) + .callout:not(:hover) {
+  transform: scale(0);
+  transition: .25s transform;
+}
+
+.callout {
+  transition: .5s cubic-bezier(.25,.1,.3,1.5) transform;
+  transform-origin: 1.4em -.4em;
+}
+
+/* Styling */
+body {
+  padding: 1.5em;
+  font: 200%/1.6 Baskerville;
+}
+
+input {
+  display: block;
+  padding: 0 .4em;
+  font: inherit;
+}
+
+.callout {  
+  position: absolute;
+  max-width: 14em;
+  padding: .6em .8em;
+  border-radius: .3em;
+  margin: .3em 0 0 -.2em;
+  background: #fed;
+  border: 1px solid rgba(0,0,0,.3);
+  box-shadow: .05em .2em .6em rgba(0,0,0,.2);
+  font-size: 75%;
+}
+
+.callout:before {
+  content: "";
+  position: absolute;
+  top: -.4em;
+  left: 1em;
+  padding: .35em;
+  background: inherit;
+  border: inherit;
+  border-right: 0;
+  border-bottom: 0;
+  transform: rotate(45deg);
+}
+
+/* html */
+<label>
+  Your username:
+  <input value="leaverou"></input>
+  <span class="callout">
+  Only letters, numbers, underscores (_) and hyphens (-) allowed!
+  </span>
+</label>
+
+
+
+/* 逐帧动画 */
+@keyframes loader {
+  to { background-position: -800px 0; }
+}
+
+.loader {
+  width: 100px; height: 100px;
+  text-indent: 999px; overflow: hidden; /* Hide text */
+  background: url(http://dabblet.com/img/loader.png) 0 0;
+  animation: loader 1s infinite steps(8);
+}
+
+
+/* 闪烁 */
+@keyframes blink-1 { 50% { color: transparent } }
+@keyframes blink-2 { to { color: transparent } }
+
+p {
+  padding: 1em;
+  background: gold;
+}
+
+.blink-smooth-1 {
+  animation: 1s blink-1 3;
+}
+
+.blink-smooth-2 {
+  animation: .5s blink-2 6;
+  animation-direction: alternate;
+}
+
+.blink {
+  animation: 1s blink-1 3 steps(1);
+}
+
+
+/* 打字动画 */
+@keyframes typing {
+  from { width: 0 }
+}
+
+@keyframes caret {
+  50% { border-right-color: transparent; }
+}
+
+h1 {
+  font: bold 200% Consolas, Monaco, monospace;
+  /*width: 8.25em;*/
+  width: 15ch;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: .05em solid;
+  animation: typing 8s steps(15),
+             caret 1s steps(1) infinite;
+}
+
+
+/**
+ * Smooth state animations
+ * Photo credits: https://www.flickr.com/photos/employtheskinnyboy/3904743709
+ */
+
+@keyframes panoramic {
+  to { background-position: 100% 0; }
+}
+
+.panoramic {
+  width: 150px; height: 150px;
+  background: url('http://c3.staticflickr.com/3/2671/3904743709_74bc76d5ac_b.jpg');
+  background-size: auto 100%; 
+  animation: panoramic 10s linear infinite alternate;
+  animation-play-state: paused;
+}
+
+.panoramic:hover, .panoramic:focus {
+  animation-play-state: running;
+}
+
+/**
+ * Animation along a circular path - Solution 1
+ */
+ 
+@keyframes spin {
+  to { transform: rotate(1turn); }
+}
+
+.avatar {
+  animation: spin 3s infinite linear;
+  transform-origin: 50% 150px;
+}
+
+.avatar > img {
+  animation: inherit;
+  animation-direction: reverse;
+}
+
+/* Anything below this is just styling */
+
+.avatar {
+  width: 50px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar > img {
+  display: block;
+  width: inherit;
+}
+
+.path {
+  width: 300px; height: 300px;
+  padding: 20px;
+  border-radius: 50%;
+  background: #fb3;
+}
+
+/**
+ * Animation along a circular path - Solution 2
+ */
+ 
+@keyframes spin {
+  from {
+    transform: rotate(0turn)
+               translateY(-150px) translateY(50%)
+               rotate(1turn)
+  }
+  to {
+    transform: rotate(1turn)
+               translateY(-150px) translateY(50%)
+               rotate(0turn);
+  }
+}
+
+
+.avatar {
+  animation: spin 3s infinite linear;
+}
+
+/* Anything below this is just styling */
+
+.avatar {
+  display: block;
+  width: 50px;
+  margin: calc(50% - 25px) auto 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.path {
+  width: 300px; height: 300px;
+  padding: 20px;
+  margin: 100px auto;
+  border-radius: 50%;
+  background: #fb3;
+}
