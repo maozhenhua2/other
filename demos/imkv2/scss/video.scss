@@ -1,0 +1,75 @@
+@charset "UTF-8";
+@import "compass";
+@import "pub";
+
+#video {
+  width: 100%;
+  background-color: #000;
+  position: relative;
+  video {
+    width: 100%;
+    display: block;
+    -o-object-position: top;
+    object-position: top;
+  }
+}
+#processBar {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  padding: 5px 0;
+}
+
+#startTime,
+#endTime {
+  width: 15%;
+  text-align: center;
+}
+#process {
+  width: 80%;
+  position: relative;
+}
+#processBtn,
+.process,
+.bufferbg,
+.bg {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 10px;
+
+  position: absolute;
+  left: 0;
+  top: 30%;
+  z-index: 1;
+}
+
+.bufferbg {
+  background-color: #b5b5b5;
+  width: 0;
+  z-index: 2;
+}
+.process {
+
+  background-color: #fff;
+  width: 0;
+  z-index: 3;
+}
+#processBtn {
+  background-color: #f00;
+  width: 10px;
+  height: 10px;
+  z-index: 4;
+}
+.flex-box {
+  @include display-flex(flex);
+  @include flex-flow(row nowrap);
+  @include justify-content(space-between);
+  @include align-items(stretch);
+
+  & > * {
+    order: 1;
+    flex: 0 1 auto;
+  }
+}

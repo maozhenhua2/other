@@ -1,0 +1,43 @@
+@charset "UTF-8";
+@import "compass";
+@import "pub";
+
+.tab {
+  font-size: 0;
+  a {
+    font-size: 0.7rem;
+    width: 3rem;
+    display: inline-block;
+    text-align: center;
+  }
+}
+
+.item > a {
+  position: relative;
+  .tag {
+    display: block;
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 3px 7px;
+    background-color: $blue;
+    @include border-bottom-right-radius(5px);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+  }
+}
+
+#tabBorder {
+  position: absolute;
+  border-bottom: 2px solid $blue;
+  z-index: 9;
+}
+
+.process {
+  @include transition(left 0.1s linear, width 0.1s linear);
+}
+
+.swiper-slide {
+  overflow: auto;
+}

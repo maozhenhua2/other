@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>Title</title>
+  <link rel="stylesheet" href="vendor/normalize.css">
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="vendor/swiper/css/swiper.min.css">
+  <link rel="stylesheet" href="vendor/video/video-js.min.css">
+  <link rel="stylesheet" href="css/video.css">
+  <style>
+  </style>
+</head>
+<body>
+<div id="video">
+  <video
+    id="my-player"
+    class="video-js"
+    style="width:100%;object-position: top;"
+    data-setup='{"controls": true, "autoplay": true, "preload": "auto"}'
+
+    webkit-playsinline
+    playsinline
+    x-webkit-airplay="allow"
+    x5-video-player-type="h5"
+    x5-video-player-fullscreen="true"
+    x5-video-orientation="portraint"
+
+  >
+    <source type="application/x-mpegURL" src="http://ojx4iftwz.bkt.clouddn.com/636242441482164446.m3u8">
+  </video>
+  <!--<div id="processBar" class="flex-box">-->
+    <!--<div id="startTime"></div>-->
+    <!--<div id="process">-->
+      <!--<div id="processBtn"></div>-->
+      <!--<div class="process"></div>-->
+      <!--<div class="bufferbg"></div>-->
+      <!--<div class="bg"></div>-->
+    <!--</div>-->
+    <!--<div id="endTime"></div>-->
+  <!--</div>-->
+</div>
+
+
+<script src="vendor/jquery-3.1.1.min.js"></script>
+<script src="vendor/swiper/js/swiper.jquery.min.js"></script>
+<!--<script src="//vjs.zencdn.net/5.11/video.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.3.3/videojs-contrib-hls.min.js"></script>-->
+<script src="vendor/video/video.min.js"></script>
+<script src="vendor/videojs-contrib-hls.min.js"></script>
+<script>
+  changeSize();
+
+  $(window).on('resize', function () {
+    changeSize();
+  });
+
+  function changeSize() {
+    var width = $(window).width();
+    var height = $(window).height();
+
+    $('#video').css({
+      height: width * 9 / 16 + 'px',
+      overflow: 'hidden'
+    });
+
+    $('#video video').attr({
+      width: width,
+      height: width * 9 / 16 + 'px'
+    }).css({
+      height: width * 9 / 16 + 'px'
+    });
+
+    var btn = $('.vjs-big-play-button');
+    $('.vjs-big-play-button').css({
+      left: (width - btn.width()) / 2 + 'px',
+      top: (width * 9 / 16 - btn.height()) / 2 + 'px',
+      transition: 'none'
+    });
+
+    // 设置控制条位置
+    var ch = $('.vjs-control-bar').height();
+    $('.vjs-control-bar').css({
+      top: $('#video').height() - ch + 'px'
+    });
+
+
+  }
+
+
+  player = videojs('my-player', {
+    controlBar: {
+      fullscreenControl: false
+    }
+  });
+  player.ready(function () {
+    var start = $('#startTime');
+    var end = $('#endTime');
+    var process = $('.process');
+    var bufferbg = $('.bufferbg');
+    var processBtn = $('#processBtn');
+
+    var pw = process.width() - processBtn.width();
+
+    processBtn.on('touchstart', function () {
+
+    });
+
+
+
+    player.on('play', function () {
+      console.log('play');
+//       player.playbackRate(4);
+    });
+    player.on('timeupdate', function () {
+//      var currentTime = parseFloat(player.currentTime() / 60).toFixed(2);
+//      var allTime = parseFloat(player.duration() / 60).toFixed(2);
+//      if (isNaN(allTime)) {
+//        allTime = 0.00;
+//      }
+//      start.html((currentTime + '').split('.').join(':'));
+//      end.html((allTime + '').split('.').join(':'));
+//
+//      processBtn.css({
+//        left: parseFloat(pw * player.currentTime() / player.duration()).toFixed(2) + 'px'
+//      });
+//
+//      process.css({
+//        width: parseFloat(player.currentTime() / player.duration() * 100).toFixed(2) + '%'
+//      });
+    });
+    player.on('ended', function () {
+      console.log('ended');
+    });
+  });
+
+</script>
+</body>
+</html>

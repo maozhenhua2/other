@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>个人信息</title>
+  <link rel="stylesheet" href="vendor/normalize.css">
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="vendor/swiper/css/swiper.min.css">
+  <link rel="stylesheet" href="css/person.css?v=3fad918098">
+</head>
+<body>
+<div id="wrapper">
+  <div class="banner">
+    <img src="img/personalBanner.png" alt="">
+    <div class="banner-content">
+      <div class="head" style="background-image: url(http://wx.qlogo.cn/mmopen/gibImpIBcyMAibRx14ZibrBqMhUVSh7Py68XiaS6bTRazYQAxRfSQr04nvCRHKGic4rrfncZ7Lopa83riaNn63TcFAfLkoDFj9uBZH/0)"></div>
+      <div class="flex-box">
+        <p>max</p>
+        <p class="v-line"></p>
+        <p>LV 新手</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="tab">
+      <a class="active">充值</a>
+      <a>提现</a>
+      <a>明细</a>
+    </div>
+    <div class="tab-content swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="recharge">
+            <h3 class="flex-box"><p>*汇率：<span id="charge_show_label"><i class="fa fa-jpy" aria-hidden="true"></i>10=1000L</span></p></h3>
+            <div class="price-list">
+              <a>10元</a>
+              <a>30元</a>
+              <a>50元</a>
+              <a>100元</a>
+              <a>200元</a>
+              <a>500元</a>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide balance">
+          <div>
+            <h3><span>可用余额：</span><i class="fa fa-tint" aria-hidden="true"></i><span>9999.00L(</span><i class="fa fa-jpy" aria-hidden="true"></i><span>9999.00)</span></h3>
+            <div>
+              <h5>请输入本次充值金额：(手续费0.1%)</h5>
+              <div class="flex-box">
+                <i class="fa fa-jpy" aria-hidden="true"></i><input type="number" name="" id="price">
+              </div>
+              <button>两小时内到账，确认提现</button>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="detail">
+            <ul>
+              <li>
+                <div class="flex-box">
+                  <p class="time">
+                    <span>周一</span>
+                    <span>02-01</span>
+                  </p>
+                  <p><img src="img/logo.png" alt=""></p>
+                  <p>
+                    <span>500L</span><span>新用户赠送</span>
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <div class="flex-box">
+                  <p class="time">
+                    <span>周一</span>
+                    <span>02-01</span>
+                  </p>
+                  <p><img src="img/logo.png" alt=""></p>
+                  <p>
+                    <span>500L</span><span>新用户赠送</span>
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <div class="flex-box">
+                  <p class="time">
+                    <span>周一</span>
+                    <span>02-01</span>
+                  </p>
+                  <p><img src="img/logo.png" alt=""></p>
+                  <p>
+                    <span>500L</span><span>新用户赠送</span>
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <div class="flex-box">
+                  <p class="time">
+                    <span>周一</span>
+                    <span>02-01</span>
+                  </p>
+                  <p><img src="img/logo.png" alt=""></p>
+                  <p>
+                    <span>500L</span><span>新用户赠送</span>
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <div class="flex-box">
+                  <p class="time">
+                    <span>周一</span>
+                    <span>02-01</span>
+                  </p>
+                  <p><img src="img/logo.png" alt=""></p>
+                  <p>
+                    <span>500L</span><span>新用户赠送</span>
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <div class="flex-box">
+                  <p class="time">
+                    <span>周一</span>
+                    <span>02-01</span>
+                  </p>
+                  <p><img src="img/logo.png" alt=""></p>
+                  <p>
+                    <span>500L</span><span>新用户赠送</span>
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="tabBorder"></div>
+</div>
+
+<div id="mask"></div>
+<div id="pop">
+  <h3><i class="fa fa-remove" id="close"></i><span>支付详细</span><i></i></h3>
+  <div>
+    <p class="price"><i class="fa fa-cny"></i><span></span></p>
+    <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+
+    <button>支付</button>
+  </div>
+</div>
+
+<script src="vendor/jquery-3.1.1.min.js"></script>
+<script src="vendor/swiper/js/swiper.jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    var width = $('.tab a').outerWidth(true) * 2;
+    // tab
+    tabContent(0);
+    function tab() {
+      $('.tab a').on('click', function () {
+        var i = $(this).index();
+        if (i === 3) {
+          return false;
+        }
+
+        var p = i * 0.5;
+        if (!$('#tabBorder').hasClass('process')) {
+          $('#tabBorder').addClass('process')
+        }
+        tabBorderProcess(p);
+        tabContent(i);
+      });
+    }
+
+    tab();
+    function tabContent(i) {
+      $('.tab').children('a').eq(i).addClass('active').siblings().removeClass('active');
+    }
+
+    // tab内容高度
+    function tabCOntentMinHeight() {
+      var vidoeh = $('.banner').outerHeight(true);
+      var windowh = $(window).height();
+      var tabh = $('.tab').outerHeight(true);
+      var h = windowh - vidoeh - 10 - tabh - 7;
+      $('.tab-content').css({
+        'height': h + 'px'
+      })
+    }
+    tabCOntentMinHeight();
+
+    function tabBorder() {
+      var tabA = $('.tab .active');
+      $('#tabBorder').css({
+        width: tabA.outerWidth(true) + 'px',
+        left: tabA.offset().left + 'px',
+        top: tabA.offset().top + tabA.outerHeight(true) - 2 + 'px'
+      });
+    }
+    tabBorder();
+
+    function tabBorderProcess(p) {
+      $('#tabBorder').css({
+        left: 7 + width * p + 'px'
+      });
+    }
+
+    // swiper初始化
+    function swiperInit() {
+      var mySwiper = new Swiper('.swiper-container', {
+        speed: 100,
+        onTouchStart: function (swiper, even) {
+          if ($('#tabBorder').hasClass('process')) {
+            $('#tabBorder').removeClass('process')
+          }
+        },
+        onSlideChangeStart: function (swiper) {
+          tabContent(swiper.activeIndex);
+        },
+        onProgress: function (swiper, progress) {
+          tabBorderProcess(progress);
+        }
+      });
+
+      $('.tab a').click(function () {
+        var i = $(this).index();
+        if (i === 3) {
+          return false;
+        }
+        mySwiper.slideTo(i, 1000, false);//切换到第一个slide，速度为1秒
+      })
+    }
+    swiperInit();
+
+    // 充值
+    function recharge() {
+      $('.price-list a').on('click', function () {
+        var n = parseInt($(this).html(), 10);
+        $('#pop p span').html(n);
+
+        $(this).addClass('selected').siblings().removeClass('selected');
+        $('#pop, #mask').addClass('show');
+      });
+
+      $('#close, #mask').on('click', function () {
+        $('#pop, #mask').removeClass('show');
+      });
+    }
+    recharge();
+  });
+</script>
+</body>
+</html>

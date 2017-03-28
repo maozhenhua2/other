@@ -1,0 +1,55 @@
+@charset "UTF-8";
+@import "compass";
+@import "pub";
+
+#wrapper {
+  background-color: #fff;
+}
+.balance-title {
+  text-align: center;
+  h3 {
+    padding: 15px 0;
+  }
+  img {
+    width: auto;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  span {
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  h5 {
+    padding: 0 0 10px;
+    font-size: 1.8rem;
+    font-weight: normal;
+  }
+  p {
+    color: #aaa;
+    padding-bottom: 15px;
+  }
+}
+
+.balance-content {
+  padding: 7px;
+}
+
+.balance-info {
+  padding: 7px;
+  @include flex-flow(row nowrap);
+  @include align-items(flex-start);
+  p {
+    line-height: 1.3rem;
+    color: #777;
+    &:first-child {
+      width: 10rem;
+      color: #666;
+    }
+  }
+}
+
+.border-top {
+  border-top: 1px solid #ccc;
+}

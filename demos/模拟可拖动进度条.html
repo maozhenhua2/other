@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title></title>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/normalize/5.0.0/normalize.min.css">
+  <style>
+    .no-select {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    #processBar {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+
+      width: 400px;
+      margin: 50px auto;
+      position: relative;
+    }
+
+    #processBg {
+      order: 1;
+      flex: 1 0 auto;
+      background-color: #999;
+
+      width: 100%;
+      height: 10px;
+      border-radius: 50px;
+      box-shadow: inset 1px 1px 20px 1px #666;
+    }
+
+    #processBtn {
+      order: 1;
+      flex: 0 0 auto;
+      background: radial-gradient(ellipse at center, #ffffff 0%,#f1f1f1 50%,#f6f6f6 100%);
+
+      position: absolute;
+      left: 0;
+      z-index: 5;
+
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+
+    #processBtn.active {
+      width: 30px;
+      height: 30px;
+      margin-left: -15px;
+    }
+
+
+  </style>
+</head>
+<body>
+
+<div id="processBar">
+  <a id="processBtn"></a>
+  <div id="processBg"></div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  function isMobile() {
+    var isMobile = {
+      Android: function() {
+        return navigator.userAgent.match(/Android/i) ? true : false;
+      },
+      BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i) ? true : false;
+      },
+      iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+      },
+      Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i) ? true : false;
+      },
+      any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
+      }
+    };
+    return isMobile;
+  }
+  var processBar = {
+    init: function (obj) {
+      var _this = processBar;
+      _this.bar = obj.bar;
+      _this.btn = obj.btn;
+      _this.downfn = obj.downfn;
+      _this.movefn = obj.movefn;
+      _this.upfn = obj.upfn;
+      _this.startx = 0;
+      _this.moveX = 0;
+      _this.moveS = 0;
+      _this.limitS = 0;
+      _this.limitE = parseInt(_this.bar.width(), 10) - _this.btn.width();
+
+      if (!isMobile().any()) {
+        _this.dEvent = 'mousedown';
+        _this.mEvent = 'mousemove';
+        _this.uEvent = 'mouseup';
+      } else {
+        _this.dEvent = 'touchstart';
+        _this.mEvent = 'touchmove';
+        _this.uEvent = 'touchend';
+      }
+
+      $(document).on(_this.dEvent, _this.downEvent);
+
+      $(document).on(_this.uEvent, function (e) {
+        _this.btn.removeClass('active');
+        $(document).off(_this.mEvent, _this.moveEvent);
+        $('body').removeClass('no-select');
+        _this.upfn && _this.upfn(e);
+      });
+
+      $('#processBg').on(_this.dEvent, function (e) {
+        _this.moveX = _this.getPageX(e) - $(this).offset().left;
+        _this.btn.css({
+          left: _this.moveX + 'px'
+        });
+      });
+    },
+    downEvent: function (e) {
+      var _this = processBar;
+      if (e.target.id === 'processBtn') {
+        $('body').addClass('no-select');
+        _this.startx = _this.getPageX(e);
+        _this.moveS = parseInt(_this.btn.css('left'), 10);
+        _this.btn.addClass('active');
+        _this.downfn && _this.downfn(e);
+        $(document).on(_this.mEvent, _this.moveEvent);
+      }
+    },
+    moveEvent: function (e) {
+      var _this = processBar;
+      if (isNaN(_this.startx) || isNaN(_this.moveS)) {
+        return false;
+      }
+      var changeX = _this.getPageX(e) - _this.startx;
+      _this.moveX = _this.moveS + changeX;
+      if (_this.moveX <= _this.limitS) {
+        _this.moveX = 0;
+      } else if (_this.moveX >= _this.limitE) {
+        _this.moveX = _this.limitE;
+      }
+      _this.btn.css({
+        left: _this.moveX + 'px'
+      });
+
+      _this.movefn && _this.movefn(e);
+    },
+    getPageX: function (e) {
+      var pagex;
+      if (isMobile().any()) {
+        pagex = e.touches[0].pageX;
+      } else {
+        pagex = e.pageX;
+      }
+
+      return pagex;
+    }
+  };
+
+  processBar.init({
+    bar: $('#processBar'),
+    btn: $('#processBtn')
+  })
+  /*var bar = $('#processBar');
+  var btn = $('#processBtn');
+  var startx;
+  var moveX;
+  var moveS;
+  var limitS = 0;
+  var limitE = parseInt(bar.width(), 10) - btn.outerWidth(true);
+  var down = false;
+  $(document).on('mousedown', function (e) {
+    downEvent(e);
+  });
+
+  $(document).on('mouseup', function (e) {
+    down = false;
+    $(document).off('mousemove', moveEvent);
+    $('body').removeClass('no-select');
+  });
+
+  function downEvent(e) {
+    if (e.target.id === 'processBtn') {
+      $('body').addClass('no-select');
+      startx = e.pageX;
+      moveS = parseInt(btn.css('left'), 10);
+      down = true;
+
+      $(document).on('mousemove', moveEvent);
+    }
+  }
+
+  function moveEvent(e) {
+    if (isNaN(startx) || isNaN(moveS)) {
+      down = false;
+      return false;
+    }
+
+    var changeX = e.pageX - startx;
+    moveX = moveS + changeX;
+    if (moveX <= limitS) {
+      moveX = 0;
+    } else if (moveX >= limitE) {
+      moveX = limitE;
+    }
+    btn.css({
+      left: moveX + 'px'
+    });
+  }*/
+</script>
+</body>
+</html>

@@ -27,7 +27,7 @@ li {
 	position: absolute;
 	left: 0;
 	top: 0;
-	z-index: 3;
+	z-index: 31;
 }
 
 .m-calendar h1 {
@@ -138,14 +138,19 @@ li {
 	content: '';
 	display: block;
 	clear: both;
-	widht: 100%;
+	width: 100%;
 	height: 0;
 }
 .m-calendar .times .time-box{
-	width: 30%;
+	width: 33%;
 	height: 30px;
-	margin-left: 3%;
 	float: left;
+  white-space: nowrap;
+}
+.colon {
+  display: inline-block;
+  height: 30px;
+  text-align: center;
 }
 .m-calendar .times .time-box .time-text,
 .m-calendar .times .time-box .time-btn{
@@ -155,7 +160,7 @@ li {
   border-width: 1px;
 }
 .m-calendar .times .time-box .time-text{
-	width: 60%;
+	width: 90%;
 	height: 100%;
 	padding: 5px;
   text-align: center;

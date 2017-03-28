@@ -1,0 +1,359 @@
+@charset "UTF-8";
+@import "compass";
+@import "all";
+
+* {
+  @extend %borderBox;
+  &:after {
+    @extend %borderBox;
+  }
+  &:before {
+    @extend %borderBox;
+  }
+}
+
+li {
+  list-style-type: none;
+}
+
+// 弹框
+.pop-box {
+  visibility: hidden;
+  //position: absolute;
+  //left: -99999px;
+  &.show {
+    visibility: visible;
+    //left: 0;
+  }
+}
+
+.mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.pop {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top left;
+  width: 80%;
+  //min-height: 10px;
+  position: fixed;
+  top: 0;
+  //right: 0;
+  //bottom: 0;
+  margin: auto;
+  z-index: 4;
+  color: #fff;
+  display: none;
+  // 右上角关闭按钮
+  .pop-close {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    top: -10px;
+    right: -10px;
+    z-index: 10;
+    @include border-radius(999px);
+    background-color: #c8c8c8;
+  }
+  .pop-content {
+    position: relative;
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    font-size: 20px;
+  }
+  &.pop-pulling {
+    .pop-close {
+      top: -5px;
+      right: -5px;
+    }
+    p {
+      text-align: center;
+      bottom: 9%;
+      position: absolute;
+      width: 100%;
+      line-height: 1.3;
+      margin-bottom: 40px;
+    }
+  }
+
+  .btn-box {
+    display: block;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 9%;
+    text-align: center;
+    padding: 0 10%;
+    margin-top: 10px;
+  }
+  .btn {
+    background-color: #0066d5;
+    background-image: none;
+    font-size: 20px;
+  }
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: contain;
+  }
+
+  &:after {
+    width: 50%;
+    height: 50%;
+    margin: 20% 25% 0;
+    z-index: 6;
+  }
+  // 读取
+  &.loading {
+    background-image: none;
+    width: 70%;
+    max-width: 300px;
+    height: 200px;
+    text-align: center;
+    img {
+      width: 40px;
+      max-width: 187px;
+      @include animation(rotate 2s linear infinite);
+    }
+    .btn-gradient-v {
+      display: block;
+      @include background(linear-gradient(bottom, #0089d9 0%, #00c7e1 100%));
+      width: auto;
+      font-size: 14px;
+      margin: 10px auto;
+      padding: 10px 20px;
+    }
+    &:before {
+      display: none;
+    }
+    &:after {
+      display: none;
+    }
+  }
+  // 确认框
+  // 消息框
+  &.pop-confirm,
+  &.pop-info {
+    max-width: 500px;
+    background-image: none;
+    @include background(linear-gradient(top, #0089d9 0%, #00c7e1 100%));
+    @include border-radius(5px);
+    h3,
+    h6,
+    p {
+      margin: 0;
+      font-weight: normal;
+    }
+    &:before {
+      display: none;
+    }
+    &:after {
+      display: none;
+    }
+  }
+  &.pop-info {
+    .info-content {
+      padding: 10px;
+      & + .line {
+        margin-bottom: 15px;
+      }
+    }
+    .icon-ok {
+      @include border-radius(999px);
+      background-color: #3ebbbe;
+      position: relative;
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        border-right: 1px solid #000;
+        border-bottom: 1px solid #000;
+        @include transform(rotate(45deg));
+        @include transform-origin(50%, 50%);
+        width: 40%;
+        height: 60%;
+        left: 0;
+        top: 0;
+        margin: 15% 30%;
+      }
+    }
+    span {
+      @extend %vm;
+    }
+
+    .bottom-text {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  }
+  .info-title {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  .info-calendar {
+    width: 110px;
+    margin: 10px auto;
+    border: 1px solid #fff;
+    @include border-radius(5px);
+    text-align: center;
+    .line {
+      margin-top: 20px;
+    }
+  }
+  .info-calendar-content {
+    padding: 10px 0;
+    span {
+      vertical-align: baseline;
+      margin: 0 2px;
+    }
+  }
+
+  .confirm-box {
+    input[type="text"],
+    input[type="password"] {
+      border: 1px solid #999;
+      @include border-radius(3px);
+      background-color: #e5e5e5;
+      color: #989898;
+      padding: 5px;
+    }
+    & > div {
+      &:first-child {
+        padding: 10px;
+        height: 60%;
+        border-bottom: 1px solid #fff;
+        text-align: center;
+        h3,
+        h6 {
+          margin: 10px;
+        }
+      }
+      &:last-child {
+        @extend %clearfix;
+        a {
+          display: block;
+          float: left;
+          width: 50%;
+          padding: 10px;
+          color: #0066d5;
+          font-size: 16px;
+          text-align: center;
+          &:first-child {
+            border-right: 1px solid #fff;
+          }
+        }
+      }
+    }
+  }
+  .confirm-content {
+    display: inline-block;
+    margin: auto;
+  }
+}
+
+.line {
+  width: 100%;
+  border-top: 1px solid #fff;
+}
+
+.text-large {
+  font-size: 35px;
+}
+
+.dotting {
+  display: inline-block;
+  width: 10px;
+  min-height: 2px;
+  padding-right: 2px;
+  border-left: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  background-color: currentColor;
+  background-clip: content-box;
+  box-sizing: border-box;
+  animation: dot 4s infinite step-start both;
+}
+
+.dotting:before {
+  content: '...';
+}
+
+.dotting::before {
+  content: '';
+}
+
+:root .dotting {
+  margin-left: 2px;
+  padding-left: 2px;
+}
+
+/* IE9+ */
+
+@keyframes dot {
+  25% {
+    border-color: transparent;
+    background-color: transparent;
+  }
+  /* 0个点 */
+  50% {
+    border-right-color: transparent;
+    background-color: transparent;
+  }
+  /* 1个点 */
+  75% {
+    border-right-color: transparent;
+  }
+  /* 2个点 */
+}
+
+// 旋转
+@include keyframes(rotate) {
+  0% {
+    @include transform(rotate(0deg));
+  }
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+
+.animatedS {
+  -webkit-animation-duration: 700ms;
+  animation-duration: 700ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  //-webkit-animation-delay: 200ms;
+  //animation-delay: 200ms;
+}
+
+.animatedE {
+  -webkit-animation-duration: 700ms;
+  animation-duration: 700ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@media screen and (max-height: 568px) {
+  .pop {
+    &:after {
+      margin-top: 14%;
+    }
+  }
+}

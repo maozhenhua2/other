@@ -1,0 +1,230 @@
+@charset "UTF-8";
+@import "compass";
+
+$bgColor: #f1f1f1;
+$headerHeight: 45px;
+$footer-height: 52px;
+$footerBottom: 10px;
+
+%borderBox {
+  box-sizing: border-box;
+}
+
+%gradient-bg {
+  @include background(linear-gradient(left, #0055d3 0%, #00e8e5 100%));
+}
+
+%format0 {
+  padding: 0;
+  margin: 0;
+}
+
+%vm {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+%border {
+  @extend %gradient-bg;
+  height: 2px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 3;
+}
+
+%clearfix {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+    overflow: hidden;
+  }
+}
+
+
+// 圆形头像
+%headImg {
+  width: 80px;
+  height: 80px;
+  border: 3px solid #fff;
+  background-color: $bgColor;
+  @include border-radius(999px);
+  box-shadow: 0px 0px 10px 0px #2f95c3;
+  margin: 35px auto 10px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+// wrapper 绝对定位
+%wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  //padding: $headerHeight + 15px 15px $footerBottom 15px;
+  padding: $headerHeight + 15px + 35px 0 0;
+}
+
+// 搜索框
+%search {
+  width: 100%;
+  height: $headerHeight;
+  background-color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  @include box-shadow(0px 1px 5px 1px #ccc);
+  img {
+    height: 100%;
+  }
+  .search,
+  .logo {
+    height: 50%;
+    display: block;
+    vertical-align: middle;
+    position: absolute;
+    top: 25%;
+    padding: 0 10px;
+  }
+  .log {
+    left: 0;
+  }
+  .search {
+    right: 0;
+  }
+  input[type="text"] {
+    width: 73%;
+    border: 0;
+    border-radius: 5px;
+    background-color: $bgColor;
+    padding: 5px 10px;
+  }
+}
+
+%head-tag {
+  position: relative;
+  z-index: 3;
+  //width: 35%;
+  //height: 45px;
+  //line-height: 45px;
+  padding: 5px;
+  text-align: center;
+  //color: #fff;
+  //@include border-radius(5px);
+  //@extend %gradient-bg;
+  color: #333;
+  font-weight: bold;
+  font-size: 14px;
+  display: inline-block;
+  //margin-bottom: -1px;
+  img,
+  span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  img {
+    width: 20%;
+  }
+  span {
+    font-size: 1em;
+  }
+}
+
+%content-nav {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  background-color: #fff;
+  width: 100%;
+  text-align: right;
+  padding-bottom: 2px;
+  a {
+    padding: 6px 10px;
+    font-size: 0.8em;
+    color: #999;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    margin-bottom: -2.5px;
+  }
+  .active {
+    @include border-radius(2px);
+    @include background(linear-gradient(top, #b1b1b1 0%, #868686 100%));
+    color: #fff;
+  }
+  .border {
+    z-index: 2;
+  }
+}
+
+// footer导航
+%footer {
+  width: 100%;
+  //height: $footer-height;
+  //padding: 0 15px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 5;
+  //margin-bottom: $footerBottom;
+  a {
+    width: 25%;
+    float: left;
+    font-size: 1em;
+    display: inline-block;
+    //width: 25%;
+    padding: 0 10px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    position: relative;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    //&:before {
+    //  content: '';
+    //  height: 100%;
+    //  display: inline-block;
+    //  vertical-align: middle;
+    //  border-left: 2px solid #fff;
+    //  position: absolute;
+    //  left: -5px;
+    //  top: 0;
+    //}
+    &:first-child {
+      border-left: 1px solid transparent;
+      //&:before {
+      //  display: none;
+      //}
+    }
+    &:last-child {
+      border-right: 1px solid transparent;
+    }
+  }
+
+  .footer-bg {
+    //background-color: #fff;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.5);
+    //padding-bottom: 5px;
+    //padding-top: 5px;
+  }
+
+  .nav-footer {
+    text-align: center;
+    padding: 7px 0;
+    background-color: #2984e2;
+    //@extend %gradient-bg;
+    // @include border-radius(5px);
+  }
+}

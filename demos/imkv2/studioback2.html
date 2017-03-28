@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>直播间</title>
+  <link rel="stylesheet" href="vendor/normalize.css">
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="vendor/swiper/css/swiper.min.css">
+  <link rel="stylesheet" href="vendor/video/video-js.min.css">
+  <!--<link href="//vjs.zencdn.net/5.11/video-js.min.css" rel="stylesheet">-->
+  <link rel="stylesheet" href="css/studioback2.css?v=fa8555a4ce">
+</head>
+<body>
+<div id="wrapper">
+  <div id="video">
+    <div id="pnumber"><i class="fa fa-users"></i><span>999999</span></div>
+    <video
+      id="my-player"
+      class="video-js"
+      style="width:100%;object-position: top;"
+      controls
+      data-setup='{"controls": true, "autoplay": false, "preload": "auto"}'
+
+      webkit-playsinline
+      playsinline
+      x-webkit-airplay="allow"
+      x5-video-player-type="h5"
+      x5-video-player-fullscreen="true"
+      x5-video-orientation="portraint"
+
+    >
+      <source type="application/x-mpegURL" src="http://ojx4iftwz.bkt.clouddn.com/636242441482164446.m3u8">
+    </video>
+  </div>
+  <div class="block">
+    <div class="tab">
+      <a class="active"><i class="fa fa-commenting-o" aria-hidden="true"></i>聊天</a>
+      <a><i class="fa fa-bookmark-o" aria-hidden="true"></i>课件</a>
+      <a><i class="fa fa-microphone" aria-hidden="true"></i>主播</a>
+      <a class="share"><i class="fa fa-share-square-o" aria-hidden="true"></i><span>分享</span></a>
+      <div id="tabBorder"></div>
+    </div>
+
+    <div class="tab-content swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <!--<h3 id="chatTitle"><i class="fa fa-users" aria-hidden="true"></i><span>正在观看的人数</span><span>100</span></h3>-->
+          <div id="chatList" class="">
+            <ul>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功1！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功2！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功3！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功4！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功5！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功6！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功7！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功8！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功9！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功10！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功11！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功12！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功13！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功14！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功15！</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功16！</span>
+                </div>
+              </li>
+            </ul>
+
+
+          </div>
+          <div id="sendBox">
+            <button type="button" id="reward"><i class="fa fa-gift" aria-hidden="true"></i></button>
+            <input type="text" name="" id="">
+            <button type="button" id="send">发送</button>
+          </div>
+        </div>
+        <div class="swiper-slide "></div>
+        <div class="swiper-slide ">
+          <div class="anchor-box">
+            <div class="head-img"><img src="img/0.jpg" alt=""></div>
+            <div class="anchor-info">
+              <h3>啊啊啊</h3>
+              <p><i class="fa fa-eye" aria-hidden="true"></i><span>粉丝人数</span><span>100</span></p>
+              <p><i class="fa fa-users" aria-hidden="true"></i><span>观看人数</span><span>100</span></p>
+              <p><a id="follow"><i class="fa fa-heart" aria-hidden="true"></i><span>关注</span></a></p>
+            </div>
+          </div>
+
+          <div class="anchor-content">
+            <h3>简介</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="rewardList">
+  <h3><span>你的资产：300</span></h3>
+  <div class="reward-item">
+    <a>
+      <div class="img" style="background-image: url(img/qingwen.png);"></div>
+      <span>5L</span><span>吻</span></a>
+    <a>
+      <div class="img" style="background-image: url(img/xianhua.png);"></div>
+      <span>10L</span><span>鲜花</span></a>
+    <a>
+      <div class="img" style="background-image: url(img/hl.jpg);"></div>
+      <span>200L</span><span>哈雷</span></a>
+    <a>
+      <div class="img" style="background-image: url(img/bm.jpg);"></div>
+      <span>500L</span><span>宝马</span></a>
+    <a>
+      <div class="img" style="background-image: url(img/fll.jpg);"></div>
+      <span>1000L</span><span>法拉利</span></a>
+    <a>
+      <div class="img" style="background-image: url(img/bjd.jpg);"></div>
+      <span>10000L</span><span>布加迪威龙</span></a>
+  </div>
+</div>
+
+<script src="vendor/jquery-3.1.1.min.js"></script>
+<script src="vendor/swiper/js/swiper.jquery.min.js"></script>
+<!--<script src="//vjs.zencdn.net/5.11/video.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.3.3/videojs-contrib-hls.min.js"></script>-->
+<script src="vendor/video/video.min.js"></script>
+<script src="vendor/videojs-contrib-hls.min.js"></script>
+<script>
+  $(document).ready(function () {
+    var width = $('.tab a').outerWidth(true) * 2;
+    var pnumber;
+
+    $(window).on('resize', function () {
+      console.log('resize');
+      checkResize();
+      changeSize();
+    });
+
+    function checkResize() {
+      var width = $(window).width();
+      var height = $(window).height();
+      var i = $('#fullscreen i');
+      if (width > height) {
+        // 横屏
+        i.removeClass('fa-arrows-alt');
+        i.addClass('fa-compress');
+      } else {
+        // 竖屏
+        i.removeClass('fa-compress');
+        i.addClass('fa-arrows-alt');
+      }
+    }
+
+    function changeSize() {
+      var width = $(window).width();
+      var height = $(window).height();
+
+      $('#video').css({
+        height: width * 9 / 16 + 'px',
+        overflow: 'hidden'
+      });
+
+      $('#video video').attr({
+        width: width
+//        height: height
+      }).css({
+        height: height + 'px'
+      });
+
+      var btn = $('.vjs-big-play-button');
+      $('.vjs-big-play-button').css({
+        left: (width - btn.width()) / 2 + 'px',
+        top: (width * 9 / 16 - btn.height()) / 2 + 'px',
+        transition: 'none'
+      });
+
+      // 设置控制条位置
+      var ch = $('.vjs-control-bar').height();
+      $('.vjs-control-bar').css({
+        top: $('#video').height() - ch + 'px'
+      });
+
+      $('.vjs-fullscreen-control').css({
+        visibility: 'hidden'
+      });
+
+      $('.block').css({
+        'top': width * 9 / 16 + 'px',
+        height: height - width * 9 / 16 + 'px',
+        overflow: 'hidden'
+      });
+
+      tabCOntentMinHeight();
+
+
+    }
+
+    // 视频
+    function video() {
+      var u = navigator.userAgent;
+      var ios = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+//      if (!ios) {
+//        $('#my-player').removeAttr('webkit-playsinline playsinline x-webkit-airplay x5-video-player-type x5-video-player-fullscreen');
+//      }
+
+//      $('#my-player video').attr('data-setup', options);
+
+      player = videojs('my-player');
+      player.ready(function () {
+        videojs.log('Your player is ready!');
+        changeSize();
+
+        $('.vjs-control-bar').append('<div id="fullscreen"><i class="fa fa-arrows-alt"></i></div>');
+
+        $('#fullscreen').on('click', function () {
+          console.log('fullscreentoggle');
+          var i = $(this).children('i');
+          if (player.paused) {
+            player.play();
+          } else {
+
+          }
+          if (i.hasClass('fa-arrows-alt')) {
+            i.removeClass('fa-arrows-alt');
+            i.addClass('fa-compress');
+
+//            player.pause();
+            if (ios) {
+              $('video').attr('x5-video-player-fullscreen', false);
+            }
+            $('video').attr('x5-video-orientation', 'landscape');
+//            player.play();
+          } else {
+            i.addClass('fa-arrows-alt');
+            i.removeClass('fa-compress');
+
+//            player.pause();
+            if (ios) {
+              $('video').attr('x5-video-player-fullscreen', true);
+            }
+            $('video').attr('x5-video-orientation', 'portraint');
+//            player.play();
+          }
+
+
+        });
+
+
+      })
+        .on('play', function () {
+          console.log('play');
+          checkResize();
+        })
+        .on('pause', function () {
+          console.log('play');
+          checkResize();
+        })
+        .on('fullscreenchange', function () {
+          alert('change')
+        })
+        .on('ended', function () {
+          videojs.log('Awww...over so soon?!');
+        });
+
+      document.addEventListener("fullscreenchange", function(e) {
+        alert("fullscreenchange");
+      });
+
+      $('#chatList, #sendBox').on('touchstart', function () {
+        toggleNumber();
+      });
+
+      $('#send').on('click', function () {
+        var h = $('#chatList').outerHeight(true) + 500;
+        $('#chatList').scrollTop(h);
+      });
+
+
+
+    }
+
+    toggleNumber();
+    function toggleNumber() {
+      $('#pnumber').removeClass('animateHide');
+      clearTimeout(pnumber);
+      pnumber = setTimeout(function () {
+        $('#pnumber').addClass('animateHide');
+      }, 3000);
+    }
+
+    video();
+
+
+    // tab
+    tabContent(0);
+    function tab() {
+      $('.tab a').on('click', function () {
+        var i = $(this).index();
+        if (i === 3) {
+          return false;
+        }
+
+        var p = i * 0.5;
+        if (!$('#tabBorder').hasClass('process')) {
+          $('#tabBorder').addClass('process')
+        }
+        tabBorderProcess(p);
+        tabContent(i);
+      });
+    }
+
+    tab();
+    function tabContent(i) {
+      $('.tab').children('a').eq(i).addClass('active').siblings().removeClass('active');
+    }
+
+    // tab内容高度
+    function tabCOntentMinHeight() {
+      var vidoeh = $('#video').outerHeight(true);
+      var windowh = $(window).height();
+      var tabh = $('.tab').outerHeight(true);
+      var h = windowh - vidoeh - tabh;
+      $('.tab-content').css({
+        'height': h + 'px'
+      })
+    }
+
+    // tab 按钮下的线条动画
+    function tabBorder() {
+      var tabA = $('.tab .active');
+      $('#tabBorder').css({
+        width: tabA.outerWidth(true) + 'px',
+        left: tabA.offset().left + 'px',
+        top: tabA.outerHeight(true) - 2 + 'px'
+      });
+    }
+
+    tabBorder();
+
+    function tabBorderProcess(p) {
+      $('#tabBorder').css({
+        left: 7 + width * p + 'px'
+      });
+    }
+
+    // swiper初始化
+    function swiperInit() {
+      var mySwiper = new Swiper('.swiper-container', {
+        speed: 100,
+        onTouchStart: function (swiper, even) {
+          if ($('#tabBorder').hasClass('process')) {
+            $('#tabBorder').removeClass('process')
+          }
+        },
+        onSlideChangeStart: function (swiper) {
+          tabContent(swiper.activeIndex);
+        },
+        onProgress: function (swiper, progress) {
+          tabBorderProcess(progress);
+        }
+      });
+
+      $('.tab a').click(function () {
+        var i = $(this).index();
+        if (i === 3) {
+          return false;
+        }
+        mySwiper.slideTo(i, 1000, false);//切换到第一个slide，速度为1秒
+      })
+    }
+
+    swiperInit();
+
+    // 打赏
+    function reward() {
+
+      // 点击打赏按钮
+      $('#reward').on('click', function () {
+        $('#rewardList').addClass('show');
+      });
+
+      // 选择打赏道具隐藏打赏列表
+      $('#rewardList a').on('click', function () {
+        $('#rewardList').removeClass('show');
+      });
+
+      // 点击其他地方隐藏打赏
+      $('#wrapper').on('click', function (e) {
+        var o = $(e.target).parentsUntil('#rewardList');
+        var l = o.length;
+        if (e.target.id === 'reward' || $(e.target).parent().attr('id') === 'reward' || $(o[l - 1]).parent().attr('id') === 'rewardList') {
+          return false;
+        }
+        $('#rewardList').removeClass('show');
+      });
+    }
+
+    reward();
+
+    // 关注
+    function follow() {
+      $('#follow').on('click', function () {
+        var i = $(this).children('i');
+        i.toggleClass('red');
+      });
+    }
+
+    follow();
+  });
+</script>
+</body>
+</html>

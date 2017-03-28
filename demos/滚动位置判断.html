@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>滚动位置判断</title>
+  <link href="http://cdn.bootcss.com/normalize/5.0.0/normalize.min.css" rel="stylesheet">
+  <style>
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      list-style-type: none;
+    }
+
+    main {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    header,
+    footer {
+      width: 100%;
+      height: 100px;
+      background-color: #00AA00;
+    }
+
+    footer {
+      height: 300px;
+    }
+
+    .left {
+      order: 1;
+      flex: 0 0 auto;
+
+      width: 70%;
+    }
+    .left li{
+      padding: 5px 0;
+      border-top: 1px solid #000;
+    }
+
+    .right {
+      order: 1;
+      flex: 1 0 auto;
+
+      position: relative;
+    }
+
+    .right > div {
+      border-top: 1px solid #000;
+      background-color: #ccc;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div id="wrapper">
+  <header>header</header>
+  <main>
+    <div class="left"></div>
+    <div class="right"><div></div></div>
+  </main>
+  <footer>footer</footer>
+</div>
+
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  function createHtml() {
+    var i = 0;
+    var l = 100;
+    var left = $('.left');
+    var right = $('.right');
+    var h = '<ul>';
+    while (i < l) {
+      h += `<li>${i}</li>`;
+      i++;
+    }
+    h += '</ul>';
+    left.html(h);
+
+    i = 0;
+    l = 50;
+    h = '<ul>';
+    while (i < l) {
+      h += `<li>${i}</li>`;
+      i++;
+    }
+    h += '</ul>';
+    right.children().html(h);
+  }
+  createHtml();
+
+  var scrollFix = {
+    init: function (fixobj, scrollObj) {
+      if (fixobj === null || scrollObj === null) {
+        console.log('fixobj or scrollobj must not be empty!');
+        return false;
+      }
+
+      var box = fixobj;
+      var main = scrollObj;
+      var mainTop = main.offset().top;
+      var mainBottom = mainTop + main.outerHeight(true);
+      var fixedH = box.outerHeight(true);
+      $(document).on('scroll', function () {
+        var top = $(this).scrollTop();
+        if (top >= mainTop && top <= mainBottom - fixedH) {
+          var ft = top - mainTop;
+          box.addClass('fixed').css({
+            top: ft + 'px'
+          });
+        } else if (top < mainBottom - fixedH) {
+          box.removeClass('fixed').css({
+            top: 0
+          });
+        } else if (top > mainBottom - fixedH) {
+          box.removeClass('fixed').css({
+            top: mainBottom - fixedH - mainTop + 'px'
+          });
+        }
+      });
+
+    }
+  };
+
+  scrollFix.init($('.right').children(), $('main'));
+
+</script>
+</body>
+</html>

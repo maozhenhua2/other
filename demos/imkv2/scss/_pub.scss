@@ -1,0 +1,193 @@
+@charset "UTF-8";
+@import "compass";
+
+$blue: #00bbee;
+
+%vm {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+%clearfix {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+    overflow: hidden;
+  }
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+ul,
+li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-size: 14px;
+  color: #333;
+  background-color: #f1f1f1;
+  -webkit-overflow-scrolling: touch;
+}
+
+a {
+  text-decoration: none;
+}
+
+h3,
+h4,
+
+h6,
+p {
+  margin: 0;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+i {
+  margin-right: 5px;
+}
+
+.red {
+  color: #f00;
+}
+
+.flex-box {
+  @include display-flex(flex);
+  @include flex-flow(row wrap);
+  @include justify-content(space-between);
+  @include align-items(center);
+
+  & > * {
+    @include order(1);
+    @include flex(0 1 auto);
+  }
+}
+
+.btn {
+  text-align: center;
+  color: #fff;
+  background-color: $blue;
+  font-size: 1rem;
+}
+
+.btn-large {
+  padding: 10px;
+}
+
+.btn-block {
+  display: block;
+}
+
+// 评分
+.score-box {
+  margin: 10px 0;
+  padding: 10px 20px;
+  text-align: center;
+  border: {
+    top: 1px solid #ccc;
+    bottom: 1px solid #ccc;
+  }
+  line-height: 1.7;
+  position: relative;
+  $position: 10px;
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: $position;
+    position: absolute;
+    left: 0;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+  //&:before {
+  //  top: -$position;
+  //  background-image: url("../img/upShadow1.png");
+  //}
+  //&:after {
+  //  bottom: -$position;
+  //  background-image: url("../img/downShadow1.png");
+  //}
+  & > div {
+    @extend %vm;
+  }
+  span {
+    @extend %vm;
+  }
+}
+
+.score {
+  font-size: 0;
+  text-align: center;
+  @extend %vm;
+  a {
+    display: inline-block;
+    $step: 27px;
+    color: $blue;
+    font-size: 1rem;
+    //background-image: url("../img/carScore.png");
+    @for $i from 1 through 5 {
+      &:nth-child(#{$i}) {
+        //@if $i > 1 {
+        //  background-position: -($i - 1) * $step + ($i * 0.5) 0;
+        //} @else {
+        //  background-position: 0 * $step + ($i * 0.5) 0;
+        //}
+
+        &.selected {
+          & ~ a {
+            color: #ccc;
+            //background-image: url("../img/carScore2.png");
+            //background-position: 0 0;
+          }
+        }
+      }
+    }
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    padding: 0;
+    width: 25px;
+    height: 16px;
+    margin: 0 1px;
+    position: relative;
+    i {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+// icon
+.icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+$icon-arr: 'book', 'card', 'clipboard';
+@each $icon in $icon-arr {
+  .icon-#{$icon} {
+    background-image: url("../img/#{$icon}.png");
+  }
+}

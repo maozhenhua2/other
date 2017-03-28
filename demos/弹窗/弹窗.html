@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>pop</title>
+  <link rel="stylesheet" href="vendor/animate.css">
+  <link rel="stylesheet" href="css/modalBox.css">
+</head>
+<body>
+
+<div><label>进度框
+  <button id="loadBtn">loading</button>
+</label></div>
+<div><label>确认框
+  <button id="confirmBtn">confirm</button>
+</label></div>
+<div><label>消息框
+  <button id="infoBtn">info</button>
+</label></div>
+
+<!--loading-->
+<div class="pop-box">
+  <div class="mask"></div>
+  <div id="loading" class="pop loading">
+    <div>
+      <img src="images/loading.png" alt="">
+    </div>
+    <div>
+      <span>正在玩命加载<span class="dotting"></span></span>
+    </div>
+  </div>
+
+  <!--支付页面-->
+  <!--报名提示-->
+  <!--口令密码-->
+  <div id="confirm" class="pop pop-confirm">
+    <div class="confirm-box">
+      <div>
+        <div class="confirm-content">
+          <!--支付页面-->
+          <h3>本次消费：10L</h3>
+          <h6>当前余额：150L</h6>
+
+          <!--报名提示-->
+          <h3>报名提示</h3>
+          <h6>您尚未报名该直播精品课程，是否现在报名</h6>
+
+          <!--口令密码-->
+          <h3>请输入口令密码</h3>
+          <h6><input type="password" name="" id=""></h6>
+        </div>
+      </div>
+      <div>
+        <a class="confirm-no">取消</a>
+        <a class="confirm-yes">确认</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!--签到成功-->
+  <div id="info" class="pop pop-info">
+    <a class="pop-close">X</a>
+    <div class="info-content">
+      <p>
+        <span class="icon icon-ok"></span>
+        <span>签到提醒</span>
+      </p>
+      <p class="info-title">签到成功</p>
+      <div class="info-calendar">
+        <div class="line"></div>
+        <p class="info-calendar-content"><span>第</span><span class="text-large">1</span><span>天</span></p>
+      </div>
+      <p class="bottom-text">本次签到成功可获得###########</p>
+    </div>
+    <div class="line"></div>
+  </div>
+</div>
+
+<script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/modalBox.js"></script>
+<script>
+  $('#loadBtn').click(function () {
+    pop.init({
+      pop: '#loading'
+    });
+    pop.show();
+  });
+
+  $('#confirmBtn').click(function () {
+    pop.init({
+      pop: '#confirm',
+      yes: function () {
+        console.log('yes');
+      },
+      no: function () {
+        console.log('no');
+      }
+    });
+    pop.show();
+  });
+
+  $('#infoBtn').click(function () {
+    pop.init({
+      pop: '#info'
+    });
+    pop.show();
+  });
+</script>
+</body>
+</html>

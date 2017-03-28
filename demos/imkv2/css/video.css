@@ -1,0 +1,241 @@
+.score-box > div, .score-box span, .score {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+ul,
+li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-size: 14px;
+  color: #333;
+  background-color: #f1f1f1;
+  -webkit-overflow-scrolling: touch;
+}
+
+a {
+  text-decoration: none;
+}
+
+h3,
+h4,
+h6,
+p {
+  margin: 0;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+i {
+  margin-right: 5px;
+}
+
+.red {
+  color: #f00;
+}
+
+.flex-box {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.flex-box > * {
+  -webkit-order: 1;
+  order: 1;
+  -webkit-flex: 0 1 auto;
+  flex: 0 1 auto;
+}
+
+.btn {
+  text-align: center;
+  color: #fff;
+  background-color: #00bbee;
+  font-size: 1rem;
+}
+
+.btn-large {
+  padding: 10px;
+}
+
+.btn-block {
+  display: block;
+}
+
+.score-box {
+  margin: 10px 0;
+  padding: 10px 20px;
+  text-align: center;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  line-height: 1.7;
+  position: relative;
+}
+.score-box:before, .score-box:after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 10px;
+  position: absolute;
+  left: 0;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.score {
+  font-size: 0;
+  text-align: center;
+}
+.score a {
+  display: inline-block;
+  color: #00bbee;
+  font-size: 1rem;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  padding: 0;
+  width: 25px;
+  height: 16px;
+  margin: 0 1px;
+  position: relative;
+}
+.score a:nth-child(1).selected ~ a {
+  color: #ccc;
+}
+.score a:nth-child(2).selected ~ a {
+  color: #ccc;
+}
+.score a:nth-child(3).selected ~ a {
+  color: #ccc;
+}
+.score a:nth-child(4).selected ~ a {
+  color: #ccc;
+}
+.score a:nth-child(5).selected ~ a {
+  color: #ccc;
+}
+.score a i {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.icon-book {
+  background-image: url("../img/book.png");
+}
+
+.icon-card {
+  background-image: url("../img/card.png");
+}
+
+.icon-clipboard {
+  background-image: url("../img/clipboard.png");
+}
+
+#video {
+  width: 100%;
+  background-color: #000;
+  position: relative;
+}
+#video video {
+  width: 100%;
+  display: block;
+  -o-object-position: top;
+  object-position: top;
+}
+
+#processBar {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  padding: 5px 0;
+}
+
+#startTime,
+#endTime {
+  width: 15%;
+  text-align: center;
+}
+
+#process {
+  width: 80%;
+  position: relative;
+}
+
+#processBtn,
+.process,
+.bufferbg,
+.bg {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 10px;
+  position: absolute;
+  left: 0;
+  top: 30%;
+  z-index: 1;
+}
+
+.bufferbg {
+  background-color: #b5b5b5;
+  width: 0;
+  z-index: 2;
+}
+
+.process {
+  background-color: #fff;
+  width: 0;
+  z-index: 3;
+}
+
+#processBtn {
+  background-color: #f00;
+  width: 10px;
+  height: 10px;
+  z-index: 4;
+}
+
+.flex-box {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+}
+.flex-box > * {
+  order: 1;
+  flex: 0 1 auto;
+}
+
+/*# sourceMappingURL=video.css.map */

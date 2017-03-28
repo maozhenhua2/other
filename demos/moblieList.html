@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>Title</title>
+  <style>
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+    }
+
+    body,
+    ul,
+    li,
+    p {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    body {
+      font-size: 12px;
+    }
+
+    #wrapper ul {
+      margin: 10px;
+      border: 1px solid #eee;
+      border-bottom: 0;
+    }
+
+    #wrapper li {
+      width: 100%;
+      display: table;
+      background-color: #fff;
+      color: #000;
+      border: 1px solid #eee;
+      border-left: 0;
+      border-right: 0;
+      padding: 5px 10px;
+      margin-top: -1px;
+    }
+
+    #wrapper p {
+      line-height: 1.1rem;
+    }
+
+    #wrapper img {
+      display: inline-block;
+      vertical-align: middle;
+      width: 90%;
+      height: 90%;
+      background-color: #eee;
+      border: 1px solid #eee;
+    }
+
+    #wrapper li > div:first-child {
+      width: 30%;
+      text-align: center;
+      display:table-cell;
+      vertical-align:middle;
+    }
+
+    #wrapper a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    #wrapper li > div:first-child + div {
+      display:table-cell;
+      width: 70%;
+      margin-left: 40%;
+      padding: 0 10px;
+    }
+
+    #wrapper li > div:first-child + div p:last-child {
+      margin-top: 5px;
+    }
+
+    #wrapper li > div:first-child + div p:last-child a {
+      display: inline-block;
+      width: 30px;
+      height: 12px;
+      border: 1px solid #eee;
+      background-color: #eee;
+      margin-right: 10px;
+    }
+
+    #wrapper li > div:first-child + div p:last-child a:last-child {
+      margin-right: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="wrapper">
+  <ul></ul>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    var i = 0;
+    var l = 10;
+    var h = '';
+    for (; i < l; i++) {
+      h += '<li>' +
+        '  <div><img></div>' +
+        '  <div>' +
+        '    <p><a href="#">移动内容行，移动内容行，移动内容行</a></p>' +
+        '    <p><a></a><a></a><a></a></p>' +
+        '  </div>' +
+        '</li>';
+    }
+    $('#wrapper ul').html(h);
+  });
+</script>
+</body>
+</html>

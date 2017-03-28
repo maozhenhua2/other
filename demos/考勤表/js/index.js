@@ -15,6 +15,16 @@ var d3 = new mCalendar({
 });
 d3.run()
 
+var d4 = new mCalendar({
+  input: '#d4'
+});
+d4.run()
+var d5 = new mCalendar({
+  input: '#d5',
+  showToday: false,
+  showTime: false
+});
+d5.run()
 $('#d1').on('click', function() {
 	d1.show();
 });
@@ -23,4 +33,10 @@ $('#d2').on('click', function() {
 });
 $('#d3').on('click', function() {
 	d3.show();
+});
+$('#d4').on('click', function() {
+  d4.show();
+});
+$('#d5').on('click', function() {
+  d5.show();
 });

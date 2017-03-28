@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>Title</title>
+  <link rel="stylesheet" href="vendor/normalize.css">
+  <link rel="stylesheet" href="css/taglist.css?v=0d1547d8e7">
+</head>
+<body>
+
+<div>
+  <div class="tag-list">
+    <div class="outer-container">
+      <div class="inner-container">
+        <p class="content">
+          <a>全部年份</a>
+          <a>2009</a>
+          <a>2008</a>
+          <a>2007</a>
+          <a>2006</a>
+          <a>2005</a>
+          <a>2004</a>
+          <a>2003</a>
+          <a>2002</a>
+          <a>2001</a>
+          <a>2000</a>
+
+          <a class="tag-bg"></a>
+        </p>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="tag-list">
+    <div class="outer-container">
+      <div class="inner-container">
+        <p class="content">
+          <a>全部年份</a>
+          <a>2009</a>
+          <a>2008</a>
+          <a>2007</a>
+          <a>2006</a>
+          <a>2005</a>
+          <a>2004</a>
+          <a>2003</a>
+          <a>2002</a>
+          <a>2001</a>
+          <a>2000</a>
+
+          <a class="tag-bg"></a>
+        </p>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="tag-list">
+    <div class="outer-container">
+      <div class="inner-container">
+        <p class="content">
+          <a>全部年份</a>
+          <a>2009</a>
+          <a>2008</a>
+          <a>2007</a>
+          <a>2006</a>
+          <a>2005</a>
+          <a>2004</a>
+          <a>2003</a>
+          <a>2002</a>
+          <a>2001</a>
+          <a>2000</a>
+
+          <a class="tag-bg"></a>
+        </p>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="tag-list">
+    <div class="outer-container">
+      <div class="inner-container">
+        <p class="content">
+          <a>全部年份</a>
+          <a>2009</a>
+          <a>2008</a>
+          <a>2007</a>
+          <a>2006</a>
+          <a>2005</a>
+          <a>2004</a>
+          <a>2003</a>
+          <a>2002</a>
+          <a>2001</a>
+          <a>2000</a>
+
+          <a class="tag-bg"></a>
+        </p>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="tag-list">
+    <div class="outer-container">
+      <div class="inner-container">
+        <p class="content">
+          <a>全部年份</a>
+          <a>2009</a>
+          <a>2008</a>
+          <a>2007</a>
+          <a>2006</a>
+          <a>2005</a>
+          <a>2004</a>
+          <a>2003</a>
+          <a>2002</a>
+          <a>2001</a>
+          <a>2000</a>
+
+          <a class="tag-bg"></a>
+        </p>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<script src="vendor/jquery-3.1.1.min.js"></script>
+<script>
+  $(document).ready(function () {
+    function tagbg() {
+
+      $('.tag-bg').each(function (index, dom) {
+        var p = $(dom).parent().children('a').eq(0);
+        p.addClass('selected');
+        var w = p.outerWidth();
+        var h = p.outerHeight();
+        $(dom).css({
+          width: w + 'px',
+          height: h + 'px',
+          left: p.position().left + 'px',
+          top: p.position().top + 'px'
+        });
+      });
+    }
+    tagbg();
+
+
+    $('.tag-list .content a').on('click', function () {
+      $(this).addClass('selected').siblings().removeClass('selected');
+      var w = $(this).outerWidth();
+      var dom = $(this).parent().children('.tag-bg');
+      $(dom).css({
+        width: w + 'px',
+        left: $(this).position().left + 'px'
+      });
+    })
+  });
+</script>
+</body>
+</html>

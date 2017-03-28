@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>直播间</title>
+  <link rel="stylesheet" href="vendor/normalize.css">
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="vendor/swiper/css/swiper.min.css">
+  <link href="vendor/video/video-js.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/studio.css?v=fa8555a4ce">
+  <style>
+    #video {
+      display: none;
+    }
+    .canvasBox {
+      position: relative;
+    }
+    #canvas {
+      display: block;
+      position: relative;
+      z-index: 2;
+    }
+    .control {
+      width: 100%;
+      height: 30px;
+      background-color: rgba(43, 51, 63, 0.7);
+
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 3;
+    }
+
+    .control a {
+      padding: 5px;
+      color: #fff;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="video">
+    <video
+      id="my-player"
+      class="video-js"
+      preload="auto"
+      poster="//vjs.zencdn.net/v/oceans.png"
+      controls
+    >
+      <source id="source_url" type="application/x-mpegURL" src="http://ojx4iftwz.bkt.clouddn.com/636242441482164446.m3u8">
+    </video>
+  </div>
+
+  <div class="canvasBox">
+    <canvas id="canvas"></canvas>
+    <div class="control flex-box">
+      <a id="play"><i class="fa fa-play"></i></a>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="tab">
+      <a class="active"><i class="fa fa-commenting-o" aria-hidden="true"></i>聊天</a>
+      <a><i class="fa fa-bookmark-o" aria-hidden="true"></i>课件</a>
+      <a><i class="fa fa-microphone" aria-hidden="true"></i>主播</a>
+      <a class="share"><i class="fa fa-share-square-o" aria-hidden="true"></i><span>分享</span></a>
+      <div id="tabBorder"></div>
+    </div>
+
+    <div class="tab-content swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <h3 id="chatTitle"><i class="fa fa-users" aria-hidden="true"></i><span>正在观看的人数</span><span>100</span></h3>
+          <div id="chatList" class="">
+            <ul>
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功！</span>
+                </div>
+              </li>
+
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功！</span>
+                </div>
+              </li>
+
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功！</span>
+                </div>
+              </li>
+
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功！</span>
+                </div>
+              </li>
+
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功！</span>
+                </div>
+              </li>
+
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功！</span>
+                </div>
+              </li>
+
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功！</span>
+                </div>
+              </li>
+
+              <li>
+                <div>
+                  <span>系统消息：</span>
+                  <span>聊天服务器连接成功！</span>
+                </div>
+              </li>
+            </ul>
+
+
+          </div>
+          <div id="sendBox">
+            <button type="button" id="reward"><i class="fa fa-gift" aria-hidden="true"></i></button>
+            <input type="text" name="" id="">
+            <button type="button" id="send">发送</button>
+          </div>
+        </div>
+        <div class="swiper-slide "></div>
+        <div class="swiper-slide ">
+          <div class="anchor-box">
+            <div class="head-img"><img src="img/0.jpg" alt=""></div>
+            <div class="anchor-info">
+              <h3>啊啊啊</h3>
+              <p><i class="fa fa-eye" aria-hidden="true"></i><span>粉丝人数</span><span>100</span></p>
+              <p><i class="fa fa-users" aria-hidden="true"></i><span>观看人数</span><span>100</span></p>
+              <p><a id="follow"><i class="fa fa-heart" aria-hidden="true"></i><span>关注</span></a></p>
+            </div>
+          </div>
+
+          <div class="anchor-content">
+            <h3>简介</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="rewardList">
+  <h3><span>你的资产：300</span></h3>
+  <div class="reward-item">
+    <a>
+      <div class="img" style="background-image: url(img/qingwen.png);"></div>
+      <span>5L</span><span>吻</span></a>
+    <a>
+      <div class="img" style="background-image: url(img/xianhua.png);"></div>
+      <span>10L</span><span>鲜花</span></a>
+    <a>
+      <div class="img" style="background-image: url(img/hl.jpg);"></div>
+      <span>200L</span><span>哈雷</span></a>
+    <a>
+      <div class="img" style="background-image: url(img/bm.jpg);"></div>
+      <span>500L</span><span>宝马</span></a>
+    <a>
+      <div class="img" style="background-image: url(img/fll.jpg);"></div>
+      <span>1000L</span><span>法拉利</span></a>
+    <a>
+      <div class="img" style="background-image: url(img/bjd.jpg);"></div>
+      <span>10000L</span><span>布加迪威龙</span></a>
+  </div>
+</div>
+
+<script src="vendor/jquery-3.1.1.min.js"></script>
+<script src="vendor/swiper/js/swiper.jquery.min.js"></script>
+<script src="vendor/video/video.min.js"></script>
+<script src="vendor/videojs-contrib-hls.min.js"></script>
+<script src="vendor/easeljs-0.8.2.min.js"></script>
+<script>
+  $(document).ready(function () {
+    // 视频
+    function video() {
+      var u = navigator.userAgent;
+      var ios = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+      if (!ios) {
+        $('#my-player').removeAttr('webkit-playsinline playsinline x-webkit-airplay x5-video-player-type x5-video-player-fullscreen');
+      }
+      var width = $(window).width();
+      var options = {
+        width: width + 'px',
+        height: width * 9 / 16 + 'px',
+        autoplay: false,
+        controls: true
+      };
+
+      var player = videojs('my-player', options, function onPlayerReady() {
+        videojs.log('Your player is ready!');
+        canvasVideo();
+//      this.play();
+        $('#my-player_html5_api')[0]['webkitCancelFullScreen'] = true;
+        // How about an event listener?
+        this.on('ended', function () {
+          videojs.log('Awww...over so soon?!');
+        });
+      });
+    }
+    video();
+
+    var vw = $(window).width();
+    var vh = vw * 9 / 16;
+
+    $('#canvas').attr({
+      width: $(window).width(),
+      height: $(window).width() * 9 / 16
+    });
+
+    function canvasVideo() {
+      var video = $('#video video').attr('id');
+
+      //获取video
+      var oLiveVideo = document.getElementById(video);
+      //获取canvas画布
+      var oLiveCanvas = document.getElementById('canvas');
+
+      //设置画布
+      var oLiveCanvas2D = oLiveCanvas.getContext('2d');
+      //设置setinterval定时器
+      var bLiveVideoTimer = null;
+
+      //监听播放
+      oLiveVideo.addEventListener('play', function () {
+        var w = oLiveVideo.clientWidth;
+        var h = w * oLiveVideo.videoHeight / oLiveVideo.videoWidth;
+
+        bLiveVideoTimer = setInterval(function () {
+          oLiveCanvas2D.drawImage(oLiveVideo, 0, 0, vw, vh);
+        }, 20);
+      }, false);
+      //监听暂停
+      oLiveVideo.addEventListener('pause', function () {
+        clearInterval(bLiveVideoTimer);
+      }, false);
+      //监听结束
+      oLiveVideo.addEventListener('ended', function () {
+        clearInterval(bLiveVideoTimer);
+      }, false);
+
+
+      $('#play').on('click', function () {
+        console.log('play');
+        oLiveVideo.play();
+      });
+    }
+
+
+  });
+</script>
+<script>
+  $(document).ready(function () {
+    var width = $('.tab a').outerWidth(true) * 2;
+    // tab
+    tabContent(0);
+    function tab() {
+      $('.tab a').on('click', function () {
+        var i = $(this).index();
+        if (i === 3) {
+          return false;
+        }
+
+        var p = i * 0.5;
+        if (!$('#tabBorder').hasClass('process')) {
+          $('#tabBorder').addClass('process')
+        }
+        tabBorderProcess(p);
+        tabContent(i);
+      });
+    }
+
+    tab();
+    function tabContent(i) {
+      $('.tab').children('a').eq(i).addClass('active').siblings().removeClass('active');
+    }
+
+    // tab内容高度
+    function tabCOntentMinHeight() {
+      var vidoeh = $('#video').outerHeight(true);
+      var windowh = $(window).height();
+      var tabh = $('.tab').outerHeight(true);
+      var h = windowh - vidoeh - 10 - tabh - 14;
+      $('.tab-content').css({
+        'height': h + 'px'
+      })
+    }
+
+    tabCOntentMinHeight();
+
+    function tabBorder() {
+      var tabA = $('.tab .active');
+      $('#tabBorder').css({
+        width: tabA.outerWidth(true) + 'px',
+        left: tabA.offset().left + 'px',
+        top: tabA.offset().top + tabA.outerHeight(true) - 2 + 'px'
+      });
+    }
+
+    tabBorder();
+
+    function tabBorderProcess(p) {
+      $('#tabBorder').css({
+        left: 7 + width * p + 'px'
+      });
+    }
+
+    // swiper初始化
+    function swiperInit() {
+      var mySwiper = new Swiper('.swiper-container', {
+        speed: 100,
+        onTouchStart: function (swiper, even) {
+          if ($('#tabBorder').hasClass('process')) {
+            $('#tabBorder').removeClass('process')
+          }
+        },
+        onSlideChangeStart: function (swiper) {
+          tabContent(swiper.activeIndex);
+        },
+        onProgress: function (swiper, progress) {
+          tabBorderProcess(progress);
+        }
+      });
+
+      $('.tab a').click(function () {
+        var i = $(this).index();
+        if (i === 3) {
+          return false;
+        }
+        mySwiper.slideTo(i, 1000, false);//切换到第一个slide，速度为1秒
+      })
+    }
+
+    swiperInit();
+
+    // 打赏
+    function reward() {
+
+      // 点击打赏按钮
+      $('#reward').on('click', function () {
+        $('#rewardList').addClass('show');
+      });
+
+      // 选择打赏道具隐藏打赏列表
+      $('#rewardList a').on('click', function () {
+        $('#rewardList').removeClass('show');
+      });
+
+      // 点击其他地方隐藏打赏
+      $('#wrapper').on('click', function (e) {
+        var o = $(e.target).parentsUntil('#rewardList');
+        var l = o.length;
+        if (e.target.id === 'reward' || $(e.target).parent().attr('id') === 'reward' || $(o[l - 1]).parent().attr('id') === 'rewardList') {
+          return false;
+        }
+        $('#rewardList').removeClass('show');
+      });
+    }
+
+    reward();
+
+    // 关注
+    function follow() {
+      $('#follow').on('click', function () {
+        var i = $(this).children('i');
+        i.toggleClass('red');
+      });
+    }
+
+    follow();
+  });
+</script>
+</body>
+</html>

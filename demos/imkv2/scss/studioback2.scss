@@ -1,0 +1,399 @@
+@charset "UTF-8";
+@import "compass";
+@import "pub";
+
+body {
+  background-color: transparent;
+}
+
+#pnumber {
+  display: inline-block;
+  background-color: rgba(200, 200, 200, 0.5);
+  padding: 5px 11px 7px 5px;
+  color: #fff;
+  @include border-radius(50px);
+  top: 5px;
+  left: 50%;
+  @include transform(translate(-50%, 0));
+  position: absolute;
+  z-index: 99;
+  @include opacity(1);
+
+  span, i {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &.animateHide {
+    @include transition(all 2s linear 2s);
+    @include opacity(0);
+  }
+}
+
+#video {
+  width: 100%;
+  background-color: #000;
+
+  video {
+    width: 100%;
+    display: block;
+
+  }
+}
+
+#fullscreen {
+  font-size: 1.8em;
+  line-height: 1.67;
+  padding: 3px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.block {
+  //margin-top: 10px;
+  background-color: #fff;
+  //padding-top: 7px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.tab {
+  @include display-flex(flex);
+  @include flex-flow(row nowrap);
+  @include justify-content(space-between);
+  @include align-items(center);
+
+  padding: {
+    left: 7px;
+    right: 7px;
+  }
+  a {
+    order: 1;
+    flex: 1 1 auto;
+
+    width: 30%;
+    text-align: center;
+    padding: 10px 5px;
+    display: block;
+    border-bottom: 2px solid transparent;
+    background-color: #fff;
+    &.active {
+      //border-bottom: 2px solid $blue;
+    }
+    &.share {
+      padding: 5px;
+      border: 1px solid $blue;
+      background-color: $blue;
+      color: #fff;
+
+      flex: 0 1 auto;
+    }
+  }
+}
+
+#tabBorder {
+  position: absolute;
+  border-bottom: 2px solid $blue;
+  z-index: 9;
+}
+
+.process {
+  @include transition(left 0.1s linear);
+}
+
+.tab-content {
+//  overflow: auto;
+//  & > div {
+//    display: none;
+//    &.active {
+//      display: block;
+//      padding: 7px;
+//      position: relative;
+//    }
+//  }
+}
+
+.swiper-slide {
+  overflow: auto;
+  &:nth-child(3) {
+    padding: 7px;
+  }
+}
+
+#chatTitle {
+  padding: 10px 7px 20px;
+  background-color: #fff;
+  position: relative;
+  z-index: 3;
+  span {
+    margin-left: 10px;
+  }
+}
+
+#chatList {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 2;
+
+  overflow: auto;
+  padding: {
+    top: 5px;
+    left: 7px;
+    right: 7px;
+    bottom: 45px;
+  }
+  background-color: #f1f1f1;
+  li {
+    display: block;
+
+    div {
+      display: inline-block;
+      background-color: #fff;
+      @include border-radius(5px);
+      padding: 5px;
+      margin: 10px 7px 0;
+    }
+    //@include display-flex(flex);
+    //@include flex-flow(row nowrap);
+    //@include justify-content(space-between);
+    //@include align-items(center);
+    //
+    //padding: 10px 0;
+    //border: {
+    //  top: 1px solid #aaa;
+    //  bottom: 1px solid #aaa;
+    //}
+    //margin: {
+    //  top: -1px;
+    //}
+    //
+    //span {
+    //  &:first-child {
+    //    order: 1;
+    //    width: 6rem;
+    //    flex: 0 0 auto;
+    //  }
+    //
+    //  &:last-child {
+    //    order: 2;
+    //    flex: 1 1 auto;
+    //  }
+    //}
+  }
+}
+
+#sendBox {
+  @include display-flex(flex);
+  @include flex-flow(row nowrap);
+  @include justify-content(space-between);
+  @include align-items(stretch);
+
+  & > input {
+    order: 1;
+    flex: 2 1 auto;
+
+    width: 60%;
+  }
+
+  & > button {
+    order: 1;
+    flex: 1 1 auto;
+
+    width: 20%;
+  }
+
+  input {
+    padding: 5px;
+    border: {
+      top: 1px solid $blue;
+      bottom: 1px solid $blue;
+      right: 1px solid $blue;
+      left: 1px solid #c9302c;
+    }
+  }
+
+  button {
+    background-color: $blue;
+    border: 1px solid $blue;
+    color: #fff;
+    padding: 5px;
+  }
+
+  #reward {
+    //background-color: #f9525a;
+    //border-color: #f9525a;
+    background-color: #fff;
+    border-color: #fff;
+    color: #f9525a;
+    font-size: 1.7rem;
+    position: relative;
+    i {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+
+  padding: 7px;
+  width: 100%;
+  height: 40px;
+  background-color: #fff;
+
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+#rewardList {
+  position: fixed;
+  left: 0;
+  bottom: -100%;
+  z-index: 101;
+
+  width: 100%;
+  background-color: #fff;
+  transition: bottom 0.5s linear;
+
+  &.show {
+    bottom: 0;
+  }
+
+  h3 {
+    border: {
+      top: 1px solid lightblue;
+      bottom: 1px solid lightblue;
+    }
+    padding: 5px 7px;
+  }
+}
+
+.reward-item {
+  @include display-flex(flex);
+  @include flex-flow(row wrap);
+  @include justify-content(flex-start);
+  @include align-content(stretch);
+
+  font-size: 0.7rem;
+  padding: 7px;
+
+  a {
+    order: 1;
+    flex: 0 1 auto;
+
+    display: block;
+    width: 33%;
+    text-align: center;
+    padding: 5px;
+
+    .img {
+      $size: 50%;
+      width: $size;
+      padding-bottom: $size;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin: auto;
+      //border: 1px solid $blue;
+    }
+  }
+  span {
+    margin-top: 5px;
+    display: block;
+
+    &:last-child {
+      color: $blue;
+    }
+  }
+}
+
+.anchor-box {
+  @include display-flex(flex);
+  @include flex-flow(row nowrap);
+  @include justify-content(flex-start);
+  @include align-content(stretch);
+
+  & > div {
+    order: 1;
+    flex: 1 1 auto;
+  }
+
+  .head-img {
+    width: 30%;
+    @include  border-radius(5px);
+
+
+    flex: 0 1 auto;
+  }
+
+  span {
+    margin-right: 5px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.anchor-info {
+  @include display-flex(flex);
+  @include flex-flow(column nowrap);
+  @include justify-content(flex-start);
+  @include align-content(stretch);
+
+
+  padding-left: 10px;
+  font-size: 0.8rem;
+  h3 {
+    order: 1;
+    flex: 0 1 auto;
+
+    padding-bottom: 5px;
+  }
+
+  p {
+    order: 1;
+    flex: 1 1 auto;
+
+    padding: 3px;
+    display: block;
+  }
+
+  i {
+    color: #666;
+  }
+
+  a {
+    padding: 5px 10px;
+    background-color: $blue;
+    border: 1px solid $blue;
+    color: #fff;
+    display: inline-block;
+
+    i {
+      color: #fff;
+    }
+
+    .red {
+      color: #f00;
+    }
+  }
+}
+
+.anchor-content {
+  h3 {
+    margin: 10px 0 20px;
+  }
+}

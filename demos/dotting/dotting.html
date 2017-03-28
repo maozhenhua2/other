@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>Title</title>
+  <style>
+    .dotting {
+      display: inline-block;
+      width: 10px;
+      min-height: 2px;
+      padding-right: 2px;
+      border-left: 2px solid currentColor;
+      border-right: 2px solid currentColor;
+      background-color: currentColor;
+      background-clip: content-box;
+      box-sizing: border-box;
+      animation: dot 4s infinite step-start both;
+    }
+
+    .dotting::before {
+      content: '';
+    }
+
+    :root .dotting {
+      margin-left: 2px;
+      padding-left: 2px;
+    }
+
+    @keyframes dot {
+      25% {
+        border-color: transparent;
+        background-color: transparent;
+      }
+      /* 0个点 */
+      50% {
+        border-right-color: transparent;
+        background-color: transparent;
+      }
+      /* 1个点 */
+      75% {
+        border-right-color: transparent;
+      }
+      /* 2个点 */
+    }
+
+    @supports (display:none) {
+      dot {
+        display: inline-block;
+        width: 3ch;
+        text-indent: -1ch;
+        vertical-align: bottom;
+        overflow: hidden;
+        animation: dot2 3s infinite step-start both;
+        font-family: Consolas, Monaco, monospace;
+      }
+    }
+
+    @keyframes dot2 {
+      33% { text-indent: 0; }
+      66% { text-indent: -2ch; }
+    }
+  </style>
+</head>
+<body>
+订单提交中<span class="dotting"></span>
+订单提交中<dot>...</dot>
+</body>
+</html>

@@ -1,0 +1,308 @@
+@charset "UTF-8";
+@import "compass";
+@import "pub";
+
+#wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  @include display-flex(flex);
+  @include flex-flow(column nowrap);
+  @include justify-content(space-between);
+  @include align-items(stretch);
+
+  & > * {
+    @include order(1);
+    @include flex(0 0 auto);
+  }
+
+  main {
+    @include flex(1 1 auto);
+  }
+}
+
+header {
+  @include display-flex(flex);
+  @include flex-flow(row nowrap);
+  @include justify-content(space-around);
+  @include align-items(center);
+
+  background-color: #fff;
+  width: 100%;
+  height: 45px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+
+  div {
+    @include order(1);
+    @include flex(0 1 auto);
+
+    width: 40px;
+    text-align: center;
+    padding: 5px;
+  }
+
+  .logo {
+    img {
+      vertical-align: middle;
+      width: 23px;
+      margin: auto;
+    }
+  }
+
+  .search {
+    @include flex-grow(1);
+
+    input {
+      width: 100%;
+      height: 25px;
+      border: 1px solid #f1f1f1;
+      @include border-radius(3px);
+      padding: 3px;
+      background: #f1f1f1;
+      -webkit-appearance: none;
+    }
+  }
+
+  .search-btn {
+    font-size: 1.1rem;
+    line-height: 0.9;
+    color: $blue;
+  }
+}
+
+#filter {
+  width: 100%;
+  margin-bottom: 10px;
+  @include transition(height 0.3s linear);
+  overflow: hidden;
+
+  &.hide {
+    margin-bottom: 0;
+  }
+}
+
+main {
+  @include display-flex(flex);
+  @include flex-flow(column nowrap);
+  @include justify-content(space-between);
+  @include align-items(stretch);
+
+  @include transition(height 0.3s linear);
+  //position: absolute;
+  //left: 0;
+  //top: 0;
+  //z-index: 3;
+
+  width: 100%;
+  //height: 100%;
+  //padding: 0 0 36px 0;
+  overflow: auto;
+}
+
+footer {
+  @include display-flex(flex);
+  @include flex-flow(row nowrap);
+  @include justify-content(space-around);
+  @include align-items(center);
+
+  background-color: $blue;
+  width: 100%;
+  //position: fixed;
+  //left: 0;
+  //bottom: 0;
+  //z-index: 4;
+
+  a {
+    @include order(1);
+    @include flex(1 1 auto);
+
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+
+    position: relative;
+    &:not(:first-child):before {
+      content: '';
+      display: block;
+
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+
+      background-color: #fff;
+      width: 1px;
+      height: 40%;
+      margin: auto 0;
+
+    }
+  }
+}
+
+.list {
+  @include order(1);
+  @include flex(1 1 auto);
+
+  @include display-flex(flex);
+  @include flex-flow(column nowrap);
+  @include justify-content(space-between);
+  @include align-items(stretch);
+
+  //margin: 10px 0;
+  background-color: #fff;
+  padding: 7px;
+}
+
+.title {
+  @include order(1);
+  @include flex(0 0 auto);
+
+  @include display-flex(flex);
+  @include flex-flow(row nowrap);
+  @include justify-content(space-between);
+  @include align-items(center);
+
+  font-size: 1rem;
+  margin-bottom: 7px;
+
+  & > span {
+    i {
+      margin-right: 5px;
+      color: $blue;
+      font-size: 0.75rem;
+      margin-top: -0.1rem;
+    }
+  }
+}
+
+.more {
+  color: #666;
+  font-size: 0.9rem;
+  span {
+    margin-right: 5px;
+  }
+}
+
+@keyframes refresh {
+  0% {
+    @include transform(rotate(0deg));
+  }
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+
+.item {
+
+  width: 100%;
+  overflow: auto;
+  @include order(1);
+  @include flex(1 1 auto);
+
+  .swiper-slide {
+    @include display-flex(flex);
+    @include flex-flow(row wrap);
+    @include justify-content(space-between);
+    @include align-items(flex-start);
+    @include align-content(flex-start);
+
+    & > a {
+      @include order(1);
+      @include flex(0 1 auto);
+      width: 48.8%;
+      padding-bottom: 7px;
+    }
+  }
+
+  .refresh {
+
+    @include justify-content(center);
+    text-align: center;
+    padding: 5px 0 15px 0;
+    i {
+      @include animation(refresh 1s linear infinite);
+    }
+  }
+
+  .swiper-container {
+    position: relative;
+  }
+
+  .img {
+    display: block;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100% * 3 / 4;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+    position: relative;
+
+    span {
+
+      position: absolute;
+      left: 0;
+      bottom: 0;
+
+      background-color: rgba(0, 0, 0, 0.6);
+      font-size: 0.8rem;
+      color: #fff;
+      width: 100%;
+      margin: 0;
+      padding: 6px 3px 5px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  p {
+    @include display-flex(flex);
+    @include flex-flow(row nowrap);
+    @include justify-content(space-between);
+    @include align-items(center);
+
+    font-size: 0.8rem;
+    padding: 5px 3px 3px;
+    color: #333;
+
+    span {
+      @include order(1);
+      @include flex(0 1 auto);
+    }
+    i {
+      margin-right: 3px;
+      font-size: 0.8rem;
+    }
+  }
+
+  h6 {
+    font-weight: normal;
+    & > span {
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    & > p {
+      color: #999;
+      font-size: 0.6rem;
+      span {
+        margin: 0 2px;
+      }
+    }
+  }
+}
+
+.time {
+  color: #999;
+  font-size: 0.8rem;
+}
