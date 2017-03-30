@@ -10,3 +10,6 @@ express --view=ejs app1
 使用本目录下的gulpfile.js和packag.json覆盖到app1根目录  
 安装依赖包  
 npm install
+
+用Nunjucks代替ejs
+npm install nunjucks --save
