@@ -11,15 +11,15 @@ var gulp = require('gulp'),
 
 
 gulp.task('nodererun', function () {
-  nodemon({
+  var stream = nodemon({
     script: app + '/bin/WWW',
     ext: 'html js css ejs',
     ignore: ['ignored.js', '.idea'],
     env: {
       PORT: port
     }
-  })
-    .on('start', function () {
+  });
+  stream.on('start', function () {
       console.log('start');
       if (!bs) {
         console.log('create bs');
@@ -36,7 +36,7 @@ gulp.task('nodererun', function () {
           app + '/**/*.css'
         ]).on('change', function () {
           console.log('*----change----*');
-          nodemon.emit('restart');
+          stream.emit('restart');
         });
       }
 
