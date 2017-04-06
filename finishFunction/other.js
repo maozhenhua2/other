@@ -1007,17 +1007,15 @@ var after = function(fn, afterfn) {
  * @param pos
  * @return {*}s
  */
-function setCursorPos(inputId, pos) {
-
+function setCursorPos(inpObj, pos) {
   var inpObj = document.getElementById(inputId);
   if (navigator.userAgent.indexOf('MSIE') > -1) {
-    var range = document.selection.createRange();
     var textRange = inpObj.createTextRange();
     textRange.moveStart('character', pos);
     textRange.collapse();
     textRange.select();
   } else {
-    inpObj.setSelectionRange(n, n);
+    inpObj.setSelectionRange(pos, pos);
   }
 }
 
