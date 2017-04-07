@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>只能输入数字</title>
+  <style>
+    *,
+    *:after,
+    *:before {
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    body, ul, li, #wrapper h1 {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: 14px;
+      background-color: #f5f5f5;
+    }
+
+    li {
+      list-style-type: none;
+    }
+
+    #wrapper h1 {
+      color: #ef0f26;
+      text-align: center;
+      padding-top: 1rem;
+      padding-bottom: 0.8rem;
+      font-size: 2.5rem;
+    }
+    #wrapper ul {
+      width: 90%;
+      margin: auto;
+    }
+    #wrapper li {
+      padding-bottom: 15px;
+    }
+    #wrapper li label {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+      -webkit-justify-content: space-between;
+      justify-content: space-between;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+    #wrapper li label > * {
+      -webkit-order: 1;
+      order: 1;
+      -webkit-flex: 0 1 auto;
+      flex: 0 1 auto;
+    }
+    #wrapper .title {
+      display: block;
+      width: 10rem;
+      padding-right: 0.5rem;
+    }
+    #wrapper .input {
+      text-align: right;
+      width: 100%;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      border: 1px solid #e5e5e5;
+      background: #fff;
+      font-size: 1rem;
+      padding: 5px 10px;
+      height: 2rem;
+    }
+    #wrapper .submit {
+      margin-top: 20px;
+      width: 100%;
+      text-align: center;
+      border: 1px solid #ef0f26;
+      background: #ef0f26;
+      padding: 10px;
+      font-size: 1.5rem;
+      color: #fff;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+<div id="wrapper" class="wrap">
+  <h1>填写</h1>
+  <ul>
+    <li>
+      <label>
+        <span class="title">总毛利</span>
+        <input class="input" type="text" name="" id="" placeholder="请输入数字"/>
+      </label>
+    </li>
+    <li>
+      <label>
+        <span class="title">总收入</span>
+        <input class="input" type="text" name="" id="" placeholder="请输入数字"/>
+      </label>
+    </li>
+    <li>
+      <label>
+        <span class="title">总费用</span>
+        <input class="input" type="text" name="" id="" placeholder="请输入数字"/>
+      </label>
+    </li>
+    <li>
+      <label>
+        <span class="title">总税前净利润</span>
+        <input class="input" type="text" name="" id="" placeholder="请输入数字"/>
+      </label>
+    </li>
+    <li>
+      <label>
+        <span class="title">总资产</span>
+        <input class="input" type="text" name="" id="" placeholder="请输入数字"/>
+      </label>
+    </li>
+    <li>
+      <label>
+        <span class="title">运营资金</span>
+        <input class="input" type="text" name="" id="" placeholder="请输入数字"/>
+      </label>
+    </li>
+    <li>
+      <input class="submit" type="submit" value="提交"/>
+    </li>
+  </ul>
+
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $('.submit').on('click', function () {
+
+  });
+
+  // 只能输入数字
+  onlyInput('.input', function (e, obj) {
+    return obj.value;
+  }, function (v) {
+    return isNaN(v);
+  });
+
+
+  function onlyInput(select, value, term) {
+    var poss = 0;
+    var nresult = '';
+    var count = 0;
+
+    $(select).on('keydown focus', function (e) {
+      if (e.keyCode >= 37 && e.keyCode <= 40) {
+        return;
+      }
+
+      var v = value(e, this);
+      if (term(v)) {
+        count = 1;
+        $(this).val(nresult);
+        poss = poss - 1 > 0 ? poss : 0;
+      } else {
+        nresult = $(this).val();
+        poss = getCursorPos(this);
+      }
+
+    });
+    $(select).on('keyup blur', function (e) {
+      if (e.keyCode >= 37 && e.keyCode <= 40) {
+        return;
+      }
+      var v = value(e, this);
+      var values = '';
+      if (!term(v)) {
+        values = $(this).val();
+      } else {
+        values = nresult;
+      }
+      poss++;
+
+      var arr = values.split('.');
+      if (arr.length > 1 && arr[1] !== undefined && arr[1] !== '') {
+        if (arr[1].length > 2) {
+          arr[1] = arr[1].substr(0, 2);
+        }
+      }
+
+      $(this).val(arr.join('.'));
+      setCursorPos(this, poss);
+      count = 0;
+    });
+  }
+
+  // 获取光标位置
+  function getCursorPos(inpObj) {
+    if (navigator.userAgent.indexOf('MSIE') > -1) { // IE
+      var range = document.selection.createRange();
+      range.text = '';
+      range.setEndPoint('StartToStart', inpObj.createTextRange());
+      return range.text.length;
+    } else {
+      return inpObj.selectionStart;
+    }
+  }
+  // 设置光标位置
+  function setCursorPos(inpObj, pos) {
+    if (navigator.userAgent.indexOf('MSIE') > -1) {
+      var textRange = inpObj.createTextRange();
+      textRange.moveStart('character', pos);
+      textRange.collapse();
+      textRange.select();
+    } else {
+      inpObj.setSelectionRange(pos, pos);
+    }
+  }
+</script>
+</body>
+</html>
