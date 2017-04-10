@@ -1,185 +1,252 @@
 *,
 *:after,
 *:before {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body,
 h1,
 ul,
 li {
-	margin: 0;
-	padding: 0
+  margin: 0;
+  padding: 0
 }
 
 li {
-	list-style-type: none
+  list-style-type: none
+}
+
+.flex-box {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.flex-box > * {
+  -webkit-order: 1;
+  order: 1;
+  -webkit-flex: 0 1 auto;
+  flex: 0 1 auto;
 }
 
 .m-calendar {
-	width: 260px;
-	border: 1px solid #ccc;
-	background: #fff;
-	text-align: center;
-	margin-top: 5px;
-	box-shadow: 1px 1px 5px 1px #ccc;
-	display: none;
-	position: absolute;
-	left: 0;
-	top: 0;
-	z-index: 31;
+  width: 260px;
+  border: 1px solid #ccc;
+  background: #fff;
+  text-align: center;
+  margin-top: 5px;
+  box-shadow: 1px 1px 5px 1px #ccc;
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 31;
+  user-select: none;
+}
+
+.abCenter {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }
 
 .m-calendar h1 {
-	margin: 10px 0;
-	font-size: 0;
-	position: relative;
+  margin: 10px 0;
+  font-size: 0;
 }
 
 .m-calendar h1 a {
-	font-size: 14px;
-	padding: 5px 10px;
-	cursor: pointer;
-	display: inline-block;
+  font-size: 14px;
+  padding: 5px 0;
+  cursor: pointer;
+  position: relative;
 }
-.m-calendar h1 a.prev{
-	position: absolute;
-	left: 0;
-	top: 0;
-	margin-left: 5px;
+
+.m-calendar h1 a.prev {
+  width: 25%;
+  color: transparent;
 }
-.m-calendar h1 a.next{
-	position: absolute;
-	right: 0;
-	top: 0;
-	margin-right: 5px;
+
+.m-calendar h1 a.next {
+  width: 25%;
+  color: transparent;
 }
-.m-calendar h1 a:hover{
-	background: #eaeaea;
+
+.m-calendar h1 a.next:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 7px solid transparent;
+  border-left: 10px solid #000;
 }
-.m-calendar h1 a.title{
-	width: 100%;
-	padding: 0 35px;
+
+.m-calendar h1 a.prev:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 7px solid transparent;
+  border-right: 10px solid #000;
 }
-.m-calendar h1 a.title span{
-	display: block;
-	padding: 5px 0;
+
+.m-calendar h1 a:hover {
+  background: #eaeaea;
 }
-.m-calendar h1 a.title:hover{
-	border-radius: 0;
-	background: transparent;
+
+.m-calendar h1 a.title {
+  width: 100%;
 }
-.m-calendar h1 a.title:hover span{
-	background: #eaeaea;
+
+.m-calendar h1 a.title span {
+  display: block;
+  padding: 5px 0;
 }
+
+.m-calendar h1 a.title:hover {
+  border-radius: 0;
+  background: transparent;
+}
+
+.m-calendar h1 a.title:hover span {
+  background: #eaeaea;
+}
+
 .m-calendar ul {
-	font-size: 0;
+  font-size: 0;
 }
 
 .m-calendar li {
-	font-size: 14px;
-	display: inline-block;
-	vertical-align: middle;
-	width: 36px;
-	height: 36px;
-	line-height: 16px;
-	padding: 10px;
-	border: 1px solid transparent;
+  font-size: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  width: 36px;
+  height: 36px;
+  line-height: 16px;
+  padding: 10px;
+  border: 1px solid transparent;
 }
 
 .m-calendar li.m,
 .m-calendar li.y {
-	width: 64px;
-	height: 64px;
-	line-height: 44px;
+  width: 64px;
+  height: 64px;
+  line-height: 44px;
 }
 
 .m-calendar li.prev,
 .m-calendar li.next {
-	color: #ccc;
+  color: #ccc;
 }
 
 .m-calendar li.y.gray {
-	color: #ccc;
+  color: #ccc;
 }
 
 .m-calendar .c-list li:hover {
-	color: #fff;
-	background: #6D6E79;
-	cursor: pointer;
+  color: #fff;
+  background: #6D6E79;
+  cursor: pointer;
 }
 
 .m-calendar .c-list li:empty {
-	cursor: default;
-	background: transparent;
+  cursor: default;
+  background: transparent;
 }
 
 .m-calendar .now {
-	/*background: #7276FF;
-	color: #fff;*/
-	border: 1px solid #000;
+  color: #7276FF;
 }
 
 .m-calendar .selected {
-	background: #7276FF;
-	color: #fff;
+  background: #7276FF;
+  color: #fff;
 }
+
 .m-calendar .today,
-.m-calendar .times{
-	display: block;
-	padding: 10px;
-	margin: 5px;
+.m-calendar .times {
+  display: block;
+  padding: 10px;
+  margin: 5px;
 }
-.m-calendar .today:hover{
-	background: #eaeaea;
-	cursor: pointer;
+
+.m-calendar .today:hover {
+  background: #eaeaea;
+  cursor: pointer;
 }
-.m-calendar .times:after{
-	content: '';
-	display: block;
-	clear: both;
-	width: 100%;
-	height: 0;
+
+.m-calendar .times:after {
+  content: '';
+  display: block;
+  clear: both;
+  width: 100%;
+  height: 0;
 }
-.m-calendar .times .time-box{
-	width: 33%;
-	height: 30px;
-	float: left;
+
+.m-calendar .times .time-box {
+  width: 33%;
+  height: 30px;
+  float: left;
   white-space: nowrap;
 }
+
 .colon {
   display: inline-block;
   height: 30px;
   text-align: center;
 }
+
 .m-calendar .times .time-box .time-text,
-.m-calendar .times .time-box .time-btn{
-	float: left;
-	padding: 0;
+.m-calendar .times .time-box .time-btn {
+  float: left;
+  padding: 0;
   display: block;
   border-width: 1px;
 }
-.m-calendar .times .time-box .time-text{
-	width: 90%;
-	height: 100%;
-	padding: 5px;
+
+.m-calendar .times .time-box .time-text {
+  width: 90%;
+  height: 100%;
+  padding: 5px;
   text-align: center;
 }
-.m-calendar .times .time-box .time-btn{
-	width: 40%;
-	height: 50%;
+
+.m-calendar .times .time-box .time-btn {
+  width: 40%;
+  height: 50%;
 }
 
-.m-calendar-input{
-	position: relative;
-	z-index: 4;
+.m-calendar-input {
+  position: relative;
+  z-index: 4;
 }
-#documentBtn{
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	left: 0;
-	top: 0;
-	z-index: 2;
-	visibility: hidden;
+
+#documentBtn {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  visibility: hidden;
 }

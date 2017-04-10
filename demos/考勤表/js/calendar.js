@@ -3,14 +3,15 @@ function mCalendar(obj) {
   var _thisPrototype = mCalendar.prototype;
   var s = 0;
 
-  __this.now;
+  __this.now = {};
+  __this.selected = {};
   __this.active = 'd';
   __this.input = obj.input || '';
   __this.showToday = (obj.showToday !== undefined) ? obj.showToday : true;
   __this.startView = (obj.startView !== undefined) ? obj.startView : 'date';
   __this.dateFormat = obj.dateFormat || 'yyyy/mm/dd';
   __this.selectedFn = obj.selectedFn || function() {};
-  __this.showTime = (obj.showTime !== undefined) ? obj.showTime : true;
+  __this.showTime = (obj.showTime !== undefined) ? obj.showTime : false;
   __this.everyTime = undefined;
   __this.index = 0;
 
@@ -52,9 +53,11 @@ function mCalendar(obj) {
       var _this = this;
 
       if (!$('.m-calendar.mc' + s).length) {
+        var nowDate = new Date();
 
-        _this.info = _this.getDateInfo(new Date());
-        _this.now = _this.getDateInfo(new Date());
+        _this.info = _this.getDateInfo(nowDate);
+        _this.now = _this.getDateInfo(nowDate);
+        _this.selected = _this.getDateInfo(nowDate);
 
         var dTitle = _this.info.year + '年' + (_this.info.month + 1) + '月';
         var html = '';
@@ -64,9 +67,9 @@ function mCalendar(obj) {
         var div = document.createElement('div');
 
         div.className = 'm-calendar mc' + s;
-        html += '<h1><a class="prev">&lt;</a><a class="title title-d"><span>' + dTitle + '</span></a><a class="next">&gt;</a></h1>';
+        html += '<h1 class="flex-box"><a class="prev">-</a><a class="title title-d"><span>' + dTitle + '</span></a><a class="next">+</a></h1>';
         html += '<ul>';
-        html += '<li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li>'
+        html += '<li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li>';
         html += '</ul>';
         html += '<ul class="c-list"></ul>';
 
@@ -161,7 +164,9 @@ function mCalendar(obj) {
       var h = parseInt(getCompleteStyle(input, 'height')[1], 10);
 
       var divWidth = parseInt(getCompleteStyle(div, 'width')[1], 10);
+      var divHeight = parseInt(getCompleteStyle(div, 'height')[1], 10);
       var winWidth = $(window).width();
+      var winHeight = $(window).height();
       var marginRight = parseInt(getCompleteStyle(input.parentNode, 'margin-right')[1], 10);
       var paddingLeft = parseInt(getCompleteStyle(input.parentNode, 'padding-right')[1], 10);
       left = left - marginRight - paddingLeft;
@@ -171,8 +176,17 @@ function mCalendar(obj) {
         left = left - (divWidth - w);
       }
 
-      div.style.left = left + 'px';
-      div.style.top = top + h + 'px';
+
+
+      if (isMobile().any()) {
+        //$(div).addClass('abCenter');
+        div.style.left = (winWidth - divWidth) / 2 + 'px';
+        div.style.top = (winHeight - divHeight) / 2 + 'px';
+      } else {
+        //$(div).removeClass('abCenter');
+        div.style.left = left + 'px';
+        div.style.top = top + h + 'px';
+      }
     };
 
     // 关闭其他
@@ -227,30 +241,31 @@ function mCalendar(obj) {
       _this.active = 'd';
       var fday = _this.info.fDay;
       var days = _this.info.days;
+      var year = _this.info.year;
       var month = _this.info.month;
       var className = '';
-      var tmpClassName = '';
       var now_d = '';
+      var nowYM = false;
       var html = '';
       var now = _this.now;
+      var l = 0;
 
       // 判断后面要加多少空白
       if (fday !== 0) {
-        var l = days + fday;
+        l = days + fday;
       } else if (fday === 0) {
-        var l = days + fday + 7;
+        l = days + fday + 7;
       }
       var tL = 42 - l;
 
+      // 先判断年和月
       if (now.year === _this.info.year && now.month === _this.info.month) {
-        now_d = 'now';
+        nowYM = true;
       } else {
-        now_d = '';
+        nowYM = false;
       }
 
-      // 补齐前面的空白
-      var year = _this.info.year;
-      var month = _this.info.month;
+      // 获取上个月的年和月
       if (month === 0) {
         year--;
         month = 12;
@@ -258,6 +273,7 @@ function mCalendar(obj) {
         year++;
         month = 1;
       }
+      // 获取上个月的天数
       var prevMonth = year + '/' + (month) + '/1';
       var prevLast = _this.getDateInfo(prevMonth).days;
       if (fday !== 0) {
@@ -272,22 +288,19 @@ function mCalendar(obj) {
       // 循环输出日期
       for (var i = 0; i < days; i++) {
 
-        if ((i + 1) == _this.now.date) {
-          className = now_d;
+        if ((i + 1) === _this.now.date && nowYM) {
+          now_d = 'now';
+        } else {
+          now_d = '';
+        }
+
+        if (_this.info.year === _this.selected.year && _this.info.month === _this.selected.month && (i + 1) === _this.selected.date) {
+          className = 'selected';
         } else {
           className = '';
         }
 
-        if ((i + 1) == _this.info.date) {
-          className = className + ' selected';
-        }
-
-        // if ((i + 1) == _this.selected.date) {
-        // 	if (_this.selected.year === _this.info.year && _this.selected.month === _this.info.month) {
-        // 		className = className + ' selected';
-        // 	}
-        // }
-        html += '<li class="d ' + className + '" d="' + (i + 1) + '">' + (i + 1) + '</li>';
+        html += '<li class="d ' + now_d + ' ' + className + '" d="' + (i + 1) + '">' + (i + 1) + '</li>';
       }
       // 补足后面的空白
       if (tL > 0) {
@@ -304,34 +317,32 @@ function mCalendar(obj) {
       var _this = this;
       _this.active = 'm';
       var className = '';
+      var now_y = false;
       var now_m = '';
       var html = '';
       var now = _this.now;
 
       if (now.year === _this.info.year) {
-        now_m = 'now';
+        now_y = true;
       } else {
-        now_m = '';
+        now_y = false;
       }
 
       for (var i = 0; i < 12; i++) {
-        if (i === now.month) {
-          className = now_m;
+        if (i === now.month && now_y) {
+          now_m = 'now';
+        } else {
+          now_m = '';
+        }
+
+        if (_this.info.year === _this.selected.year && _this.info.month === _this.selected.month && i === _this.selected.month) {
+          className = 'selected';
         } else {
           className = '';
         }
-
-        if (i === _this.info.month) {
-          className = className + ' selected';
-        }
-
-        // if (i === _this.selected.month) {
-        // 	if (_this.selected.year === _this.info.year) {
-        // 		className = className + ' selected';
-        // 	}
-        // }
-        html += '<li class="m ' + className + '" m="' + i + '">' + (i + 1) + '</li>';
+        html += '<li class="m ' + now_m + ' ' + className + '" m="' + i + '">' + (i + 1) + '</li>';
       }
+
       _this.setList(html);
     };
 
@@ -350,7 +361,7 @@ function mCalendar(obj) {
       _this.info.hour = d.getHours();
       _this.info.minute = d.getMinutes();
       _this.info.second = d.getSeconds();
-      console.dir(hour)
+      //console.dir(hour)
       hour[_this.info.hour].selected = true;
       minute[_this.info.minute].selected = true;
       second[_this.info.second].selected = true;
@@ -385,63 +396,6 @@ function mCalendar(obj) {
         _this.info.second = v;
       });
 
-      /*_this.calendarBox.find('.hour .add').off('click').on('click', function() {
-      	var v = parseInt(addEvents(this, 23), 10);
-      	_this.info.hour = v;
-      });
-
-      _this.calendarBox.find('.hour .minus').off('click').on('click', function() {
-      	var v = parseInt(minusEvents(this), 10);
-      	_this.info.hour = v;
-      });*/
-
-      // minutes
-      /*_this.calendarBox.find('.minute .add').off('click').on('click', function() {
-      	var v = parseInt(addEvents(this, 59), 10);
-      	_this.info.minute = v;
-      });
-
-      _this.calendarBox.find('.minute .minus').off('click').on('click', function() {
-      	var v = parseInt(minusEvents(this), 10);
-      	_this.info.minute = v;
-      });*/
-
-      // second
-      /*_this.calendarBox.find('.second .add').off('click').on('click', function() {
-      	var v = parseInt(addEvents(this, 59), 10);
-      	_this.info.second = v;
-      });
-
-      _this.calendarBox.find('.second .minus').off('click').on('click', function() {
-      	var v = parseInt(minusEvents(this), 10);
-      	_this.info.second = v;
-      });*/
-
-      function addEvents(o, t) {
-        var v = parseInt($(o).parent().children('.time-text').val(), 10);
-        if (isNaN(v)) {
-          v = 0;
-        }
-        v++;
-        if (v > t) {
-          v = t;
-        }
-        v = (v + '').length === 2 ? v : '0' + v;
-        $(o).parent().children('.time-text').val(v);
-        return v;
-      }
-
-      function minusEvents(o) {
-        var v = parseInt($(o).parent().children('.time-text').val(), 10);
-        v--;
-        if (v < 0) {
-          v = 0;
-        }
-        v = (v + '').length === 2 ? v : '0' + v;
-        $(o).parent().children('.time-text').val(v);
-        return v;
-      }
-
     };
 
     _thisPrototype.removeTime = function() {
@@ -456,29 +410,31 @@ function mCalendar(obj) {
       var y = _this.info.year / 10;
       y = Math.floor(y) * 10;
       var html = '';
-      var className = '';
+      var selectClass = '';
+      var nowClass = '';
       var now = _this.now;
       // html += '<li class="y"></li>';
       html += '<li class="y gray" y="' + (y - 1) + '">' + (y - 1) + '</li>';
       for (var i = y; i < y + 10; i++) {
         if (i === _this.now.year) {
-          className = 'now';
+          nowClass = 'now';
         } else {
-          className = '';
+          nowClass = '';
         }
 
-        if (i === _this.info.year) {
-          className = className + ' selected';
+        if (i === _this.selected.year) {
+          selectClass = 'selected';
+        } else {
+          selectClass = '';
         }
 
         // if (i === _this.selected.year) {
         // 	className = className + ' selected';
         // }
-        html += '<li class="y ' + className + '" y="' + i + '">' + i + '</li>';
+        html += '<li class="y ' + nowClass + ' ' + selectClass + '" y="' + i + '">' + i + '</li>';
       }
       // html += '<li class="y"></li>';
       html += '<li class="y gray" y="' + (y + 10) + '">' + (y + 10) + '</li>';
-
       _this.setList(html);
     };
 
@@ -587,6 +543,7 @@ function mCalendar(obj) {
         var y = parseInt($(this).html());
         $(this).addClass('selected').siblings().removeClass('selected');
         _this.info.year = y - 0;
+        _this.selected.year = y - 0;
         // _this.calendarBox.find('h1').find('.title').attr('class', 'title title-m').children('span').html(_this.info.year + '年');
         // _this.calendarBox.find('.c-list').prev().hide();
         // _this.setTitle({
@@ -622,6 +579,8 @@ function mCalendar(obj) {
         // 	html: _this.info.year + '年' + (_this.info.month + 1) + '月',
         // 	class: 'title title-d'
         // });
+        _this.selected.month = _this.info.month;
+
         if (_this.startView !== 'month') {
           _this.setDateTitle();
           _this.dateThShow();
@@ -648,6 +607,7 @@ function mCalendar(obj) {
       var year;
       var month;
       var date;
+      var o = {};
       _this.calendarBox.find('.c-list').on('click', '.d', function(e) {
         if ($(this).hasClass('prev')) {
           _this.info.date = parseInt($(this).html());
@@ -695,15 +655,23 @@ function mCalendar(obj) {
 
         }
 
-        var o = {
+        o = {
           year: year,
           month: month,
           date: date,
-          hour: _this.info.hour,
-          minute: _this.info.minute,
-          second: _this.info.second
+
         };
 
+        if (_this.showTime) {
+          o.hour =_this.info.hour;
+          o.minute =_this.info.minute;
+          o.second =_this.info.second;
+        }
+
+
+        _this.selected.year = o.year;
+        _this.selected.month = o.month - 1;
+        _this.selected.date = o.date;
         $(_this.input).val(_this.setDateFormat(o));
         _this.selectedFn();
         _this.hide();
@@ -751,7 +719,6 @@ function mCalendar(obj) {
     _thisPrototype.prev = function() {
       var _this = this;
       _this.calendarBox.find('h1').on('click', '.prev', function() {
-
         switch (_this.active) {
           case 'd':
             _this.info.month--;
@@ -760,6 +727,7 @@ function mCalendar(obj) {
           case 'm':
             _this.info.year--;
             _this.changeOnM();
+            break;
           case 'y':
             _this.info.year = _this.info.year - 10;
             _this.changeOnY();
@@ -800,7 +768,7 @@ function mCalendar(obj) {
         _this.info.month = 11;
       }
       _this.calendarBox.find('h1').find('.title').children('span').html(_this.info.year + '年' + (_this.info.month + 1) + '月');
-      _this.info = _this.getDateInfo(_this.info.year + '/' + (_this.info.month + 1) + '/' + _this.info.date);
+      _this.info = _this.getDateInfo(_this.info.year + '/' + (_this.info.month + 1) + '/' + _this.info.date + ' ' +  _this.info.hour + ':' + _this.info.minute + ':' + _this.info.second);
       _this.setDateList();
     };
 
@@ -827,6 +795,7 @@ function mCalendar(obj) {
       var _this = this;
       var t = _this.dateFormat;
       var h = '';
+      var part2 = '';
       if (o.year) {
         t = t.replace('yyyy', o.year);
       }
@@ -838,17 +807,22 @@ function mCalendar(obj) {
         h = (o.date + '').length === 2 ? o.date : '0' + o.date;
         t = t.replace('dd', h);
       }
-      if (o.hour) {
-        h = (o.hour + '').length === 2 ? o.hour : '0' + o.hour;
-        t = t.replace('hh', h);
-      }
-      if (o.minute) {
-        h = (o.minute + '').length === 2 ? o.minute : '0' + o.minute;
-        t = t.replace('nn', h);
-      }
-      if (o.second) {
-        h = (o.second + '').length === 2 ? o.second : '0' + o.second;
-        t = t.replace('ss', h);
+      if (_this.showTime) {
+        if (t.search('hh') === -1 || t.search('nn') === -1 || t.search('ss') === -1) {
+          t = t + ' hh:nn:ss';
+        }
+        if (o.hour) {
+          h = (o.hour + '').length === 2 ? o.hour : '0' + o.hour;
+          t = t.replace('hh', h);
+        }
+        if (o.minute) {
+          h = (o.minute + '').length === 2 ? o.minute : '0' + o.minute;
+          t = t.replace('nn', h);
+        }
+        if (o.second) {
+          h = (o.second + '').length === 2 ? o.second : '0' + o.second;
+          t = t.replace('ss', h);
+        }
       }
 
       return t;
@@ -1083,17 +1057,25 @@ function getElementPosition(element) {
   }
   return position;
 }
-// 网页可视面积，不含滚动条
-function documentVisibleSize() {
-  if (document.compatMode === "BackCompat") {
-    return {
-      width: document.body.clientWidth,
-      height: document.body.clientHeight
-    };
-  } else {
-    return {
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight
-    };
-  }
+
+// 判断是否是移动端
+function isMobile() {
+  var isMobile = {
+    Android: function() {
+      return navigator.userAgent.match(/Android/i) ? true : false;
+    },
+    BlackBerry: function() {
+      return navigator.userAgent.match(/BlackBerry/i) ? true : false;
+    },
+    iOS: function() {
+      return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+    },
+    Windows: function() {
+      return navigator.userAgent.match(/IEMobile/i) ? true : false;
+    },
+    any: function() {
+      return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
+    }
+  };
+  return isMobile;
 }
