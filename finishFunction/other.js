@@ -1249,18 +1249,59 @@ function isMobile() {
 
 // 取到顶层对象
 // 方法一
-(typeof window !== 'undefined'
-   ? window
-   : (typeof process === 'object' &&
-      typeof require === 'function' &&
-      typeof global === 'object')
-     ? global
-     : this);
+(typeof window !== 'undefined' ? window : (typeof process === 'object' &&
+  typeof require === 'function' &&
+  typeof global === 'object') ? global : this);
 
 // 方法二
-var getGlobal = function () {
-  if (typeof self !== 'undefined') { return self; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
+var getGlobal = function() {
+  if (typeof self !== 'undefined') {
+    return self;
+  }
+  if (typeof window !== 'undefined') {
+    return window;
+  }
+  if (typeof global !== 'undefined') {
+    return global;
+  }
   throw new Error('unable to locate global object');
 };
+
+// 点击页面其他地方隐藏弹窗
+function documentClickHide(parent1, parent2, tag, callback) {
+  /*
+  parent1: 触发弹窗显示的元素的父级元素的选择器
+  parent2: 弹窗的选择器
+  tag: 触发弹窗显示的元素的node名称
+  callback: 隐藏弹窗回调函数
+   */
+  $(document).on('click', function(e) {
+    var dom = e.target;
+    var clickParent = $(dom).parentsUntil(parent1).parent().hasClass('hasTree');
+    var popName = $(dom).parentsUntil(parent2).parent().hasClass('tree');
+    if ((dom.nodeName.toLowerCase() === tag && clickParent) || popName) {
+
+    } else {
+      callback && callback();
+    }
+  });
+}
+
+/*
+documentClickHide('.hasTree', '.tree', 'button', function () {
+    popHide()
+  })
+*/
+
+function compare(a, b) {
+  //a去年 b今年
+  var a = parseFloat(a);
+  var b = parseFloat(b);
+  var v = 0;
+  if (a > b) {
+    v = (((1 - a / b) * 100).toFixed(2));
+  } else {
+    v = (((b / a - 1) * 100).toFixed(2));
+  }
+  return v
+}
