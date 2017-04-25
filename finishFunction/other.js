@@ -957,6 +957,33 @@ function formatCurrencyTenThou(num) {
   return (((sign) ? '' : '-') + num + '.' + cents);
 }
 
+// 数字转成千分位金额格式，小数保持原样不做处理
+function numberToMoney(v) {
+  if (isNaN(v)) {
+    return v;
+  } else if (v === null) {
+    return 'NaN';
+  }
+
+  var numArr = String(v).split('.');
+  var cent = '';
+  if (numArr.length === 2) {
+    cent = '.' + numArr[1];
+  }
+  var value = numArr[0];
+  var arr = [];
+  var s = value.split('').reverse().join('');
+  var i = 0;
+  var l = s.length;
+  for (; i < l; i = i + 3) {
+    var t = s.substr(i, 3);
+    t = t.split('').reverse().join('');
+    arr.push(t);
+  }
+  arr = arr.reverse().join(',') + cent;
+  return arr;
+}
+
 // 编码字符串
 function escapeString(s) {
   return encodeURIComponent(s);
