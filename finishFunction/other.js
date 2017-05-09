@@ -1152,13 +1152,7 @@ function onlyInput(select, value, term) {
   });
 }
 
-// 加减日期
-function opDate(date, days) {
-  var d = date;
-  d.setDate(d.getDate() + days);
-  var m = d.getMonth() + 1;
-  return d.getFullYear() + '/' + m + '/' + d.getDate();
-}
+
 
 // 模拟setInterval保证每次调用之间的间隔相同
 function interval(func, wait) {
