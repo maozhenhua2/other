@@ -984,6 +984,20 @@ function numberToMoney(v) {
   return arr;
 }
 
+function numberToMoneyReg(v) {
+  var t = String(v);
+  var a = '', b = '';
+  if (t.indexOf('.') !== -1) {
+    a = t.split('.')[0];
+    b = t.split('.')[1];
+  } else {
+    a = t;
+  }
+  var regex = /\B(?=(\d{3})+\b)/g;
+  a = a.replace(regex, ',');
+  return a + '.' + b;
+}
+
 // 编码字符串
 function escapeString(s) {
   return encodeURIComponent(s);

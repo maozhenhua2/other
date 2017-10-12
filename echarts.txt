@@ -1,0 +1,18 @@
+// legend 每行固定个数和宽度
+legend: {
+	width: (144 + 20 + 10 + 5) * 4,
+	itemWidth: 20,
+	itemGap: 10,
+	padding: 0,
+	formatter: function(t) {
+		return '{a|' + t + '}'
+	},
+	textStyle: {
+		rich: {
+			a: {
+				width: 144
+			}
+		}
+	},
+	data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎', '百度', '谷歌', '必应', '其他']
+},
