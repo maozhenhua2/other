@@ -1258,28 +1258,6 @@ document.getElementById('fullScreenBtn').addEventListener('click', function() {
   }, 5 * 1000);
 }, false);
 
-// 判断是否是移动端
-function isMobile() {
-  var isMobile = {
-    Android: function() {
-      return navigator.userAgent.match(/Android/i) ? true : false;
-    },
-    BlackBerry: function() {
-      return navigator.userAgent.match(/BlackBerry/i) ? true : false;
-    },
-    iOS: function() {
-      return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
-    },
-    Windows: function() {
-      return navigator.userAgent.match(/IEMobile/i) ? true : false;
-    },
-    any: function() {
-      return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
-    }
-  };
-  return isMobile;
-}
-
 // 取到顶层对象
 // 方法一
 (typeof window !== 'undefined' ? window : (typeof process === 'object' &&
