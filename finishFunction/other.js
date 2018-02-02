@@ -913,6 +913,23 @@ function checkBrowser() {
   //   alert(Sys.safari + 'safari');
   // }
 }
+
+/*
+请使用千位分隔符(逗号)表示web网页中的大数字
+*/
+String(Number).replace(/(\d)(?=(\d{3})+$)/g, "$1,");
+
+/*
+举例：
+
+String(123456789).replace(/(\d)(?=(\d{3})+$)/g, "$1,");
+
+*/
+Number.toLocaleString('en-US');
+/*
+(123456789).toLocaleString('en-US');
+*/
+
 /**
  * 将数值四舍五入(保留2位小数)后格式化成金额形式
  *
