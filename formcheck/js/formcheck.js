@@ -22,12 +22,12 @@ var strategies = {
       return errorMsg;
     }
   },
-  isNumber: function (value, errorMsg) {
+  isNumber: function(value, errorMsg) {
     if (!/^(\d)+(\.{1}\d{1}|\d{0,})$/g.test(value)) {
       return errorMsg;
     }
   },
-  isRMB: function (value, errorMsg) {
+  isRMB: function(value, errorMsg) {
     if (!/^(\d)+(\.{1}\d{2}|\d{0,})$/g.test(value)) {
       return errorMsg;
     }
@@ -172,3 +172,42 @@ Validator.prototype.start = function() {
     }
   }
 };
+
+/***********************客户调用代码**************************/
+/*
+var registerForm = document.getElementById('registerForm');
+
+var validataFunc = function() {
+  var validator = new Validator();
+
+  validator.add(registerForm.userName, [{
+    strategy: 'isNonEmpty',
+    errorMsg: '用户名不能为空'
+  }, {
+    strategy: 'minLength:10',
+    errorMsg: '用户名长度不能小于 10 位'
+  }]);
+
+  validator.add(registerForm.password, [{
+    strategy: 'minLength:6',
+    errorMsg: '密码长度不能小于 6 位'
+  }]);
+
+  validator.add(registerForm.phoneNumber, [{
+    strategy: 'isMobile',
+    errorMsg: '手机号码格式不正确'
+  }]);
+
+  var errorMsg = validator.start();
+  return errorMsg;
+}
+
+registerForm.onsubmit = function() {
+  var errorMsg = validataFunc();
+
+  if (errorMsg) {
+    alert(errorMsg);
+    return false;
+  }
+};
+*/
