@@ -1003,7 +1003,8 @@ function numberToMoney(v) {
 
 function numberToMoneyReg(v) {
   var t = String(v);
-  var a = '', b = '';
+  var a = '',
+    b = '';
   if (t.indexOf('.') !== -1) {
     a = t.split('.')[0];
     b = t.split('.')[1];
@@ -1369,19 +1370,19 @@ $(window).bind('orientationchange', function(e) {
 // 判断是否是移动端
 function isMobile() {
   var isMobile = {
-    Android: function () {
+    Android: function() {
       return navigator.userAgent.match(/Android/i) ? true : false;
     },
-    BlackBerry: function () {
+    BlackBerry: function() {
       return navigator.userAgent.match(/BlackBerry/i) ? true : false;
     },
-    iOS: function () {
+    iOS: function() {
       return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
     },
-    Windows: function () {
+    Windows: function() {
       return navigator.userAgent.match(/IEMobile/i) ? true : false;
     },
-    any: function () {
+    any: function() {
       return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
     }
   };
@@ -1393,24 +1394,24 @@ function isMobile() {
  * <a href='http://www.jobbole.com/members/wx1409399284'>@return</a> {String} 
  */
 function getExplore() {
-    var sys = {},
-        ua = navigator.userAgent.toLowerCase(),
-        s;
-    (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? sys.ie = s[1]:
-        (s = ua.match(/msie ([\d\.]+)/)) ? sys.ie = s[1] :
-        (s = ua.match(/edge\/([\d\.]+)/)) ? sys.edge = s[1] :
-        (s = ua.match(/firefox\/([\d\.]+)/)) ? sys.firefox = s[1] :
-        (s = ua.match(/(?:opera|opr).([\d\.]+)/)) ? sys.opera = s[1] :
-        (s = ua.match(/chrome\/([\d\.]+)/)) ? sys.chrome = s[1] :
-        (s = ua.match(/version\/([\d\.]+).*safari/)) ? sys.safari = s[1] : 0;
-    // 根据关系进行判断
-    if (sys.ie) return ('IE: ' + sys.ie)
-    if (sys.edge) return ('EDGE: ' + sys.edge)
-    if (sys.firefox) return ('Firefox: ' + sys.firefox)
-    if (sys.chrome) return ('Chrome: ' + sys.chrome)
-    if (sys.opera) return ('Opera: ' + sys.opera)
-    if (sys.safari) return ('Safari: ' + sys.safari)
-    return 'Unkonwn'
+  var sys = {},
+    ua = navigator.userAgent.toLowerCase(),
+    s;
+  (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? sys.ie = s[1]:
+    (s = ua.match(/msie ([\d\.]+)/)) ? sys.ie = s[1] :
+    (s = ua.match(/edge\/([\d\.]+)/)) ? sys.edge = s[1] :
+    (s = ua.match(/firefox\/([\d\.]+)/)) ? sys.firefox = s[1] :
+    (s = ua.match(/(?:opera|opr).([\d\.]+)/)) ? sys.opera = s[1] :
+    (s = ua.match(/chrome\/([\d\.]+)/)) ? sys.chrome = s[1] :
+    (s = ua.match(/version\/([\d\.]+).*safari/)) ? sys.safari = s[1] : 0;
+  // 根据关系进行判断
+  if (sys.ie) return ('IE: ' + sys.ie)
+  if (sys.edge) return ('EDGE: ' + sys.edge)
+  if (sys.firefox) return ('Firefox: ' + sys.firefox)
+  if (sys.chrome) return ('Chrome: ' + sys.chrome)
+  if (sys.opera) return ('Opera: ' + sys.opera)
+  if (sys.safari) return ('Safari: ' + sys.safari)
+  return 'Unkonwn'
 }
 /**
  * 
@@ -1418,17 +1419,46 @@ function getExplore() {
  * <a href='http://www.jobbole.com/members/wx1409399284'>@return</a> {String} 
  */
 function getOS() {
-    var userAgent = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase() || '';
-    var vendor = 'navigator' in window && 'vendor' in navigator && navigator.vendor.toLowerCase() || '';
-    var appVersion = 'navigator' in window && 'appVersion' in navigator && navigator.appVersion.toLowerCase() || '';
- 
-    if (/mac/i.test(appVersion)) return 'MacOSX'
-    if (/win/i.test(appVersion)) return 'windows'
-    if (/linux/i.test(appVersion)) return 'linux'
-    if (/iphone/i.test(userAgent) || /ipad/i.test(userAgent) || /ipod/i.test(userAgent)) 'ios'
-    if (/android/i.test(userAgent)) return 'android'
-    if (/win/i.test(appVersion) && /phone/i.test(userAgent)) return 'windowsPhone'
+  var userAgent = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase() || '';
+  var vendor = 'navigator' in window && 'vendor' in navigator && navigator.vendor.toLowerCase() || '';
+  var appVersion = 'navigator' in window && 'appVersion' in navigator && navigator.appVersion.toLowerCase() || '';
+
+  if (/mac/i.test(appVersion)) return 'MacOSX'
+  if (/win/i.test(appVersion)) return 'windows'
+  if (/linux/i.test(appVersion)) return 'linux'
+  if (/iphone/i.test(userAgent) || /ipad/i.test(userAgent) || /ipod/i.test(userAgent)) 'ios'
+  if (/android/i.test(userAgent)) return 'android'
+  if (/win/i.test(appVersion) && /phone/i.test(userAgent)) return 'windowsPhone'
 }
 
 // 使用JS判断用户操作系统是否安装某字体
-var isSupportFontFamily=function(f){if(typeof f!="string"){return false}var h="Arial";if(f.toLowerCase()==h.toLowerCase()){return true}var e="a";var d=100;var a=100,i=100;var c=document.createElement("canvas");var b=c.getContext("2d");c.width=a;c.height=i;b.textAlign="center";b.fillStyle="black";b.textBaseline="middle";var g=function(j){b.clearRect(0,0,a,i);b.font=d+"px "+j+", "+h;b.fillText(e,a/2,i/2);var k=b.getImageData(0,0,a,i).data;return[].slice.call(k).filter(function(l){return l!=0})};return g(h).join("")!==g(f).join("")};
+var isSupportFontFamily = function(f) {
+  if (typeof f != "string") {
+    return false
+  }
+  var h = "Arial";
+  if (f.toLowerCase() == h.toLowerCase()) {
+    return true
+  }
+  var e = "a";
+  var d = 100;
+  var a = 100,
+    i = 100;
+  var c = document.createElement("canvas");
+  var b = c.getContext("2d");
+  c.width = a;
+  c.height = i;
+  b.textAlign = "center";
+  b.fillStyle = "black";
+  b.textBaseline = "middle";
+  var g = function(j) {
+    b.clearRect(0, 0, a, i);
+    b.font = d + "px " + j + ", " + h;
+    b.fillText(e, a / 2, i / 2);
+    var k = b.getImageData(0, 0, a, i).data;
+    return [].slice.call(k).filter(function(l) {
+      return l != 0
+    })
+  };
+  return g(h).join("") !== g(f).join("")
+};
