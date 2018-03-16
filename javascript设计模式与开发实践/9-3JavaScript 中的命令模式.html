@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript 中的命令模式</title>
+</head>
+
+<body>
+  <script>
+  /*
+    var bindClick = function(button, func) {
+      button.onclick = func;
+    };
+
+    var MenuBar = {
+      refresh: function() {
+        console.log('刷新菜单界面');
+      }
+    };
+
+    var SubMenu = {
+      add: function() {
+        console.log('增加子菜单');
+      },
+      del: function() {
+        console.log('删除子菜单');
+      }
+    };
+
+    bindClick(button1, MenuBar.refresh);
+    bindClick(button2, SubMenu.add);
+    bindClick(button3, SubMenu.del);
+    */
+  var setCommand = function(button, func) {
+    button.onclick = function() {
+      func();
+    }
+  };
+
+  var MenuBar = {
+    refresh: function() {
+      console.log('刷新菜单界面');
+    }
+  };
+
+  var RefreshMenuBarCommand = function(receiver) {
+    return function() {
+      receiver.refresh();
+    }
+  };
+
+  var refreshMenuBarCommand = RefreshMenuBarCommand(MenuBar);
+
+  setCommand(button1, refreshMenuBarCommand);
+
+  var RefreshMenuBarCommand = function(receiver) {
+    return {
+      execute: function() {
+        receiver.refresh();
+      }
+    }
+  };
+
+  var setCommand = function(button, command) {
+    button.onclick = function() {
+      command.execute();
+    }
+  };
+
+  var refreshMenuBarCommand = RefreshMenuBarCommand(MenuBar);
+  setCommand(button1, refreshMenuBarCommand);
+
+  </script>
+</body>
+
+</html>

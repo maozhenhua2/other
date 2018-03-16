@@ -415,3 +415,104 @@ Animate.prototype.step = function() {
 Animate.prototype.update = function(pos) {
   this.dom.style[this.propertyName] = pos + 'px';
 };
+
+// 图片懒加载
+var myImage = (function() {
+  var imgNode = document.createElement('img');
+  document.body.appendChild(imgNode);
+
+  return function(src) {
+    imgNode.src = src;
+  }
+})();
+
+var proxyImage = (function() {
+  var img = new Image;
+
+  img.onload = function() {
+    myImage(this.src);
+  }
+
+  return function(src) {
+    myImage('file:// /C:/Users/svenzeng/Desktop/loading.gif');
+    img.src = src;
+  }
+})();
+
+proxyImage('http:// imgcache.qq.com/music// N/k/000GGDys0yA0Nk.jpg');
+
+// 分批发送请求
+var synchronousFile = function(id) {
+  console.log('开始同步文件，id 为: ' + id);
+};
+
+var proxySynchronousFile = (function() {
+  var cache = [], // 保存一段时间内需要同步的 ID 
+    timer; // 定时器 
+
+  return function(id) {
+    cache.push(id);
+    if (timer) { // 保证不会覆盖已经启动的定时器 
+      return;
+    }
+
+    timer = setTimeout(function() {
+      synchronousFile(cache.join(',')); // 2 秒后向本体发送需要同步的 ID 集合 
+      clearTimeout(timer); // 清空定时器 
+      timer = null;
+      cache.length = 0; // 清空 ID 集合 
+    }, 2000);
+  }
+})();
+
+var checkbox = document.getElementsByTagName('input');
+
+for (var i = 0, c; c = checkbox[i++];) {
+  c.onclick = function() {
+    if (this.checked === true) {
+      proxySynchronousFile(this.id);
+    }
+  }
+};
+
+
+/*------浏览器同源政策及其规避方法------*/
+// 加强版的子窗口接收消息
+window.onmessage = function(e) {
+  if (e.origin !== 'http://bbb.com') return;
+  var payload = JSON.parse(e.data);
+  switch (payload.method) {
+    case 'set':
+      localStorage.setItem(payload.key, JSON.stringify(payload.data));
+      break;
+    case 'get':
+      var parent = window.parent;
+      var data = localStorage.getItem(payload.key);
+      parent.postMessage(data, 'http://aaa.com');
+      break;
+    case 'remove':
+      localStorage.removeItem(payload.key);
+      break;
+  }
+};
+// 加强版的父窗口发送消息
+var win = document.getElementsByTagName('iframe')[0].contentWindow;
+var obj = {
+  name: 'Jack'
+};
+// 存入对象
+win.postMessage(JSON.stringify({
+  key: 'storage',
+  method: 'set',
+  data: obj
+}), 'http://bbb.com');
+// 读取对象
+win.postMessage(JSON.stringify({
+  key: 'storage',
+  method: "get"
+}), "*");
+window.onmessage = function(e) {
+  if (e.origin != 'http://aaa.com') return;
+  // "Jack"
+  console.log(JSON.parse(e.data).name);
+};

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>真实的例子——网站登录</title>
+</head>
+
+<body>
+  <script>
+  var event = {
+    clientList: [],
+    listen: function(key, fn) {
+      if (!this.clientList[key]) {
+        this.clientList[key] = [];
+      }
+      this.clientList[key].push(fn); // 订阅的消息添加进缓存列表 
+    },
+    trigger: function() {
+      var key = Array.prototype.shift.call(arguments), // (1); 
+        fns = this.clientList[key];
+
+      if (!fns || fns.length === 0) { // 如果没有绑定对应的消息 
+        return false;
+      }
+
+      for (var i = 0, fn; fn = fns[i++];) {
+        fn.apply(this, arguments); // (2) // arguments 是 trigger 时带上的参数 
+      }
+    },
+    remove: function(key, fn) {
+      var fns = this.clientList[key];
+
+      if (!fns) { // 如果 key 对应的消息没有被人订阅，则直接返回 
+        return false;
+      }
+      if (!fn) { // 如果没有传入具体的回调函数，表示需要取消 key 对应消息的所有订阅 
+        fns && (fns.length = 0);
+      } else {
+        console.log(key, fns);
+        for (var l = fns.length - 1; l >= 0; l--) { // 反向遍历订阅的回调函数列表 
+          var _fn = fns[l];
+          if (_fn === fn) {
+            fns.splice(l, 1); // 删除订阅者的回调函数 
+          }
+        }
+      }
+    }
+  };
+
+  var login = {};
+  var installEvent = function(obj) {
+    for (var i in event) {
+      obj[i] = event[i];
+    }
+  };
+  
+  installEvent(login);
+
+  setTimeout(function() {
+    login.trigger('loginSucc', 'aaa'); // 发布登录成功的消息
+  }, 2000);
+  // $.ajax('http:// xxx.com?login', function(data) { // 登录成功 
+  // login.trigger('loginSucc', data); // 发布登录成功的消息 
+  // });
+
+  var header = (function() { // header 模块 
+    login.listen('loginSucc', function(data) {
+      header.setAvatar(data.avatar);
+    });
+    return {
+      setAvatar: function(data) {
+        console.log('设置 header 模块的头像');
+      }
+    }
+  })();
+
+  var nav = (function() { // nav 模块 
+    login.listen('loginSucc', function(data) {
+      nav.setAvatar(data.avatar);
+    });
+    return {
+      setAvatar: function(avatar) {
+        console.log('设置 nav 模块的头像');
+      }
+    }
+  })();
+
+  var address = (function() { // nav 模块 
+    login.listen('loginSucc', function(obj) {
+      address.refresh(obj);
+    });
+    return {
+      refresh: function(avatar) {
+        console.log('刷新收货地址列表');
+      }
+    }
+  })();
+
+  </script>
+</body>
+
+</html>

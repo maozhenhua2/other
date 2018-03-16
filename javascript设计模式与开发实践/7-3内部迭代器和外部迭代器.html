@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>内部迭代器和外部迭代器</title>
+</head>
+
+<body>
+  <script>
+  // 内部迭代
+  var compare = function(ary1, ary2) {
+    if (ary1.length !== ary2.length) {
+      throw new Error('ary1 和 ary2 不相等');
+    }
+    each(ary1, function(i, n) {
+      if (n !== ary2[i]) {
+        throw new Error('ary1 和 ary2 不相等');
+      }
+    });
+    alert('ary1 和 ary2 相等');
+  };
+
+  compare([1, 2, 3], [1, 2, 4]); // throw new Error ( 'ary1 和 ary2 不相等' ); 
+
+  // 外部迭代
+  var Iterator = function(obj) {
+    var current = 0;
+
+    var next = function() {
+      current += 1;
+    };
+
+    var isDone = function() {
+      return current >= obj.length;
+    };
+
+    var getCurrItem = function() {
+      return obj[current];
+    };
+
+    return {
+      next: next,
+      isDone: isDone,
+      getCurrItem: getCurrItem,
+      length: obj.length
+    }
+  };
+  var compare = function(iterator1, iterator2) {
+    if (iterator1.length !== iterator2.length) {
+      alert('iterator1 和 iterator2 不相等');
+    }
+    while (!iterator1.isDone() && !iterator2.isDone()) {
+      if (iterator1.getCurrItem() !== iterator2.getCurrItem()) {
+        throw new Error('iterator1 和 iterator2 不相等');
+      }
+      iterator1.next();
+      iterator2.next();
+    }
+
+    alert('iterator1 和 iterator2 相等');
+  }
+
+  compare(Iterator([1, 2, 3]), Iterator([1, 2, 4]));
+
+  </script>
+</body>
+
+</html>

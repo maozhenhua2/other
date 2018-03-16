@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>实现自己的迭代器</title>
+</head>
+
+<body>
+  <script>
+  var each = function(ary, callback) {
+    for (var i = 0, l = ary.length; i < l; i++) {
+      callback.call(ary[i], i, ary[i]); // 把下标和元素当作参数传给 callback 函数 
+    }
+  };
+
+  each([1, 2, 3], function(i, n) {
+    alert([i, n]);
+  });
+
+  </script>
+</body>
+
+</html>
