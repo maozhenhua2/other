@@ -1,0 +1,118 @@
+// 四个角
+div.block {
+	background: radial-gradient(
+		transparent calc(100% - var(--corners)),
+		var(--color) 0);
+	--color: blue;
+	--corners: 20px;
+	color: var(--color);
+}
+
+// 变量使用
+.block {
+	--size: 6;
+	--side: calc(var(--size) * 1em);
+	width: var(--side);
+	height: var(--side);
+}
+
+// 动画使用
+@keyframes bg {
+	from { background-color: var(--color1); }
+	to { background-color: var(--color2); }
+}
+
+#animation.silde {
+	--color1: yellow;
+	--color2: green;
+	animation: 1s bg infinite alternate;
+}
+
+// 过渡
+#transition.slide {
+	background: var(--bg);
+	--bg: yellow;
+	transitoion: 1s background;
+}
+
+#transition.slide:active {
+	--bg: green;
+}
+
+// 按钮
+button {
+	--col: var(--color, black);
+	border: .1em solid var(--col);
+	background: transparent;
+	color: var(--col);
+	transition: 1s;
+}
+
+button:hover {
+	box-shadow: 0 0 0 1em var(--col) inset;
+	color: white;
+}
+
+button.pink {
+	--color: #f06;
+}
+
+// clip-path
+* {
+	--clip-path: inital;
+	-webkit-clip-path: var(--clip-path);
+	clip-path: var(--clip-path);
+}
+
+.block {
+	--clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+// 打字效果
+for (let element of document.querySelectorAll('.typing')) {
+	let length = element.textContent.length;
+	element.style.setProperty('--length', length);
+}
+
+@keyframes typing{from{width:0;}}
+@keyframes caret{50%{border-color:transparent;}}
+p.typing {
+	width: calc(var(--length) * 1ch);
+	border-right: 2px solid;
+	overflow: hidden;
+	animation: typing calc(var(--length) * .2s) step(var(--length) * 1ch),
+	caret .5s step-end infinite alternate;
+}
+
+// 鼠标跟随渐变
+let root = document.documentElement;
+
+document.addEventListener('mouseMove', evt => {
+	let x = evt.clientX / innerWidth;
+	let y = evt.clientY / innerHeight;
+
+	root.style.setProperty('--mouse-x', x);
+	root.style.setProperty('--mouse-y', y);
+})
+
+#mouse.slide {
+	background-image: radial-gradient(
+		at calc(100% * var(--mouse-x)) calc(100% * val(--mouse-y)
+		transparent, black);
+	)
+}
+
+// 滚动条进度
+for (let el of document.querySelectorAll('.scrolling')) {
+	el.addEventListener('scroll', evt=>{
+		let maxScroll = el.scrollHeight - el.offsetHeight;
+		let scroll = el.scrollTop / maxScroll;
+		el.style.setProperty('--scroll', scroll);
+	});
+}
+
+.scrolling {
+	background-image: linear-gradient(to right,
+	red calc(100% * var(--scroll)), white 0)；
+	background-size: 100% 1em;
+}
