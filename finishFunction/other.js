@@ -1016,6 +1016,14 @@ function numberToMoneyReg(v) {
   return a + '.' + b;
 }
 
+// 千分位不支持小数点
+/*
+var str="123598752";
+var re=/(?=(?!(\b))(\d{3})+$)/g;
+str=str.replace(re,",");
+alert(str);
+*/
+
 // 编码字符串
 function escapeString(s) {
   return encodeURIComponent(s);
