@@ -146,31 +146,42 @@ var Validator = function() {
   this.cache = []; // 保存校验规则
 };
 
-Validator.prototype.add = function(value, rules) {
+Validator.prototype.add = function(dom, rules) {
   var self = this;
 
   for (var i = 0, rule; rule = rules[i++];) {
     (function(rule) {
-      var strategyAry = rule.strategy.split(':');
+      var ruleKeys = rule.strategy.split(':');
       var errorMsg = rule.errorMsg;
+      var key = ruleKeys[0];
+      var params = [dom.value, errorMsg];
+      var index = 1;
+      if (ruleKeys.length > 1) {
+        ruleKeys.shift();
+        ruleKeys.map(function(v) {
+          params.splice(index, 0, v);
+        });
+      }
 
-      self.cache.push(function() {
-        var strategy = strategyAry.shift();
-        strategyAry.unshift(value);
-        strategyAry.push(errorMsg);
-        return strategies[strategy].apply(value, strategyAry);
-      });
+      self.cache.push({
+        dom: dom,
+        errorMsg: strategies[key].apply(strategies, params)
+      })
     })(rule)
   }
 };
 
 Validator.prototype.start = function() {
-  for (var i = 0, validatorFunc; validatorFunc = this.cache[i++];) {
-    var errorMsg = validatorFunc();
+  var errorMsgArr = [];
+  for (var i = 0, errors; errors = this.cache[i++];) {
+    var dom = errors.dom;
+    var errorMsg = errors.errorMsg;
     if (errorMsg) {
-      return errorMsg;
+      errorMsgArr.push(errors);
     }
   }
+
+  return errorMsgArr;
 };
 
 /***********************客户调用代码**************************/

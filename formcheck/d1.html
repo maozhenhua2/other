@@ -72,144 +72,146 @@
   </div>
   <script src="js/formcheck.js"></script>
   <script>
-    /***********************客户调用代码**************************/
-    var registerForm = document.getElementById('registerForm');
-    var transed = false;
+  /***********************客户调用代码**************************/
+  var registerForm = document.getElementById('registerForm');
+  var transed = false;
 
-    var validataFunc = function () {
-      var validator = new Validator();
+  var validataFunc = function() {
+    var validator = new Validator();
 
-      validator.add(registerForm.userName.value, [{
-        strategy: 'isNonEmpty',
-        errorMsg: '用户名不能为空'
-      }, {
-        strategy: 'minLength:1',
-        errorMsg: '用户名长度不能小于 1 位'
-      }], registerForm.userName);
+    validator.add(registerForm.userName, [{
+      strategy: 'isNonEmpty',
+      errorMsg: '用户名不能为空'
+    }, {
+      strategy: 'minLength:1',
+      errorMsg: '用户名长度不能小于 1 位'
+    }]);
 
-      validator.add(registerForm.password.value, [{
-        strategy: 'minLength:6',
-        errorMsg: '密码长度不能小于 6 位'
-      }], registerForm.password);
+    validator.add(registerForm.password, [{
+      strategy: 'minLength:6',
+      errorMsg: '密码长度不能小于 6 位'
+    }]);
 
-      validator.add(registerForm.phoneNumber.value, [{
-        strategy: 'isMobile',
-        errorMsg: '手机号码格式不正确'
-      }], registerForm.phoneNumber);
+    validator.add(registerForm.phoneNumber, [{
+      strategy: 'isMobile',
+      errorMsg: '手机号码格式不正确'
+    }]);
 
-      return validator.start();
-    };
+    return validator.start();
+  };
 
-    registerForm.onsubmit = function () {
-      return false;
-    };
+  registerForm.onsubmit = function() {
+    return false;
+  };
 
-    document.getElementById('submit').addEventListener('click', function () {
-      if (transed) {
-        return;
-      }
-      var info = validataFunc();
-      if (!info) {
-        return;
-      }
+  document.getElementById('submit').addEventListener('click', function() {
+    if (transed) {
+      return;
+    }
+    var info = validataFunc();
+    if (!info.length) {
+      return;
+    }
 
-      if (info[0]) {
-        transed = true;
-      }
-
-      var po = {
-        l: info[1].offsetLeft,
-        t: info[1].offsetTop
-      };
-      var span;
-      if (!info[1].parentNode.querySelector('span')) {
-        span = document.createElement('span');
-        span.style.position = 'absolute';
-        span.style.left = po.l + 'px';
-        span.style.top = po.t + 'px';
-        span.style.width = info[1].offsetWidth + 'px';
-        span.style.height = info[1].offsetHeight + 'px';
-        span.style.display = 'block';
-        span.style.background = '#f00';
-        span.style.color = '#fff';
-        span.style.textAlign = 'center';
-        span.style.lineHeight = info[1].offsetHeight + 'px';
-        span.style.transform = 'perspective(48px) rotateX(270deg)';
-        span.style.transformOrigin = '50% 0';
-        span.style.transition = 'all 0.5s linear';
-        info[1].parentNode.appendChild(span);
-      } else {
-        span = info[1].parentNode.querySelector('span');
-      }
-
-
-      span.innerHTML = info[0];
-      setTimeout(function () {
-        span.style.transform = 'rotateX(360deg)';
-      }, 0);
-      setTimeout(function () {
-        span.style.transform = 'rotateX(270deg)';
-        transed = false;
-      }, 1500);
+    info.map(function(v, i) {
+      createErrorSpan(v);
     });
+  });
+
+  function createErrorSpan(obj) {
+    var span;
+    if (!obj.dom.parentElement.querySelector('span')) {
+      var po = {
+        l: obj.dom.offsetLeft,
+        t: obj.dom.offsetTop
+      };
+      span = document.createElement('span');
+      span.style.position = 'absolute';
+      span.style.left = po.l + 'px';
+      span.style.top = po.t + 'px';
+      span.style.width = obj.dom.offsetWidth + 'px';
+      span.style.height = obj.dom.offsetHeight + 'px';
+      span.style.display = 'block';
+      span.style.background = '#f00';
+      span.style.color = '#fff';
+      span.style.textAlign = 'center';
+      span.style.lineHeight = obj.dom.offsetHeight + 'px';
+      span.style.transform = 'perspective(48px) rotateX(270deg)';
+      span.style.transformOrigin = '50% 0';
+      span.style.transition = 'all 0.5s linear';
+      obj.dom.parentNode.appendChild(span);
+    } else {
+      span = obj.dom.parentNode.querySelector('span');
+    }
+
+    span.innerHTML = obj.errorMsg;
+    setTimeout(function() {
+      span.style.transform = 'rotateX(360deg)';
+    }, 0);
+    setTimeout(function() {
+      span.style.transform = 'rotateX(270deg)';
+      transed = false;
+    }, 1500);
+  }
 
 
-    /*function getValue() {
-      var i = 0;
-      var l = registerForm.length;
-      var arr = [];
-      var radio = [];
-      var checkbox = [];
-      for (; i < l; i++) {
-        // console.log(registerForm[i].type, registerForm[i].nodeName)
-        // console.log(radio, checkbox);
-        if (registerForm[i].type !== 'radio' && registerForm[i].type !== 'checkbox') {
-          getRadioValue(radio);
-          radio = [];
-          checkbox = [];
-          arr.push({
-            dom: registerForm[i],
-            val: registerForm[i].value
-          })
-        } else if (registerForm[i].type === 'select-one') {
-          var value = '';
-          if (registerForm[i].selectedIndex !== -1) {
-            value = registerForm[i][registerForm[i].selectedIndex].value;
-          }
-          arr.push({
-            dom: registerForm[i],
-            val: value
-          })
-        } else if (registerForm[i].type === 'radio') {
-          radio.push(registerForm[i]);
+  /*function getValue() {
+    var i = 0;
+    var l = registerForm.length;
+    var arr = [];
+    var radio = [];
+    var checkbox = [];
+    for (; i < l; i++) {
+      // console.log(registerForm[i].type, registerForm[i].nodeName)
+      // console.log(radio, checkbox);
+      if (registerForm[i].type !== 'radio' && registerForm[i].type !== 'checkbox') {
+        getRadioValue(radio);
+        radio = [];
+        checkbox = [];
+        arr.push({
+          dom: registerForm[i],
+          val: registerForm[i].value
+        })
+      } else if (registerForm[i].type === 'select-one') {
+        var value = '';
+        if (registerForm[i].selectedIndex !== -1) {
+          value = registerForm[i][registerForm[i].selectedIndex].value;
         }
-        // console.log(radio);
-        // if (registerForm[i].type === 'radio') {
-        //   checkbox = [];
-        //   radio.push(registerForm[i]);
-        // } else if (registerForm[i].type === 'checkbox') {
-        //   radio = [];
-        //   checkbox.push(registerForm[i]);
-        // }
-        // arr.push({
-        //   dom: [registerForm[i]],
-        //   val: registerForm[i].value
-        // })
+        arr.push({
+          dom: registerForm[i],
+          val: value
+        })
+      } else if (registerForm[i].type === 'radio') {
+        radio.push(registerForm[i]);
       }
-      console.log(arr);
-    }*/
+      // console.log(radio);
+      // if (registerForm[i].type === 'radio') {
+      //   checkbox = [];
+      //   radio.push(registerForm[i]);
+      // } else if (registerForm[i].type === 'checkbox') {
+      //   radio = [];
+      //   checkbox.push(registerForm[i]);
+      // }
+      // arr.push({
+      //   dom: [registerForm[i]],
+      //   val: registerForm[i].value
+      // })
+    }
+    console.log(arr);
+  }*/
 
-    /*function getRadioValue(o) {
-      var obj = o;
-      var arr = {};
-      var i = 0;
-      var l = obj.length;
-      for (; i< l;i++) {
-        console.log(arr[obj[i].name])
-        // arr[obj[i].name].push(obj[i]);
-      }
-      // console.log(arr)
-    }*/
+  /*function getRadioValue(o) {
+    var obj = o;
+    var arr = {};
+    var i = 0;
+    var l = obj.length;
+    for (; i< l;i++) {
+      console.log(arr[obj[i].name])
+      // arr[obj[i].name].push(obj[i]);
+    }
+    // console.log(arr)
+  }*/
+
   </script>
 </body>
 
