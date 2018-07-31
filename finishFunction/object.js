@@ -87,7 +87,8 @@ function classof(o) {
   return Object.prototype.toString.call(o).slice(8, -1);
 }
 
-// 利用空对象作为中介来继承
+
+
 function extend(Child, Parent) {
   var F = function() {};
   F.prototype = Parent.prototype;
@@ -96,9 +97,11 @@ function extend(Child, Parent) {
   Child.uber = Parent.prototype;
 }
 
-function extend(subClass, superClass) {
+function extend(subClass, superClass) {  
+  // 利用空对象作为中介来继承
   var F = function() {};
   F.prototype = superClass.prototype;
+  // 寄生组合式继承
   subClass.prototype = new F();
   subClass.prototype.constructor = subClass;
 
