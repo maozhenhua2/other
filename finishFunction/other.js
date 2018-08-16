@@ -1470,3 +1470,25 @@ var isSupportFontFamily = function(f) {
   };
   return g(h).join("") !== g(f).join("")
 };
+
+
+// 获取滚动条的宽度
+function getScrollbarWidth() {
+  var oP = document.createElement('p');
+  var styles = {
+    width: '100px',
+    height: '100px',
+    overflowY: 'scroll',
+  };
+  var i;
+  var scrollbarWidth;
+
+  for (i in styles) {
+    oP.style[i] = styles[i];
+  }
+  document.body.appendChild(oP);
+  scrollbarWidth = oP.offsetWidth - oP.clientWidth;
+  document.body.removeChild(oP);
+
+  return scrollbarWidth;
+}
