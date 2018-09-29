@@ -18,7 +18,7 @@ function mCalendar(obj) {
 				month: d.getMonth(),
 				date: d.getDate(),
 				days: new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate(),
-				fDay: new Date(d.getFullYear(), d.getMonth(), 1).getDay()
+				fDay: new Date(d.getFullYear(), d.getMonth(), 0).getDay()
 			}
 		};
 
