@@ -1492,3 +1492,30 @@ function getScrollbarWidth() {
 
   return scrollbarWidth;
 }
+
+// swiper 下拉刷新，上拉添加
+var refreshSwiper = new Swiper('.refresh-list', {
+  direction: 'vertical',
+  slidesPerView: 'auto',
+  freeMode: true,
+  speed: 500,
+  scrollbar: {
+    el: '.swiper-scrollbar'
+  },
+  mousewheel: true,
+  on: {
+    touchEnd: function (event) {
+      var y = 0 - $('.refresh-list .swiper-wrapper')[0].scrollHeight + $('.refresh-list').height() - 100;
+      if (refreshSwiper.translate > 130) {
+        console.log('update');
+      }
+      if (refreshSwiper.translate < y) {
+        console.log('add');
+      }
+
+      console.log('touchEnd');
+      refreshSwiper.updateSize();
+      refreshSwiper.updateSlides();
+    }
+  }
+});
