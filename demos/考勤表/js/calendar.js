@@ -26,6 +26,7 @@ function mCalendar(obj) {
         date: d.getDate(),
         days: new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate(),
         fDay: new Date(d.getFullYear(), d.getMonth(), 1).getDay(),
+        weekday: d.getDay(),
         hour: d.getHours(),
         minute: d.getMinutes(),
         second: d.getSeconds()
@@ -663,9 +664,9 @@ function mCalendar(obj) {
         };
 
         if (_this.showTime) {
-          o.hour =_this.info.hour;
-          o.minute =_this.info.minute;
-          o.second =_this.info.second;
+          o.hour = _this.info.hour;
+          o.minute = _this.info.minute;
+          o.second = _this.info.second;
         }
 
 
@@ -709,7 +710,7 @@ function mCalendar(obj) {
             break;
         }
 
-        
+
         $(_this.input).val(_this.setDateFormat(o));
         _this.hide();
       });
@@ -768,7 +769,7 @@ function mCalendar(obj) {
         _this.info.month = 11;
       }
       _this.calendarBox.find('h1').find('.title').children('span').html(_this.info.year + '年' + (_this.info.month + 1) + '月');
-      _this.info = _this.getDateInfo(_this.info.year + '/' + (_this.info.month + 1) + '/' + _this.info.date + ' ' +  _this.info.hour + ':' + _this.info.minute + ':' + _this.info.second);
+      _this.info = _this.getDateInfo(_this.info.year + '/' + (_this.info.month + 1) + '/' + _this.info.date + ' ' + _this.info.hour + ':' + _this.info.minute + ':' + _this.info.second);
       _this.setDateList();
     };
 
