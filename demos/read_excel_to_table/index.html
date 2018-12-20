@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    html,
+		body {
+			height: 100%;
+		}
+
+		*,
+		*:before,
+		*:after {
+			box-sizing: border-box;
+		}
+
+		.sheets .btn {
+			margin: 5px;
+		}
+
+  	.table {
+  		display: inline-block;
+  		max-width: 90%;
+  		max-height: 90%;
+  		overflow: auto;
+  	}
+    .table table {
+			border: 1px solid #000;
+			border-spacing: 0;
+			border-collapse: collapse;
+		}
+
+		.table td {
+			border: 1px solid #000;
+  		min-width: 4rem;
+  		padding: 5px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>excel读取</h1>
+  <div><input type="file" name="" id="file" value="./data.xlsx"></div>
+ 	<h1>sheet</h1>
+  <div class="sheets"></div>
+  <div id="table" class="table"></div>
+  <script src="./vendor/jquery-3.3.1.min.js"></script>
+  <script src="./vendor/xlsx/shim.min.js"></script>
+  <script src="./vendor/xlsx/xlsx.full.min.js"></script>
+  <script src="./js/index2.js"></script>
+</body>
+
+</html>
