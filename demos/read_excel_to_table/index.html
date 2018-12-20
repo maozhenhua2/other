@@ -16,6 +16,13 @@
 			box-sizing: border-box;
 		}
 
+		body {
+			display: flex;
+  		flex-direction: column;
+  		margin: 0;
+  		align-items: center;
+		}
+
 		.sheets .btn {
 			margin: 5px;
 		}
@@ -41,10 +48,11 @@
 </head>
 
 <body>
-	<h1>excel读取</h1>
+  <h1>excel读取</h1>
   <div><input type="file" name="" id="file" value="./data.xlsx"></div>
- 	<h1>sheet</h1>
+  <h1>sheet</h1>
   <div class="sheets"></div>
+  <h3 id="sheetName"></h3>
   <div id="table" class="table"></div>
   <script src="./vendor/jquery-3.3.1.min.js"></script>
   <script src="./vendor/xlsx/shim.min.js"></script>

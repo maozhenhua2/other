@@ -36,6 +36,7 @@ document.querySelector('.sheets').addEventListener('click', function(e) {
 	let target = e.target;
 	if (target.nodeName === 'BUTTON') {
 		let sheetsName = target.innerHTML;
+		document.querySelector('#sheetName').innerHTML = sheetsName;
 		let jsonData = sheets[sheetsName];
 		let tableData = setxlsx(jsonData);
 		console.log(tableData);
