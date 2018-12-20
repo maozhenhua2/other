@@ -12,8 +12,10 @@
   <title>纯 CSS 实现多行文字截断</title>
   <style>
   .wrap {
+    /*width: 400px;*/
     height: 40px;
     line-height: 20px;
+    margin: auto;
     overflow: hidden;
   }
 
@@ -45,15 +47,55 @@
     left: 100%;
     top: -20px;
     padding-right: 5px;
+    background-color: #fff;
+  }
+
+  .mult_line_ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    /*width: 400px;*/
+    margin: auto;
+  }
+
+  .imitate_ellipsis {
+    position: relative;
+    line-height: 1.4em;
+    height: 2.8em;
+    overflow: hidden;
+    /*width: 400px;*/
+    margin: auto;
+  }
+
+  .imitate_ellipsis:after {
+    content: "...";
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-left: 20px;
+    background: -webkit-linear-gradient(left, transparent, #fff 62%);
+    background: -o-linear-gradient(right, transparent, #fff 62%);
+    background: -moz-linear-gradient(right, transparent, #fff 62%);
+    background: linear-gradient(to right, transparent, #fff 62%);
   }
 
   </style>
 </head>
 
 <body>
+  <h1>兼容方式1（推荐）</h1>
   <div class="wrap">
     <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos labore sit vel itaque delectus atque quos magnam assumenda quod architecto perspiciatis animi.</div>
   </div>
+
+  <h1>兼容方式2（不采用）</h1>
+  <div class="imitate_ellipsis">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos labore sit vel itaque delectus atque quos magnam assumenda quod architecto perspiciatis animi.</div>
+
+  <h1>-webkit-line-clamp</h1>
+  <div class="mult_line_ellipsis">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos labore sit vel itaque delectus atque quos magnam assumenda quod architecto perspiciatis animi.</div>
 </body>
 
 </html>

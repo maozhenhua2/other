@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>文字2端对齐</title>
+  <style>
+  .justify {
+    text-align: justify;
+    height: 1.5rem;
+  }
+
+  .justify:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+    padding-left: 2rem;
+  }
+
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <div class="justify">姓名</div>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            <div>出生年月</div>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

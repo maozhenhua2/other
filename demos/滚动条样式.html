@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>Document</title>
+  <style>
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: #F5F5F5;
+  }
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 2.5px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 2.5px rgba(0, 0, 0, 0.3);
+    border-radius: 2.5px;
+    background-color: #F5F5F5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 2.5px rgba(0, 0, 0, .3);
+    box-shadow: inset 0 0 2.5px rgba(0, 0, 0, .3);
+    border-radius: 2.5px;
+    background-color: #797676;
+    opacity: .7;
+    transition: opacity ease-in-out 200ms;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    opacity: 1;
+  }
+
+  #box {
+  	width: 500px;
+  	height: 500px;
+  	margin: auto;
+  	overflow: auto;
+  	box-shadow: 1px 1px 10px 10px #ccc;
+  }
+
+  #div {
+    width: 1000px;
+    height: 1000px;
+  }
+
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <div id="div">变量声明变量声明let和const是JavaScript里相对较新的变量声明方式。像我们之前提到过的，let在很多方面与var是相似的，但是可以帮助大家避免在JavaScript里常见一些问题。const是对let的一个增强，它能阻止对一个变量再次赋值。因为TypeScript是JavaScript的超集，所以它本身就支持let和const。下面我们会详细说明这些新的声明方式以及为什么推荐使用它们来代替var。如果你之前使用JavaScript时没有特别在意，那么这节内容会唤起你的回忆。如果你已经对var声明的怪异之处了如指掌，那么你可以轻松地略过这节。var声明一直以来我们都是通过var关键字定义JavaScript变量。vara=10;大家都能理解，这里定义了一个名为a值为10的变量。我们也可以在函数内部定义变量：functionf(){varmessage="Hello,world!";returnmessage;}并且我们也可以在其它函数内部访问相同的变量。functionf(){vara=10;returnfunctiong(){varb=a+1;returnb;}}varg=f();g();//returns11;上面的例子里，g可以获取到f函数里定义的a变量。每当g被调用时，它都可以访问到f里的a变量。即使当g在f已经执行完后才被调用，它仍然可以访问及修改a。functionf(){vara=1;a=2;varb=g();a=3;returnb;functiong(){returna;}}f();//returns2作用域规则变量声明变量声明let和const是JavaScript里相对较新的变量声明方式。像我们之前提到过的，let在很多方面与var是相似的，但是可以帮助大家避免在JavaScript里常见一些问题。const是对let的一个增强，它能阻止对一个变量再次赋值。因为TypeScript是JavaScript的超集，所以它本身就支持let和const。下面我们会详细说明这些新的声明方式以及为什么推荐使用它们来代替var。如果你之前使用JavaScript时没有特别在意，那么这节内容会唤起你的回忆。如果你已经对var声明的怪异之处了如指掌，那么你可以轻松地略过这节。var声明一直以来我们都是通过var关键字定义JavaScript变量。vara=10;大家都能理解，这里定义了一个名为a值为10的变量。我们也可以在函数内部定义变量：functionf(){varmessage="Hello,world!";returnmessage;}并且我们也可以在其它函数内部访问相同的变量。functionf(){vara=10;returnfunctiong(){varb=a+1;returnb;}}varg=f();g();//returns11;上面的例子里，g可以获取到f函数里定义的a变量。每当g被调用时，它都可以访问到f里的a变量。即使当g在f已经执行完后才被调用，它仍然可以访问及修改a。functionf(){vara=1;a=2;varb=g();a=3;returnb;functiong(){returna;}}f();//returns2作用域规则变量声明变量声明let和const是JavaScript里相对较新的变量声明方式。像我们之前提到过的，let在很多方面与var是相似的，但是可以帮助大家避免在JavaScript里常见一些问题。const是对let的一个增强，它能阻止对一个变量再次赋值。因为TypeScript是JavaScript的超集，所以它本身就支持let和const。下面我们会详细说明这些新的声明方式以及为什么推荐使用它们来代替var。如果你之前使用JavaScript时没有特别在意，那么这节内容会唤起你的回忆。如果你已经对var声明的怪异之处了如指掌，那么你可以轻松地略过这节。var声明一直以来我们都是通过var关键字定义JavaScript变量。vara=10;大家都能理解，这里定义了一个名为a值为10的变量。我们也可以在函数内部定义变量：functionf(){varmessage="Hello,world!";returnmessage;}并且我们也可以在其它函数内部访问相同的变量。functionf(){vara=10;returnfunctiong(){varb=a+1;returnb;}}varg=f();g();//returns11;上面的例子里，g可以获取到f函数里定义的a变量。每当g被调用时，它都可以访问到f里的a变量。即使当g在f已经执行完后才被调用，它仍然可以访问及修改a。functionf(){vara=1;a=2;varb=g();a=3;returnb;functiong(){returna;}}f();//returns2作用域规则</div>
+  </div>
+</body>
+
+</html>
