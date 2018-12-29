@@ -1504,7 +1504,7 @@ var refreshSwiper = new Swiper('.refresh-list', {
   },
   mousewheel: true,
   on: {
-    touchEnd: function (event) {
+    touchEnd: function(event) {
       var y = 0 - $('.refresh-list .swiper-wrapper')[0].scrollHeight + $('.refresh-list').height() - 100;
       if (refreshSwiper.translate > 130) {
         console.log('update');
@@ -1519,3 +1519,13 @@ var refreshSwiper = new Swiper('.refresh-list', {
     }
   }
 });
+
+// 获取地址栏属性值
+function GetQueryString(name) {
+  var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+  var r = window.location.search.substr(1).match(reg);
+  if (r != null) {
+    return unescape(r[2]);
+  }
+  return null;
+}
