@@ -27,3 +27,19 @@ function opDate(date, days) {
   var m = d.getMonth() + 1;
   return d.getFullYear() + '/' + m + '/' + d.getDate();
 }
+
+// 获取日期相关数据
+function getDateInfo(s) {
+  var d = new Date(s);
+  return {
+    year: d.getFullYear(),
+    month: d.getMonth(),
+    date: d.getDate(),
+    days: new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate(),
+    fDay: new Date(d.getFullYear(), d.getMonth(), 1).getDay(),
+    weekday: d.getDay(),
+    hour: d.getHours(),
+    minute: d.getMinutes(),
+    second: d.getSeconds()
+  }
+}
