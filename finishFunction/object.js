@@ -88,7 +88,6 @@ function classof(o) {
 }
 
 
-
 function extend(Child, Parent) {
   var F = function() {};
   F.prototype = Parent.prototype;
@@ -97,7 +96,7 @@ function extend(Child, Parent) {
   Child.uber = Parent.prototype;
 }
 
-function extend(subClass, superClass) {  
+function extend(subClass, superClass) {
   // 利用空对象作为中介来继承
   var F = function() {};
   F.prototype = superClass.prototype;
@@ -110,6 +109,17 @@ function extend(subClass, superClass) {
     superClass.prototype.constructor = superClass;
   }
 }
+
+/*
+// 使用例子
+
+var Child = function () {
+  Parent.call(this);
+  this.toString2 = toString2;
+}
+extend(Child, Parent);
+var child1 = new Child();
+*/
 
 // 拷贝继承
 function extend2(Child, Parent) {
