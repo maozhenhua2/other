@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="renderer" content="webkit"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title></title>
+</head>
+<body>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+  /*var p1 = new Promise(function (resolve, reject) {
+    $.ajax({
+      url: 'data.json',
+      type: 'get',
+      dataType: 'json',
+    })
+      .done(function (data) {
+        if (data.code === 200) {
+          resolve(data.data);
+        } else {
+          reject('error');
+        }
+      })
+  });
+
+  var p2 = new Promise(function (resolve, reject) {
+    $.ajax({
+      url: 'data2.json',
+      type: 'get',
+      dataType: 'json',
+    })
+      .done(function (data) {
+        if (data.code === 200) {
+          resolve(data.data);
+        } else {
+          reject('error');
+        }
+      })
+  });
+
+  var p3 = new Promise(function (resolve, reject) {
+    $.ajax({
+      url: 'data.json',
+      type: 'get',
+      dataType: 'json',
+    })
+      .done(function (data) {
+        if (data.code === 200) {
+          resolve(data.data);
+        } else {
+          reject('error');
+        }
+      })
+  });
+
+  p1.then(function (data) {
+    console.log(data);
+    return p2;
+  }).then(function (data) {
+    console.log(data);
+    return p3;
+  }).then(function (data) {
+    console.log(data);
+  });*/
+
+
+  /*Promise.all([p1, p2, p3]).then(function (posts) {
+    console.log(posts);
+  }).catch(function (reason) {
+  });*/
+
+  var dtd = $.Deferred(); // 生成Deferred对象
+  var wait = function (dtd) {
+    var tasks = function () {
+      console.log("执行完毕！");
+      dtd.resolve(); // 改变Deferred对象的执行状态
+    };
+    setTimeout(tasks, 5000);
+  };
+  dtd.promise(wait);
+  wait.done(function () {
+    console.log("哈哈，成功了！");
+  })
+    .fail(function () {
+      console.log("出错啦！");
+    });
+  wait(dtd);
+
+
+  function ajax1() {
+    var dtd = $.Deferred();
+    $.ajax({
+      url: 'data.json',
+      type: 'get'
+    })
+      .done(function (data) {
+        dtd.resolve(data);
+      });
+
+    return dtd.promise();
+  }
+
+  function ajax2() {
+    var dtd = $.Deferred();
+    $.ajax({
+      url: 'data2.json',
+      type: 'get'
+    })
+      .done(function (data) {
+        dtd.resolve(data);
+      });
+
+    return dtd.promise();
+  }
+
+
+  $.when(ajax1(), ajax2())
+    .done(function (data1, data2) {
+      console.log(data1, data2);
+    })
+
+
+</script>
+</body>
+</html>
