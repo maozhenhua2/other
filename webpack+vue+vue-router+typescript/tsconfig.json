@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "listFiles": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "watch": true,
+    "target": "es5",
+    "allowJs": false,
+    "checkJs": false,
+    "module": "commonjs",
+    "sourceMap": true,
+    "pretty": true,
+    "removeComments": true,
+    "outDir": "src/js",
+    "baseUrl": "./"
+  },
+  "include": [
+    "src/ts/**/*"
+  ],
+  "exclude": [
+    "vendor",
+    "node_modules",
+    "bower_components",
+    "**/*.spec.ts"
+  ]
+}

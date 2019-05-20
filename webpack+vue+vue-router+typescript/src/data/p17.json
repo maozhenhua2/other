@@ -1,0 +1,41 @@
+{
+  "mainTitle": "汽车经销商集团业绩管理<br>（预实对比）",
+  "pageTitle": [
+    ["预实对比分析", "品牌—广汽丰田", "2019年4月"]
+  ],
+  "chart": [
+    {
+      "title": ["总收入（万元）"],
+      "value": [
+        {"name": "实际", "type": "bar", "stack": "", "code": "", "value": [60, 60, 60, 60]},
+        {"name": "预算", "type": "bar", "stack": "", "code": "", "value": [50, 50, 50, 50]},
+        {"name": "实际VS预算", "type": "line", "stack": "", "code": "", "value": [70, 70, 70, 70, 70, 70]}
+      ]
+    },
+    {
+      "title": ["总毛利（万元）"],
+      "value": [
+        {"name": "实际", "type": "bar", "stack": "", "code": "", "value": [60, 60, 60, 60]},
+        {"name": "预算", "type": "bar", "stack": "", "code": "", "value": [50, 50, 50, 50]},
+        {"name": "实际VS预算", "type": "line", "stack": "", "code": "", "value": [70, 70, 70, 70, 70, 70]}
+      ]
+    },
+    {
+      "title": ["总费用（万元）"],
+      "value": [
+        {"name": "实际", "type": "bar", "stack": "", "code": "", "value": [60, 60, 60, 60]},
+        {"name": "预算", "type": "bar", "stack": "", "code": "", "value": [50, 50, 50, 50]},
+        {"name": "实际VS预算", "type": "line", "stack": "", "code": "", "value": [70, 70, 70, 70, 70, 70]}
+      ]
+    },
+    {
+      "title": ["税前利润（万元）"],
+      "value": [
+        {"name": "实际", "type": "bar", "stack": "", "code": "", "value": [60, 60, 60, 60]},
+        {"name": "预算", "type": "bar", "stack": "", "code": "", "value": [50, 50, 50, 50]},
+        {"name": "实际VS预算", "type": "line", "stack": "", "code": "", "value": [70, 70, 70, 70, 70, 70]}
+      ]
+    }
+  ],
+  "xAxisLabel": ["A店", "B店", "C店", "D店"]
+}

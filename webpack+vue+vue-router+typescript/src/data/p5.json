@@ -1,0 +1,39 @@
+{
+  "mainTitle": "汽车经销商集团业绩管理<br>（每周业绩分析）",
+  "pageTitles": [
+    ["每周总毛利（品牌维度分析）", "2019年W1"],
+    ["每周总毛利（区域维度分析）", "2019年W1"],
+    ["总毛利—省份单店平均","总毛利—省份各店总额"]
+  ],
+  "brand": [
+    {"name": "benzPassengerCar", "url": "p1.png", "txt": "乘用车", "month": 1234567, "average": 1234567},
+    {"name": "benzCommercialCar", "url": "p1.png", "txt": "商用车", "month": 1234567, "average": 1234567},
+    {"name": "lexus", "url": "p2.png", "txt": "", "month": 1234567, "average": 1234567},
+    {"name": "bmw", "url": "p3.png", "txt": "", "month": 1234567, "average": 1234567},
+    {"name": "audi", "url": "p4.png", "txt": "", "month": 1234567, "average": 1234567},
+    {"name": "porsche", "url": "p5.png", "txt": "", "month": 1234567, "average": 1234567},
+    {"name": "landrover", "url": "p6.png", "txt": "", "month": 1234567, "average": 1234567},
+    {"name": "gactoyota", "url": "p7.png", "txt": "", "month": 1234567, "average": 1234567},
+    {"name": "fawtoyota", "url": "p8.png", "txt": "", "month": 1234567, "average": 1234567},
+    {"name": "nissan", "url": "p9.png", "txt": "", "month": 1234567, "average": 1234567},
+    {"name": "honda", "url": "p10.png", "txt": "", "month": 1234567, "average": 1234567},
+    {"name": "gachonda", "url": "p11.png", "txt": "", "month": 1234567, "average": 1234567}
+  ],
+  "area": [
+    {"name": "1区单店平均", "value": 1234567},
+    {"name": "2区单店平均", "value": 1234567},
+    {"name": "3区单店平均", "value": 1234567},
+    {"name": "4区单店平均", "value": 1234567},
+    {"name": "北京", "value": 1234567},
+    {"name": "上海", "value": 1234567},
+    {"name": "广州", "value": 1234567},
+    {"name": "杭州", "value": 1234567},
+    {"name": "郑州", "value": 1234567},
+    {"name": "天津", "value": 1234567},
+    {"name": "沈阳", "value": 1234567},
+    {"name": "昆明", "value": 1234567},
+    {"name": "石家庄", "value": 1234567},
+    {"name": "长沙", "value": 1234567},
+    {"name": "南宁", "value": 1234567}
+  ]
+}

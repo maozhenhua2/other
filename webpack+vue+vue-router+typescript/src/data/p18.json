@@ -1,0 +1,61 @@
+{
+  "mainTitle": "汽车经销商集团业绩管理<br>（对标分析）",
+  "pageTitle": [
+    ["对标分析", "2019年4月21日", "2019年4月23日"],
+    ["关键KPI排名", "2019年4月"]
+  ],
+  "chart": [
+    {
+      "chartTitle": "单车综合毛利",
+      "value": [
+        {"name": "集团标杆", "type": "bar", "stack": "", "code": "", "value": [60, 60, 60]},
+        {"name": "品牌标杆", "type": "bar", "stack": "", "code": "", "value": [50, 50, 50]},
+        {"name": "A店", "type": "bar", "stack": "", "code": "", "value": [40, 40, 40]},
+        {"name": "B店", "type": "bar", "stack": "", "code": "", "value": [30, 30, 30]},
+        {"name": "C店", "type": "bar", "stack": "", "code": "", "value": [20, 20, 20]},
+        {"name": "D店", "type": "bar", "stack": "", "code": "", "value": [10, 10, 10]}
+      ]
+    },
+    {
+      "title": ["关联KPI 1 —单车增值业务毛利（元）"],
+      "chartTitle": "单车增值业务毛利",
+      "value": [
+        {"name": "集团标杆", "type": "bar", "stack": "", "code": "", "value": [60, 60, 60]},
+        {"name": "品牌标杆", "type": "bar", "stack": "", "code": "", "value": [50, 50, 50]},
+        {"name": "A店", "type": "bar", "stack": "", "code": "", "value": [40, 40, 40]},
+        {"name": "B店", "type": "bar", "stack": "", "code": "", "value": [30, 30, 30]},
+        {"name": "C店", "type": "bar", "stack": "", "code": "", "value": [20, 20, 20]},
+        {"name": "D店", "type": "bar", "stack": "", "code": "", "value": [10, 10, 10]}
+      ]
+    },
+    {
+      "title": ["关联KPI 2 —展厅成交率"],
+      "chartTitle": "展厅成交率",
+      "value": [
+        {"name": "集团标杆", "type": "bar", "stack": "", "code": "", "value": [60, 60, 60]},
+        {"name": "品牌标杆", "type": "bar", "stack": "", "code": "", "value": [50, 50, 50]},
+        {"name": "A店", "type": "bar", "stack": "", "code": "", "value": [40, 40, 40]},
+        {"name": "B店", "type": "bar", "stack": "", "code": "", "value": [30, 30, 30]},
+        {"name": "C店", "type": "bar", "stack": "", "code": "", "value": [20, 20, 20]},
+        {"name": "D店", "type": "bar", "stack": "", "code": "", "value": [10, 10, 10]}
+      ]
+    }
+  ],
+  "table": [
+    {
+      "title": ["单车综合毛利（元）", "品牌-广汽丰田"],
+      "value": [
+        ["深圳XXXXX店", 8764, 8764, 64, 1],
+        ["广州XXXXXX店", 8764, 8764, -14, -1],
+        ["长春XXXXXX店", 8764, 8764, 64, 1],
+        ["海口XXXXXX店", 8764, 8764, 64, 1],
+        ["郑州XXXXXXX店", 8764, 8764, 64, 1],
+        ["北京XXXXXX店", 8764, 8764, 64, 1],
+        ["沈阳XXXXX店", 8764, 8764, 64, 1],
+        ["呼和浩特XXXXXX店", 8764, 8764, 64, 1],
+        ["长沙XXXXXX店", 8764, 8764, 64, 1],
+        ["杭州XXXXXX店", 8764, 8764, 64, 1]
+      ]
+    }
+  ]
+}
