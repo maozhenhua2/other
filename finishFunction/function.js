@@ -107,3 +107,34 @@ var throttle = require('./throttle');
 function debounce(delay, atBegin, callback) {
   return callback === undefined ? throttle(delay, atBegin, false) : throttle(delay, callback, atBegin !== false);
 };
+
+// 尾递归优化
+function tco(f) {
+  var value;
+  var active = false;
+  var accumulated = [];
+
+  return function accumulator() {
+    accumulated.push(arguments);
+    if (!active) {
+      active = true;
+      while (accumulated.length) {
+        value = f.apply(this, accumulated.shift());
+      }
+      active = false;
+      return value;
+    }
+  };
+}
+
+// 使用例子
+// var sum = tco(function(x, y) {
+//   if (y > 0) {
+//     return sum(x + 1, y - 1)
+//   }
+//   else {
+//     return x
+//   }
+// });
+
+// sum(1, 100000)

@@ -223,3 +223,7 @@ function arrxtoy(arr) {
   ["61~90天期末新车库存占比", "6.37%", "10.3%", "16.1%"],
   [">90天期末新车库存占比", "1.92%", "7.3%", "17.4%"]
 ];*/
+
+const toArray = (() =>
+  Array.from ? Array.from : obj => [].slice.call(obj)
+)();
